@@ -1,0 +1,975 @@
+@import './colors';
+.BgImage{
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .personalImage{
+        position: absolute;
+        border-radius: 50%;
+        background-color: #fff;
+        border: 2px solid #fff;
+        box-shadow: 2px 5px 10px #00000048;
+    }
+    .name {
+        text-transform: capitalize;
+        position: absolute;
+        bottom: -30%;
+    }
+    .email {
+        position: absolute;
+        bottom: -40%;
+    }
+    .shareBtn {
+        position: absolute;
+        bottom: -30%;
+    }
+    .viewBtn{
+        position: absolute;
+        bottom: -30%;
+    }
+}
+.editInfo {
+    grid-column: 1/13;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .form {
+        position: relative;
+        margin-top: 15px;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 2px 2px 15px rgba($color: #000000, $alpha: 0.1);
+        border-radius: 8px;
+        .FnameLabel {
+            position: absolute;
+        }
+        .LnameLabel {
+            position: absolute;
+            transform: translateX(100%);
+        }
+        .FnameInput,
+        .LnameInput {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+        }
+        .emailIcon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        .emailLabel {
+            position: absolute;
+        }
+        .email {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+        }
+        .personalImage {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid #fff;
+            box-shadow: 1px 1px 5px #00000048;
+        }
+        .selectImage {
+            position: absolute;
+            cursor: pointer;
+            border: 1px solid rgba($color: $borders-gray, $alpha: 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            .icon {
+                background-color: rgba($color: $normal-gray, $alpha: 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                color: $normal-gray;
+            }
+            .blue {
+                color: $primary-color;
+            }
+        }
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #EAECF0;
+        }
+        .cancelBtn {
+            position: absolute;
+        }
+        .saveBtn {
+            position: absolute;
+        }
+    }
+}
+.articlesLine {
+    margin-top: 30px;
+    background-color: #EAECF0;
+    height: 1px;
+}
+.editProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .form {
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 80px;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 2px 2px 15px rgba($color: #000000, $alpha: 0.1);
+        border-radius: 8px;
+        .availableBtn {
+            position: absolute;
+            display: flex;
+            color: $primary-color;
+            cursor: pointer;
+        }
+        .availableTxt {
+            position: absolute;
+        }
+        .availableState {
+            position: absolute;
+        }
+        .usernameUrl {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px 0 0 8px;
+            padding: 6px 10px;
+            z-index: 2;
+        }
+        .usernameLable {
+            position: absolute;
+        }
+        .username {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+        }
+        .websiteHttp {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px 0 0 8px;
+            padding: 6px 10px;
+            z-index: 2;
+        }
+        .websiteLabel {
+            position: absolute;
+        }
+        .website {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+        }
+        .bioLabel {
+            position: absolute;
+        }
+        .bio {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+            padding: 6px 10px;
+            resize: none;
+            &:focus {
+                outline: none;
+            }
+        }
+        .leftChar {
+            position: absolute;
+        }
+        .countryLabel {
+            position: absolute;
+        }
+        .country {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+        .timezoneLabel {
+            position: absolute;
+        }
+        .timezone {
+            position: absolute;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #EAECF0;
+        }
+        .cancelBtn {
+            position: absolute;
+        }
+        .saveBtn {
+            position: absolute;
+        }
+    }
+}
+@media only screen and (min-width:992px){
+    .BgImage{
+        grid-column: 1/13;
+        height: 180px;
+        .personalImage{
+            bottom: -60%;
+            height: 140px;
+            left: 20px;
+        }
+        .name {
+            left: 170px;
+        }
+        .email {
+            left: 170px;
+        }
+        .shareBtn {
+            right: 150px;
+            padding: 6px 12px;
+        }
+        .viewBtn{
+            right: 20px;
+            padding: 6px 12px;
+        }
+    }
+    .editInfo {
+        grid-column: 1/13;
+        margin-top: 120px;
+        .form {
+            height: 460px;
+            .FnameLabel {
+                top: 20px;
+                left: 20px;
+            }
+            .FnameInput {
+                left: 20px;
+            }
+            .LnameLabel {
+                top: 20px;
+                right: calc(((100% - 60px) / 2) + 20px);
+            }
+            .LnameInput {
+                right: 20px;
+            }
+            .FnameInput,
+            .LnameInput {
+                width: calc((100% - 60px) / 2);
+                top: 45px;
+                right: 20px;
+                padding: 6px 10px;
+            }
+            .emailIcon {
+                padding: 6px 10px;
+                left: 21px;
+                top: 136px;
+            }
+            .emailLabel {
+                left: 20px;
+                top: 110px;
+            }
+            .email {
+                width: calc(100% - 40px);
+                top: 135px;
+                left: 20px;
+                padding: 6px 10px 6px 40px;
+            }
+            .personalImage {
+                left: 20px;
+                top: 200px;
+                width: 65px;
+            }
+            .selectImage {
+                top: 200px;
+                right: 20px;
+                width: calc(100% - 125px);
+                height: 160px;
+                padding: 0 80px;
+            }
+            .line {
+                bottom: 75px;
+            }
+            .cancelBtn {
+                bottom: 20px;
+                right: 160px;
+                padding: 6px 12px;
+            }
+            .saveBtn {
+                bottom: 20px;
+                right: 20px;
+                padding: 6px 12px;
+            }
+        }
+    }
+    .articlesLine {
+        grid-column: 1/13;
+    }
+    .editProfile {
+        grid-column: 1/13;
+        .form {
+            margin-top: 20px;
+            height: 720px;
+            .availableBtn {
+                top: 20px;
+                left: 20px;
+            }
+            .availableTxt {
+                top: 25px;
+                left: 60px;
+            }
+            .availableState {
+                top: 50px;
+                left: 60px;
+            }
+            .usernameUrl {
+                top: 115px;
+                left: 20px;
+            }
+            .usernameLable {
+                left: 20px;
+                top: 90px;
+            }
+            .username {
+                width: calc(100% - 40px);
+                top: 115px;
+                left: 20px;
+                padding: 6px 10px 6px 180px;
+            }
+            .websiteHttp {
+                top: 200px;
+                left: 20px;
+            }
+            .websiteLabel {
+                left: 20px;
+                top: 175px;
+            }
+            .website {
+                width: calc(100% - 40px);
+                top: 200px;
+                left: 20px;
+                padding: 6px 10px 6px 75px;
+            }
+            .bioLabel {
+                left: 20px;
+                top: 260px;
+            }
+            .bio {
+                width: calc(100% - 40px);
+                top: 285px;
+                left: 20px;
+                height: 120px;
+            }
+            .leftChar {
+                top: 410px;
+                left: 20px;
+            }
+            .countryLabel {
+                left: 20px;
+                top: 450px;
+            }
+            .country {
+                width: calc(100% - 40px);
+                top: 475px;
+                left: 20px;
+            }
+            .timezoneLabel {
+                left: 20px;
+                top: 540px;
+            }
+            .timezone {
+                width: calc(100% - 40px);
+                top: 565px;
+                left: 20px;
+            }
+            .line {
+                bottom: 75px;
+            }
+            .cancelBtn {
+                bottom: 20px;
+                right: 160px;
+                padding: 6px 12px;
+            }
+            .saveBtn {
+                bottom: 20px;
+                right: 20px;
+                padding: 6px 12px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 992px) and (min-width:768px){
+    .BgImage{
+        grid-column: 1/13;
+        height: 140px;
+        .personalImage{
+            height: 100px;
+            left: 10px;
+            bottom: -55%;
+        }
+        .name {
+            left: 120px;
+        }
+        .email {
+            left: 120px;
+        }
+        .shareBtn {
+            right: 120px;
+            padding: 4px 10px;
+        }
+        .viewBtn{
+            right: 10px;
+            padding: 4px 10px;
+        }
+    }
+    .editInfo {
+        grid-column: 1/13;
+        margin-top: 100px;
+        .form {
+            height: 360px;
+            .FnameLabel {
+                top: 10px;
+                left: 10px;
+            }
+            .FnameInput {
+                left: 10px;
+            }
+            .LnameLabel {
+                top: 10px;
+                right: calc(((100% - 60px) / 2) + 10px);
+            }
+            .LnameInput {
+                right: 10px;
+            }
+            .FnameInput,
+            .LnameInput {
+                width: calc((100% - 60px) / 2);
+                top: 30px;
+                padding: 6px 10px;
+            }
+            .emailIcon {
+                padding: 6px 10px;
+                left: 10px;
+                top: 100px;
+            }
+            .emailLabel {
+                left: 10px;
+                top: 80px;
+            }
+            .email {
+                width: calc(100% - 20px);
+                top: 100px;
+                left: 10px;
+                padding: 6px 10px 6px 40px;
+            }
+            .personalImage {
+                left: 10px;
+                top: 150px;
+                width: 55px;
+            }
+            .selectImage {
+                top: 150px;
+                right: 10px;
+                width: calc(100% - 100px);
+                height: 120px;
+                padding: 0 60px;
+            }
+            .line {
+                bottom: 55px;
+            }
+            .cancelBtn {
+                bottom: 10px;
+                right: 140px;
+                padding: 4px 10px;
+            }
+            .saveBtn {
+                bottom: 10px;
+                right: 10px;
+                padding: 4px 10px;
+            }
+        }
+    }
+    .articlesLine {
+        grid-column: 1/13;
+    }
+    .editProfile {
+        grid-column: 1/13;
+        .form {
+            margin-top: 20px;
+            height: 580px;
+            .availableBtn {
+                top: 10px;
+                left: 10px;
+            }
+            .availableTxt {
+                top: 15px;
+                left: 50px;
+            }
+            .availableState {
+                top: 35px;
+                left: 50px;
+            }
+            .usernameUrl {
+                top: 80px;
+                left: 10px;
+            }
+            .usernameLable {
+                left: 10px;
+                top: 60px;
+            }
+            .username {
+                width: calc(100% - 20px);
+                top: 80px;
+                left: 10px;
+                padding: 6px 10px 6px 160px;
+            }
+            .websiteHttp {
+                top: 150px;
+                left: 10px;
+            }
+            .websiteLabel {
+                left: 10px;
+                top: 130px;
+            }
+            .website {
+                width: calc(100% - 20px);
+                top: 150px;
+                left: 10px;
+                padding: 6px 10px 6px 70px;
+            }
+            .bioLabel {
+                left: 10px;
+                top: 200px;
+            }
+            .bio {
+                width: calc(100% - 20px);
+                top: 220px;
+                left: 10px;
+                height: 120px;
+            }
+            .leftChar {
+                top: 345px;
+                left: 10px;
+            }
+            .countryLabel {
+                left: 10px;
+                top: 380px;
+            }
+            .country {
+                width: calc(100% - 20px);
+                top: 400px;
+                left: 10px;
+            }
+            .timezoneLabel {
+                left: 10px;
+                top: 450px;
+            }
+            .timezone {
+                width: calc(100% - 20px);
+                top: 470px;
+                left: 10px;
+            }
+            .line {
+                bottom: 55px;
+            }
+            .cancelBtn {
+                bottom: 10px;
+                right: 140px;
+                padding: 4px 10px;
+            }
+            .saveBtn {
+                bottom: 10px;
+                right: 10px;
+                padding: 4px 10px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) and (min-width:480px){
+    .BgImage{
+        grid-column: 1/7;
+        height: 120px;
+        .personalImage{
+            height: 80px;
+            left: 0px;
+            bottom: -55%;
+        }
+        .name {
+            left: 90px;
+        }
+        .email {
+            left: 90px;
+        }
+        .shareBtn {
+            right: 110px;
+            padding: 2px 10px;
+        }
+        .viewBtn{
+            right: 0px;
+            padding: 2px 10px;
+        }
+    }
+    .editInfo {
+        grid-column: 1/7;
+        margin-top: 80px;
+        .form {
+            height: 360px;
+            .FnameLabel {
+                top: 10px;
+                left: 10px;
+            }
+            .FnameInput {
+                left: 10px;
+            }
+            .LnameLabel {
+                top: 10px;
+                right: calc(((100% - 60px) / 2) + 10px);
+            }
+            .LnameInput {
+                right: 10px;
+            }
+            .FnameInput,
+            .LnameInput {
+                width: calc((100% - 60px) / 2);
+                top: 30px;
+                padding: 4px 8px;
+            }
+            .emailIcon {
+                padding: 4px 8px;
+                left: 10px;
+                top: 100px;
+            }
+            .emailLabel {
+                left: 10px;
+                top: 80px;
+            }
+            .email {
+                width: calc(100% - 20px);
+                top: 100px;
+                left: 10px;
+                padding: 4px 8px 4px 40px;
+            }
+            .personalImage {
+                left: 10px;
+                top: 150px;
+                width: 55px;
+            }
+            .selectImage {
+                top: 150px;
+                right: 10px;
+                width: calc(100% - 100px);
+                height: 120px;
+                padding: 0 40px;
+            }
+            .line {
+                bottom: 55px;
+            }
+            .cancelBtn {
+                bottom: 10px;
+                right: 140px;
+                padding: 2px 10px;
+            }
+            .saveBtn {
+                bottom: 10px;
+                right: 10px;
+                padding: 2px 10px;
+            }
+        }
+    }
+    .articlesLine {
+        grid-column: 1/7;
+    }
+    .editProfile {
+        grid-column: 1/7;
+        .form {
+            margin-top: 20px;
+            height: 580px;
+            .availableBtn {
+                top: 10px;
+                left: 10px;
+            }
+            .availableTxt {
+                top: 15px;
+                left: 50px;
+            }
+            .availableState {
+                top: 35px;
+                left: 50px;
+            }
+            .usernameUrl {
+                top: 80px;
+                left: 10px;
+            }
+            .usernameLable {
+                left: 10px;
+                top: 60px;
+            }
+            .username {
+                width: calc(100% - 20px);
+                top: 80px;
+                left: 10px;
+                padding: 6px 10px 6px 160px;
+            }
+            .websiteHttp {
+                top: 150px;
+                left: 10px;
+            }
+            .websiteLabel {
+                left: 10px;
+                top: 130px;
+            }
+            .website {
+                width: calc(100% - 20px);
+                top: 150px;
+                left: 10px;
+                padding: 6px 10px 6px 70px;
+            }
+            .bioLabel {
+                left: 10px;
+                top: 200px;
+            }
+            .bio {
+                width: calc(100% - 20px);
+                top: 220px;
+                left: 10px;
+                height: 120px;
+            }
+            .leftChar {
+                top: 345px;
+                left: 10px;
+            }
+            .countryLabel {
+                left: 10px;
+                top: 380px;
+            }
+            .country {
+                width: calc(100% - 20px);
+                top: 400px;
+                left: 10px;
+            }
+            .timezoneLabel {
+                left: 10px;
+                top: 450px;
+            }
+            .timezone {
+                width: calc(100% - 20px);
+                top: 470px;
+                left: 10px;
+            }
+            .line {
+                bottom: 55px;
+            }
+            .cancelBtn {
+                bottom: 10px;
+                right: 140px;
+                padding: 4px 10px;
+            }
+            .saveBtn {
+                bottom: 10px;
+                right: 10px;
+                padding: 4px 10px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 480px){
+    .BgImage{
+        grid-column: 1/7;
+        height: 120px;
+        .personalImage{
+            height: 60px;
+            left: 0px;
+            bottom: -45%;
+        }
+        .name {
+            left: 65px;
+        }
+        .email {
+            left: 65px;
+        }
+        .shareBtn {
+            right: 80px;
+            padding: 2px 4px;
+        }
+        .viewBtn{
+            right: 0px;
+            padding: 2px 4px;
+        }
+    }
+    .editInfo {
+        grid-column: 1/7;
+        margin-top: 70px;
+        .form {
+            height: 460px;
+            .FnameLabel {
+                top: 10px;
+                left: 10px;
+            }
+            .FnameInput {
+                left: 10px;
+                top: 30px;
+            }
+            .LnameLabel {
+                top: 70px;
+                left: 10px;
+                transform: translateX(0%);
+            }
+            .LnameInput {
+                top: 90px;
+                right: 10px;
+            }
+            .FnameInput,
+            .LnameInput {
+                width: calc(100% - 20px);
+                padding: 4px 8px;
+            }
+            .emailIcon {
+                padding: 4px 8px;
+                left: 10px;
+                top: 150px;
+            }
+            .emailLabel {
+                left: 10px;
+                top: 130px;
+            }
+            .email {
+                width: calc(100% - 20px);
+                top: 150px;
+                left: 10px;
+                padding: 4px 8px 4px 40px;
+            }
+            .personalImage {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 200px;
+                width: 60px;
+            }
+            .selectImage {
+                top: 270px;
+                right: 10px;
+                width: calc(100% - 20px);
+                height: 120px;
+                padding: 0 40px;
+            }
+            .line {
+                bottom: 45px;
+            }
+            .cancelBtn {
+                bottom: 10px;
+                right: 110px;
+                padding: 2px 6px;
+            }
+            .saveBtn {
+                bottom: 10px;
+                right: 10px;
+                padding: 2px 6px;
+            }
+        }
+    }
+    .articlesLine {
+        grid-column: 1/7;
+    }
+    .editProfile {
+        grid-column: 1/7;
+        .form {
+            margin-top: 20px;
+            height: 580px;
+            .availableBtn {
+                top: 10px;
+                left: 10px;
+            }
+            .availableTxt {
+                top: 15px;
+                left: 50px;
+            }
+            .availableState {
+                top: 35px;
+                left: 50px;
+            }
+            .usernameUrl {
+                top: 80px;
+                left: 10px;
+            }
+            .usernameLable {
+                left: 10px;
+                top: 60px;
+            }
+            .username {
+                width: calc(100% - 20px);
+                top: 80px;
+                left: 10px;
+                padding: 6px 10px 6px 160px;
+            }
+            .websiteHttp {
+                top: 150px;
+                left: 10px;
+            }
+            .websiteLabel {
+                left: 10px;
+                top: 130px;
+            }
+            .website {
+                width: calc(100% - 20px);
+                top: 150px;
+                left: 10px;
+                padding: 6px 10px 6px 70px;
+            }
+            .bioLabel {
+                left: 10px;
+                top: 200px;
+            }
+            .bio {
+                width: calc(100% - 20px);
+                top: 220px;
+                left: 10px;
+                height: 120px;
+            }
+            .leftChar {
+                top: 345px;
+                left: 10px;
+            }
+            .countryLabel {
+                left: 10px;
+                top: 380px;
+            }
+            .country {
+                width: calc(100% - 20px);
+                top: 400px;
+                left: 10px;
+            }
+            .timezoneLabel {
+                left: 10px;
+                top: 450px;
+            }
+            .timezone {
+                width: calc(100% - 20px);
+                top: 470px;
+                left: 10px;
+            }
+            .line {
+                bottom: 55px;
+            }
+            .cancelBtn {
+                bottom: 10px;
+                right: 120px;
+                padding: 4px 10px;
+            }
+            .saveBtn {
+                bottom: 10px;
+                right: 10px;
+                padding: 4px 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,861 @@
+@import './colors';
+
+.ProfileCreation {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 5vh;
+    .progressBar {
+        position: relative;
+        background-color: #F9F5FF;
+        .progress {
+            transition: 0.7s;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: $primary-color;
+        }
+    }
+    .uploadImages {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .personalImage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba($color: $borders-gray, $alpha: 0.5);
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            .image {
+                background-color: #fff;
+                border-radius: 50%;
+            }
+            .icon {
+                background-color: rgba($color: $normal-gray, $alpha: 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                color: #fff;
+            }
+            .blue {
+                color: $primary-color;
+            }
+        }
+        .coverImage {
+            cursor: pointer;
+            border: 1px solid rgba($color: $borders-gray, $alpha: 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            .icon {
+                background-color: rgba($color: $normal-gray, $alpha: 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                color: $normal-gray;
+            }
+            .blue {
+                color: $primary-color;
+            }
+        }
+    }
+    .firstForm,
+    .secondForm,
+    .thirdForm,
+    .fourthForm {
+        .btns {
+            position: relative;
+            width: 100%;
+            margin-top: 50px;
+            .backBtn {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: transparent;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                gap: 10px;
+                .span {
+                    display: flex;
+                }
+            }
+            .skipBtn {
+                position: absolute;
+                top: 0;
+                background-color: transparent;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                gap: 10px;
+            }
+            .nextBtn {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                .span {
+                    display: flex;
+                }
+            }
+        }
+    }
+    .formsSlider {
+        position: relative;
+        overflow-x: hidden;
+        height: fit-content;
+    }
+    .formsHolder {
+        display: flex;
+        gap: 200px;
+        transform: translateX(-0%);
+        transition: 0.7s;
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 5vh;
+        .formLabel {
+            margin-top: 20px;
+            .required {
+                color: #F04438;
+            }
+        }
+        .formInput,
+        .FNameInput,
+        .LNameInput {
+            border-radius: 8px;
+            border: 1px solid $borders-gray;
+        }
+        .textarea {
+            resize: vertical;
+            &:focus {
+                outline: none;
+            }
+        }
+        .name {
+            position: relative;
+            .FirstLabel {
+                position: absolute;
+                top: 0;
+                left: 0;
+                .required {
+                    color: #F04438;
+                }
+            }
+            .FNameInput {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+            .LastLabel {
+                position: absolute;
+                top: 0;
+                transform: translateX(100%);
+                .required {
+                    color: #F04438;
+                }
+            }
+            .LNameInput{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+        }
+        .addFile {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .history {
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid $borders-gray;
+            padding: 5px 20px;
+            .delete {
+                position: absolute;
+                cursor: pointer;
+                right: 20px;
+                height: 100%;
+                width: 60px;
+                padding-left: 20px;
+                top: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-left: 1px solid $borders-gray;
+            }
+        }
+        .addItems {
+            margin-top: 20px;
+            position: relative;
+            height: fit-content;
+            .addSkill {
+                position: absolute;
+                right: 0;
+            }
+            .items {
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                height: fit-content;
+                .item {
+                    background-color: #fff;
+                    border-radius: 4px;
+                    border: 2px solid $borders-gray;
+                    padding: 2px 4px;
+                    display: flex;
+                    align-items: center;
+                    margin: 2px;
+                    cursor: pointer;
+                }
+            }
+        }
+        .checkbox {
+            position: relative;
+            .agreement {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .agreementLabel {
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                .terms {
+                    color: $secondary-color;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width: 992px){
+    .ProfileCreation {
+        gap: 15px;
+        grid-column: 1/13;
+        .progressBar {
+            width: 600px;
+            height: 8px;
+            border-radius: 4px;
+            .progress {
+                height: 8px;
+                border-radius: 4px;
+            }
+        }
+        .heading {
+            width: 600px;
+        }
+        .firstP {
+            width: 600px;
+        }
+        .uploadImages {
+            justify-content: center;
+            width: 600px;
+            .personalImage {
+                width:180px;
+                height: 180px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+        .coverImage {
+            width: 400px;
+            height: 180px;
+            padding: 20px 50px;
+            .icon {
+                font-size: 28px;
+                width: 60px;
+                height: 60px;
+            }
+        }
+        .firstForm,
+        .secondForm,
+        .thirdForm,
+        .fourthForm  {
+            .btns {
+                height: 45px;
+                .backBtn {
+                    height: 45px;
+                }
+                .skipBtn {
+                    right:200px;
+                    height: 45px;
+                }
+                .nextBtn {
+                    width: 160px;
+                    height: 45px;
+                }
+            }
+        }
+        .formsSlider {
+            width: 600px;
+        }
+        .formsHolder {
+            width: 600px;
+        }
+        .form {
+            .name {
+                width: 600px;
+                height: 80px;
+                .FNameInput,
+                .LNameInput {
+                    width: 280px;
+                    padding: 10px 14px;
+                }
+                .LastLabel {
+                    right: 280px;
+                }
+                .formLabel {
+                    margin-top: 15px;
+                }
+            }
+            .formInput {
+                width: 600px;
+                padding: 10px 14px;
+            }
+            .addFile {
+                width: 600px;
+                .addBtn {
+                    padding: 8px 12px;
+                    width: 160px;
+                }
+            }
+            .addItems {
+                width: 600px;
+                .addSkill {
+                    padding: 10px 20px;
+                }
+                .formInput {
+                    width: 500px;
+                }
+            }
+            .checkbox {
+                margin-top: 15px;
+                margin-bottom: 25px;
+                width: 600px;
+                height: 25px;
+                .resetPass {
+                    right: 0;
+                    transform: translateY(-50%);
+                    top: 50%;
+                }
+            }
+            .CreateProfile {
+                width: 600px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 992px) and (min-width:768px){
+    .ProfileCreation {
+        gap: 15px;
+        .progressBar {
+            width: 500px;
+            height: 8px;
+            border-radius: 4px;
+            .progress {
+                height: 8px;
+                border-radius: 4px;
+            }
+        }
+        .uploadImages {
+            flex-direction: column;
+            gap: 15px;
+            width:100%;
+            .personalImage {
+                width:180px;
+                height: 180px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+        .coverImage {
+            width: 500px;
+            height: 180px;
+            padding: 20px 50px;
+            .icon {
+                font-size: 28px;
+                width: 60px;
+                height: 60px;
+            }
+        }
+        .heading {
+            width: 500px;
+            text-align: center;
+        }
+        .firstP {
+            width: 500px;
+            text-align: center;
+        }
+        .firstForm,
+        .secondForm,
+        .thirdForm,
+        .fourthForm  {
+            .btns {
+                height: 35px;
+                .backBtn {
+                    height: 35px;
+                }
+                .skipBtn {
+                    right:180px;
+                    height: 35px;
+                }
+                .nextBtn {
+                    width: 150px;
+                    height: 35px;
+                }
+            }
+        }
+        .formsSlider {
+            width: 500px;
+        }
+        .formsHolder {
+            width: 500px;
+        }
+        .form {
+            .formLabel {
+                margin-top: 20px;
+            }
+            .formInput {
+                width: 500px;
+                padding: 8px 12px;
+            }
+            .name {
+                width: 100%;
+                height: 80px;
+                .FNameInput,
+                .LNameInput {
+                    width: 220px;
+                    padding: 10px 14px;
+                }
+                .LastLabel {
+                    right: 220px;
+                }
+            }
+            .addFile {
+                width: 100%;
+                .addBtn {
+                    padding: 6px 10px;
+                    width: 150px;
+                }
+            }
+            .addItems {
+                width: 100%;
+                .addSkill {
+                    padding: 8px 12px;
+                }
+                .formInput {
+                    width: 80%;
+                }
+            }
+            .checkbox {
+                margin-top: 15px;
+                margin-bottom: 25px;
+                width: 100%;
+                height: 25px;
+                .resetPass {
+                    right: 0;
+                    transform: translateY(-50%);
+                    top: 50%;
+                }
+            }
+            .CreateProfile {
+                width: 100%;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) and (min-width:480px){
+    .ProfileCreation {
+        gap: 15px;
+        .progressBar {
+            width: 460px;
+            height: 6px;
+            border-radius: 3px;
+            .progress {
+                height: 6px;
+                border-radius: 3px;
+            }
+        }
+        .uploadImages {
+            width: 460px;
+            justify-content: center;
+            .personalImage {
+                width:180px;
+                height: 180px;
+                margin-bottom: 30px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            .coverImage {
+                width: 100%;
+                height: 180px;
+                padding: 20px 40px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+        .heading {
+            width: 460px;
+            text-align: center;
+        }
+        .firstP {
+            width: 460px;
+            text-align: center;
+        }
+        .firstForm,
+        .secondForm,
+        .thirdForm,
+        .fourthForm  {
+            .btns {
+                height: 35px;
+                .backBtn {
+                    height: 35px;
+                }
+                .skipBtn {
+                    right:170px;
+                    height: 35px;
+                }
+                .nextBtn {
+                    width: 140px;
+                    height: 35px;
+                }
+            }
+        }
+        .formsSlider {
+            width: 460px;
+        }
+        .formsHolder {
+            width: 460px;
+        }
+        .form {
+            .formLabel {
+                margin-top: 15px;
+            }
+            .formInput {
+                width: 460px;
+                padding: 10px 8px;
+            }
+            .name {
+                width: 100%;
+                height: 70px;
+                .FNameInput,
+                .LNameInput {
+                    width: 220px;
+                    padding: 10px 8px;
+                }
+                .LastLabel {
+                    right: 200px;
+                }
+            }
+            .addFile {
+                width: 100%;
+                .addBtn {
+                    padding: 6px 10px;
+                    width: 140px;
+                }
+            }
+            .addItems {
+                width: 100%;
+                .addSkill {
+                    padding: 10px 12px;
+                }
+                .formInput {
+                    width: 80%;
+                }
+            }
+            .checkbox {
+                margin-top: 15px;
+                margin-bottom: 25px;
+                width: 100%;
+                height: 25px;
+                .resetPass {
+                    right: 0;
+                    transform: translateY(-50%);
+                    top: 50%;
+                }
+            }
+            .CreateProfile {
+                width: 100%;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 480px) and (min-width:370px){
+    .ProfileCreation {
+        gap: 15px;
+        .progressBar {
+            width: 350px;
+            height: 4px;
+            border-radius: 2px;
+            .progress {
+                height: 4px;
+                border-radius: 2px;
+            }
+        }
+        .uploadImages {
+            width: 350px;
+            justify-content: center;
+            .personalImage {
+                width:180px;
+                height: 180px;
+                margin-bottom: 30px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            .coverImage {
+                width: 100%;
+                height: 180px;
+                padding: 20px 40px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+        .heading {
+            width: 350px;
+            text-align: center;
+        }
+        .firstP {
+            width: 350px;
+            text-align: center;
+        }
+        .firstForm,
+        .secondForm,
+        .thirdForm,
+        .fourthForm  {
+            .btns {
+                height: 30px;
+                .backBtn {
+                    height: 30px;
+                }
+                .skipBtn {
+                    right:130px;
+                    height: 30px;
+                }
+                .nextBtn {
+                    width: 110px;
+                    height: 30px;
+                }
+            }
+        }
+        .formsSlider {
+            width: 350px;
+        }
+        .formsHolder {
+            width: 350px;
+        }
+        .form {
+            .formLabel {
+                margin-top: 15px;
+            }
+            .formInput {
+                width: 350px;
+                padding: 10px 8px;
+            }
+            .name {
+                width: 100%;
+                height: 70px;
+                .FNameInput,
+                .LNameInput {
+                    width: 170px;
+                    padding: 10px 8px;
+                }
+                .LastLabel {
+                    right: 170px;
+                }
+            }
+            .addFile {
+                width: 100%;
+                .addBtn {
+                    padding: 2px 8px;
+                    width: 120px;
+                }
+            }
+            .addItems {
+                width: 100%;
+                .addSkill {
+                    padding: 10px 12px;
+                }
+                .formInput {
+                    width: 80%;
+                }
+            }
+            .checkbox {
+                margin-top: 15px;
+                margin-bottom: 25px;
+                width: 100%;
+                height: 25px;
+                .resetPass {
+                    right: 0;
+                    transform: translateY(-50%);
+                    top: 50%;
+                }
+            }
+            .CreateProfile {
+                width: 100%;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 370px){
+    .ProfileCreation {
+        gap: 15px;
+        .progressBar {
+            width: 240px;
+            height: 4px;
+            border-radius: 2px;
+            .progress {
+                height: 4px;
+                border-radius: 2px;
+            }
+        }
+        .uploadImages {
+            width: 240px;
+            justify-content: center;
+            .personalImage {
+                width:180px;
+                height: 180px;
+                margin-bottom: 30px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            .coverImage {
+                width: 240px;
+                height: 180px;
+                padding: 20px 10px;
+                .icon {
+                    font-size: 28px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+        .heading {
+            width: 240px;
+        }
+        .firstP {
+            width: 240px;
+        }
+        .firstForm,
+        .secondForm,
+        .thirdForm,
+        .fourthForm  {
+            .btns {
+                height: 30px;
+                .backBtn {
+                    height: 30px;
+                }
+                .skipBtn {
+                    right:110px;
+                    height: 30px;
+                }
+                .nextBtn {
+                    width: 100px;
+                    height: 30px;
+                }
+            }
+        }
+        .formsSlider {
+            width: 240px;
+        }
+        .formsHolder {
+            width: 240px;
+        }
+        .form {
+            .name {
+                width: 240px;
+                height: 60px;
+                .FNameInput,
+                .LNameInput {
+                    width: 110px;
+                    padding: 8px 8px;
+                }
+                .LastLabel {
+                    right: 110px;
+                }
+            }
+            .formLabel {
+                margin-top: 15px;
+            }
+            .formInput {
+                width: 240px;
+                padding: 8px 8px;
+            }
+            .addFile {
+                width: 240px;
+                .addBtn {
+                    width: fit-content;
+                    white-space: nowrap;
+                    padding: 5px;
+                }
+            }
+            .addItems {
+                width: 240px;
+                .addSkill {
+                    padding: 8px 8px;
+                }
+                .formInput {
+                    width: 180px;
+                }
+            }
+            .checkbox {
+                margin-top: 15px;
+                margin-bottom: 25px;
+                width: 240px;
+                height: 25px;
+                .resetPass {
+                    right: 0;
+                    transform: translateY(-50%);
+                    top: 50%;
+                }
+            }
+            .CreateProfile {
+                width: 240px;
+            }
+        }
+    }
+}
