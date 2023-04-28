@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/sidebar.module.scss';
-import Logo from './Logo';
+import Logo from '../nestedComponents/Logo';
 import { CiSearch } from 'react-icons/ci';
 import { BiHomeAlt } from 'react-icons/bi';
 import { FiBarChart2,FiUser,FiUsers,FiMessageSquare,FiLayers,FiHeadphones,FiSettings,FiLogOut } from 'react-icons/fi';
@@ -8,14 +8,20 @@ import { IoPricetagOutline } from 'react-icons/io5';
 import { signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
 import { auth } from '@/config/firebaseConfig';
+import { doc, onSnapshot,getDoc } from 'firebase/firestore';
+import { storage,db } from '@/config/firebaseConfig';
+import { ref,getDownloadURL } from 'firebase/storage';
 
 const SideBar = () => {
     const [active,setActive] = useState(false);
     const [currentPage,setCurrentPage] = useState('home');
     const dispatch = useDispatch();
+    const [imageUrl,setImageUrl] = useState(null);
+    const [name,setName] = useState('')
+    const user = useSelector(state => state.user);
 
     function handleSignOut(){
         signOut(auth)
@@ -26,6 +32,26 @@ const SideBar = () => {
             dispatch(alertActions.showAlert({msg:err.message,type:'error'}));
         })
     }
+
+
+    useEffect(()=>{
+        if(user.isLoggedIN){
+            if(user.userData.uid) {
+                const docRef = doc(db,'userData', user.userData.uid);
+                getDoc(docRef)
+                .then(res => {
+                    const {firstName,lastName} = res.data();
+                    setName(`${firstName} ${lastName}`)
+                    const storageRef = ref(storage,`images/personalImage_${user.userData.uid}`);
+                    getDownloadURL(storageRef)
+                    .then(url => {
+                        setImageUrl(url)
+                    })
+                })
+            }
+        }
+    },[user.isLoggedIN])
+
     return (
         <>
             <aside className={`${styles.sidebar} ${active? `${styles.active}`:''}`}>
@@ -124,9 +150,13 @@ const SideBar = () => {
                     </Link>
                 </ul>
                 <div className={styles.account}>
-                    <img src="/personal-image.png" alt="" className={styles.profileImage}/>
-                    <p className={`${styles.name} small-fs normal dark-gray`}>Olivia Rhye</p>
-                    <span className={`${styles.email} small-fs light light-gray`}>olivia@untitledui.com</span>
+                    <img src={imageUrl} alt="" className={styles.profileImage}/>
+                    <p className={`${styles.name} small-fs normal dark-gray`}>{name}</p>
+                    {auth.currentUser?
+                        <span className={`${styles.email} small-fs light light-gray`}>{auth.currentUser.email}</span>
+                            :
+                        ''
+                    }
                     <button className={`${styles.logOut} large-fs light-gray`} onClick={handleSignOut}>{FiLogOut({})}</button>
                 </div>
             </aside>

@@ -1,6 +1,6 @@
 @import './colors';
 .sidebar {
-    z-index: 999;
+    z-index: 900;
     position: fixed;
     height: 100vh;
     box-shadow: 10px 0px 20px rgba($color: #000000, $alpha: 0.05);
@@ -58,6 +58,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-100%);
+            text-transform: capitalize;
         }
         .email {
             position: absolute;

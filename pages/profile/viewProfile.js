@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/ViewProfile.module.scss';
+import styles from '../../styles/ViewProfile.module.scss';
 import { FiUserPlus,FiMessageCircle,FiArrowUpRight } from 'react-icons/fi';
 import { MdOutlineExpandMore,MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import { auth,db } from '@/config/firebaseConfig';
+import { auth,db, storage } from '@/config/firebaseConfig';
 import { doc,getDoc } from 'firebase/firestore';
+import { ref,getDownloadURL } from 'firebase/storage';
 import { useSelector } from 'react-redux';
-import Loading from './Loading';
+import Loading from '../../nestedComponents/Loading';
 
 const ViewProfile = () => {
     const user = useSelector(state => state.user.userData);
@@ -19,8 +20,13 @@ const ViewProfile = () => {
             const docRef = doc(db,'userData', user.uid);
             getDoc(docRef)
             .then(res => {
-                setIsFetching(false);
                 setData(res.data());
+                const storageRef = ref(storage,`images/personalImage_${user.uid}`);
+                getDownloadURL(storageRef)
+                .then(url => {
+                    setImageUrl(url);
+                    setIsFetching(false);
+                })
             });
         }
     },[user])
@@ -29,7 +35,7 @@ const ViewProfile = () => {
     return (
         <section className={styles.container}>
             <div className={styles.images} style={{backgroundImage: 'url(/cover-image.jpg)'}}>
-                <img className={styles.personalImage} src="/personal-image.png" alt="" />
+                <img className={styles.personalImage} src={imageUrl} alt="" />
             </div>
             <article className={styles.contact}>
                 <h2 className={`${styles.name} heading2-fs bold dark-gray`}>{data.firstName} {data.lastName}</h2>
@@ -91,6 +97,15 @@ const ViewProfile = () => {
                             <img src="/linkedIn.png" alt="" className={styles.linkIcon}/>
                             <p className={`${styles.name} dark-gray normal medium-fs`}>LinkedIn</p>
                             <a href={data.linkedIn} target='_blank' className={`${styles.linkURL} light-gray light small-fs`}>{data.linkedIn}</a>
+                        </div>
+                    :
+                        ''
+                    }
+                    {data.twitter !== ''?
+                        <div className={styles.link}>
+                            <img src="/twitter.png" alt="" className={styles.linkIcon}/>
+                            <p className={`${styles.name} dark-gray normal medium-fs`}>Twitter</p>
+                            <a href={data.linkedIn} target='_blank' className={`${styles.linkURL} light-gray light small-fs`}>{data.twitter}</a>
                         </div>
                     :
                         ''

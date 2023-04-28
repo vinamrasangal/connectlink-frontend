@@ -10,7 +10,7 @@ import Verification from '@/components/verification';
 import SideBar from '@/components/SideBar';
 import ProfileCreation from '@/components/ProfileCreation';
 import { doc, onSnapshot } from 'firebase/firestore';
-import Loading from '@/components/Loading';
+import Loading from '@/nestedComponents/Loading';
 
 
 export default function App({ Component, pageProps }) {

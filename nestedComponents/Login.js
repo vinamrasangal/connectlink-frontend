@@ -1,14 +1,15 @@
 import React,{useState} from 'react';
 import Image from 'next/image';
-import styles from '../styles/Login.module.scss';
+import styles from '../styles/Account.module.scss';
 import { useSelector ,useDispatch } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
 import { userAction } from '@/redux/User';
 import { signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider , signInWithPopup  } from 'firebase/auth';
 import { auth } from '@/config/firebaseConfig';
 import { RxEyeOpen,RxEyeClosed } from 'react-icons/rx';
+import {Link} from 'react-router-dom';
 
-const Login = ({setPage}) => {
+const Login = () => {
     const [showPassword,setShowPassword] = useState(false);
     const [loginData,setLoginData] = useState({email:'',password:'',rememberMe:false});
     const [loading,setLoading] = useState(false);
@@ -127,11 +128,10 @@ const Login = ({setPage}) => {
         </form>
         <p className={`${styles.newAccount} small-fs light`}>
             Don't have an account? 
-            <a href="" className={styles.createAccount} 
-            onClick={(e)=>{e.preventDefault() 
-                setPage('signUp')
-            }}>
-            Create free account</a></p>
+            <Link to='/signup' className={styles.createAccount} >
+                Create free account
+            </Link>
+        </p>
         <span className='small-fs normal'> Or </span>
         <p className={`${styles.providersLabel} normal medium-fs`}>Sign in with</p>
         <div className={styles.providers}>

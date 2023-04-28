@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../styles/SignUp.module.scss';
+import styles from '../styles/Account.module.scss';
 import { useDispatch } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
 import { auth,db } from '@/config/firebaseConfig';

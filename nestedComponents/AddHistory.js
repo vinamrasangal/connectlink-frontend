@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/addHistory.module.scss';
+import styles from '../styles/ProfileCreation.module.scss';
 
 const AddHistory = ({setData,name,historyFor,hide}) => {
 

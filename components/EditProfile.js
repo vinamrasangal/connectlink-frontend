@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/EditProfile.module.scss';
-import DropImage from './DropImage';
+import DropImage from '../nestedComponents/DropImage';
 import { FiUploadCloud } from 'react-icons/fi';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsToggleOn,BsToggleOff } from 'react-icons/bs';
 import allCountries from '@/suggestions/allCountries';
 import timeZones from '@/suggestions/timeZones';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from './Loading';
+import Loading from '../nestedComponents/Loading';
 import { doc, getDoc,updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firebaseConfig';
 import { storage } from '@/config/firebaseConfig';
-import { ref,getDownloadURL, uploadBytes, deleteObject } from 'firebase/storage';
+import { ref,getDownloadURL, uploadBytes } from 'firebase/storage';
 import { alertActions } from '@/redux/AlertController';
-const EditProfile = ({setShowenPage}) => {
+import Link from 'next/link';
+
+
+
+const EditProfile = () => {
     const dispatch = useDispatch();
     const [userInfo,setUserInfo] = useState({LName:'',FName:'',email:'',userImage:''})
     const [personalInfo,setPersonalInfo] = useState({Fname:'',Lname:'',email:''});
@@ -117,7 +121,9 @@ const EditProfile = ({setShowenPage}) => {
                 <h2 className={`${styles.name} dark-gray normal x-large-fs`}>{userInfo.FName} {userInfo.LName}</h2>
                 <p className={`${styles.email} small-fs light light-gray`}>{userInfo.email}</p>
                 <button className={`${styles.shareBtn} S-BTN`}>Share</button>
-                <button className={`${styles.viewBtn} P-BTN`} onClick={()=>setShowenPage('viewProfile')}>View profile</button>
+                <Link href='/profile/viewProfile'>
+                    <button className={`${styles.viewBtn} P-BTN`}>View profile</button>
+                </Link>
             </div>
             <article className={styles.editInfo}>
                 <p className='normal normal-gray medium-fs'>Personal info</p>

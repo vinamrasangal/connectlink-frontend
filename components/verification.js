@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/verification.module.scss';
-import Logo from './Logo';
+import Logo from '../nestedComponents/Logo';
 import { sendEmailVerification } from 'firebase/auth';
 import { auth } from '@/config/firebaseConfig';
 import { useDispatch } from 'react-redux';

@@ -6,15 +6,14 @@ import { alertActions } from '@/redux/AlertController';
 import { FiUploadCloud } from 'react-icons/fi';
 import { ref,uploadBytes,deleteObject } from 'firebase/storage';
 import { auth, storage } from '@/config/firebaseConfig';
-import DropImage from '@/components/DropImage';
-import AddHistory from '@/components/AddHistory';
+import DropImage from '@/nestedComponents/DropImage';
+import AddHistory from '@/nestedComponents/AddHistory';
 import { AiOutlineDelete,AiOutlineArrowRight,AiOutlineArrowLeft } from 'react-icons/ai';
 import { setDoc,doc } from 'firebase/firestore';
 import { db } from '@/config/firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { userAction } from '@/redux/User';
-import { getDownloadURL } from 'firebase/storage';
-// import { FileReader}
+
 
 
 const ProfileCreation = () => {

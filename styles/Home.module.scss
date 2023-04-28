@@ -1,0 +1,153 @@
+@import './colors';
+.main {
+    background-color: $BG-color;
+}
+.container {
+    .nav {
+        height: fit-content;
+        .ul {
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            .li {
+                .link {
+                    display: flex;
+                    align-items: center;
+                    .span {
+                        display: flex;
+                    }
+                    &:hover,
+                    &.active {
+                        background-color: #EFF8FF;
+                        .span {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width:992px) {
+    .container {
+        .nav {
+            grid-column: 1/13;
+            .ul {
+                gap: 10px;
+                .li {
+                    .link {
+                        border-bottom: 2px solid transparent;
+                        padding: 16px 12px;
+                        gap: 10px;
+                        &:hover,
+                        &.active {
+                            border-bottom: 2px solid $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 992px) and (min-width:768px){
+    .container {
+        .nav {
+            grid-column: 1/13;
+            .ul {
+                gap: 5px;
+                .li {
+                    .link {
+                        border-bottom: 2px solid transparent;
+                        padding: 14px 10px;
+                        gap: 10px;
+                        &:hover,
+                        &.active {
+                            border-bottom: 2px solid $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) and (min-width:480px){
+    .container {
+        .nav {
+            grid-column: 1/7;
+            .ul {
+                gap: 10px;
+                flex-wrap: wrap;
+                .li {
+                    .link {
+                        border-bottom: 2px solid transparent;
+                        padding: 12px 8px;
+                        gap: 10px;
+                        width: 140px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        &:hover,
+                        &.active {
+                            border-bottom: 2px solid $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 480px)and (min-width:370px){
+    .container {
+        .nav {
+            grid-column: 1/7;
+            .ul {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                .li {
+                    .link {
+                        border-bottom: 2px solid transparent;
+                        padding: 10px 6px;
+                        gap: 10px;
+                        width: 120px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        &:hover,
+                        &.active {
+                            border-bottom: 2px solid $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 370px){
+    .container {
+        .nav {
+            grid-column: 1/7;
+            .ul {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                .li {
+                    .link {
+                        border-bottom: 2px solid transparent;
+                        padding: 10px 6px;
+                        gap: 10px;
+                        width: 100px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        &:hover,
+                        &.active {
+                            border-bottom: 2px solid $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

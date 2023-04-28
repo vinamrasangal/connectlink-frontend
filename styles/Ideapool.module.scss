@@ -1,0 +1,893 @@
+@import './colors';
+.ideas {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .shareIdea {
+        width: 100%;
+    }
+    .createPost {
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 1%;
+        border-radius: 8px;
+        box-shadow: 2px 2px 5px #0000002c;
+        .image {
+            background-color: #fff;
+            border-radius: 50%;
+        }
+        .input {
+            border-radius: 8px;
+            border: 1px solid $borders-gray;
+        }
+    }
+    .explore {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .filterBtn {
+            border-radius: 8px;
+            display:flex;
+            align-items: center;
+            justify-content: space-around;
+            .span {
+                text-transform: capitalize;
+                display: flex;
+            }
+        }
+    }
+    .post {
+        position: relative;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 2px 2px 5px #0000002c;
+        .hashTags {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            .hash {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #6941C6;
+                background-color: #F9F5FF;
+            }
+            .hashCount {
+                background-color: #F2F4F7;
+            }
+        }
+        .more,
+        .title,
+        .text,
+        .roles {
+            position: absolute;
+            display: flex;
+        }
+        .text {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+        }
+        .ul {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .overlay {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.3) , #FFFFFF );
+            .readMore {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .icon {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+        .details {
+            position: absolute;
+            display: flex;
+            gap: 5px;
+            .span {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .arrow,
+        .comments,
+        .share {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            .icon {
+                display: flex;
+            }
+        }
+    }
+}
+
+.rightSide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .interests {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 2px 2px 5px #0000002c;
+        display: flex;
+        flex-direction: column;
+        .h2 {
+            text-transform: uppercase;
+            width: 100% ;
+            border-bottom: 1px solid $borders-gray;
+        }
+        .ul {
+            display: flex;
+            flex-direction: column;
+            .li {
+                width: 100% ;
+                border-bottom: 1px solid $borders-gray;
+            }
+        }
+    }
+    .trending {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 2px 2px 5px #0000002c;
+        display: flex;
+        flex-direction: column;
+        .h2 {
+            text-transform: uppercase;
+            width: 100%;
+            border-bottom: 1px solid $borders-gray;
+        }
+        .ul {
+            display: flex;
+            flex-direction: column;
+            .li {
+                position: relative;
+                width: 100%;
+                border-bottom: 1px solid $borders-gray;
+                .image,
+                .p,
+                .span {
+                    position: absolute;
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width:1200px){
+    .ideas {
+        grid-column: 1/9;
+        gap: 20px;
+        .shareIdea {
+            height: 25px;
+        }
+        .createPost {
+            .image {
+                width: 50px;
+            }
+            .input {
+                width: 92%;
+                height: 50px;
+                padding: 0 20px;
+            }
+        }
+        .explore {
+            height: 60px;
+            .filterBtn {
+                width: 90px;
+                height: 40px;
+                padding:  0 10px;
+            }
+        }
+        .post {
+            width: 100%;
+            height: 400px;
+            .hashTags {
+                top: 20px;
+                left: 20px;
+                gap: 10px;
+                .hash {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+                .hashCount {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+            }
+            .more {
+                top: 20px;
+                right: 20px;
+            }
+            .title {
+                top: 60px;
+                left: 20px;
+            }
+            .text {
+                top: 105px;
+                left: 20px;
+                padding-right: 20px;
+                height: 120px;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 5;
+            }
+            .roles {
+                bottom: 130px;
+                left: 20px;
+            }
+            .ul {
+                width: calc(100% - 65px);
+                bottom: 100px;
+                left: 35px;
+            }
+            .overlay {
+                height: 80px;
+                bottom: 90px;
+                .readMore {
+                    padding: 5px 10px;
+                    gap: 5px;
+                }
+            }
+            .details {
+                left: 20px;
+                bottom: 60px;
+            }
+            .arrow,
+            .comments,
+            .share {
+                gap: 2px;
+                padding:  5px 10px;
+            }
+            .arrow {
+                bottom: 20px;
+                left: 10px;
+            }
+            .comments {
+                bottom: 20px;
+                left: 80px;
+            }
+            .share {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    }
+    .rightSide {
+        grid-column: 9/13;
+        margin-top: 45px;
+        gap: 30px;
+        .interests {
+            padding: 20px;
+            .h2 {
+                padding: 0px 0px 10px 0px;
+            }
+            .ul {
+                .li {
+                    padding: 15px 0px;
+                }
+            }
+        }
+        .trending {
+            padding: 20px;
+            .h2 {
+                padding: 0px 0px 10px 0px;
+            }
+            .ul {
+                .li {
+                    height: 70px;
+                    width: 100%;
+                    .image {
+                        top: 15px;
+                        left: 0;
+                    }
+                    .p {
+                        top: 15px;
+                        left: 55px;
+                    }
+                    .span {
+                        bottom: 15px;
+                        left: 55px;
+                        display: -webkit-box;
+                        overflow: hidden;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1200px) and (min-width:992px) {
+    .ideas {
+        grid-column: 1/9;
+        gap: 20px;
+        .shareIdea {
+            height: 25px;
+        }
+        .createPost {
+            .image {
+                width: 40px;
+            }
+            .input {
+                width: 90%;
+                height: 40px;
+                padding: 0 15px;
+            }
+        }
+        .explore {
+            height: 40px;
+            .filterBtn {
+                width: 90px;
+                height: 40px;
+                padding:  0 10px;
+            }
+        }
+        .post {
+            width: 100%;
+            height: 500px;
+            .hashTags {
+                top: 15px;
+                left: 15px;
+                gap: 10px;
+                .hash {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+                .hashCount {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+            }
+            .more {
+                top: 15px;
+                right: 15px;
+            }
+            .title {
+                top: 50px;
+                left: 15px;
+            }
+            .text {
+                top: 90px;
+                left: 15px;
+                height: 240px;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 10;
+                padding-right: 15px;
+            }
+            .roles {
+                bottom: 130px;
+                left: 15px;
+            }
+            .ul {
+                width: calc(100% - 65px);
+                bottom: 80px;
+                left: 30px;
+            }
+            .overlay {
+                height: 80px;
+                bottom: 80px;
+                .readMore {
+                    padding: 5px 10px;
+                    gap: 5px;
+                }
+            }
+            .details {
+                left: 15px;
+                bottom: 50px;
+            }
+            .arrow,
+            .comments,
+            .share {
+                gap: 2px;
+                padding:  5px 10px;
+            }
+            .arrow {
+                bottom: 15px;
+                left: 10px;
+            }
+            .comments {
+                bottom: 15px;
+                left: 80px;
+            }
+            .share {
+                bottom: 15px;
+                right: 20px;
+            }
+        }
+    }
+    .rightSide {
+        grid-column: 9/13;
+        margin-top: 45px;
+        gap: 30px;
+        .interests {
+            padding: 20px 8px;
+            .h2 {
+                padding: 0px 0px 5px 0px;
+            }
+            .ul {
+                .li {
+                    padding: 10px 0px;
+                }
+            }
+        }
+        .trending {
+            padding: 20px 8px;
+            .h2 {
+                padding: 0px 0px 5px 0px;
+            }
+            .ul {
+                .li {
+                    height: 60px;
+                    width: 100%;
+                    .image {
+                        top: 10px;
+                        left: 0;
+                    }
+                    .p {
+                        top: 10px;
+                        left: 55px;
+                    }
+                    .span {
+                        bottom: 10px;
+                        left: 55px;
+                        display: -webkit-box;
+                        overflow: hidden;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 992px) and (min-width:768px){
+    .ideas {
+        grid-column: 1/13;
+        gap: 20px;
+        .shareIdea {
+            height: 25px;
+        }
+        .createPost {
+            .image {
+                width: 40px;
+            }
+            .input {
+                width: 90%;
+                height: 40px;
+                padding: 0 15px;
+            }
+        }
+        .explore {
+            height: 40px;
+            .filterBtn {
+                width: 90px;
+                height: 40px;
+                padding:  0 10px;
+            }
+        }
+        .post {
+            width: 100%;
+            height: 420px;
+            .hashTags {
+                top: 15px;
+                left: 15px;
+                gap: 10px;
+                .hash {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+                .hashCount {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+            }
+            .more {
+                top: 15px;
+                right: 15px;
+            }
+            .title {
+                top: 50px;
+                left: 15px;
+            }
+            .text {
+                top: 90px;
+                left: 15px;
+                height: 170px;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 8;
+                padding-right: 15px;
+            }
+            .roles {
+                bottom: 130px;
+                left: 15px;
+            }
+            .ul {
+                width: calc(100% - 65px);
+                bottom: 80px;
+                left: 30px;
+            }
+            .overlay {
+                height: 80px;
+                bottom: 80px;
+                .readMore {
+                    padding: 5px 10px;
+                    gap: 5px;
+                }
+            }
+            .details {
+                left: 15px;
+                bottom: 50px;
+            }
+            .arrow,
+            .comments,
+            .share {
+                gap: 2px;
+                padding:  5px 10px;
+            }
+            .arrow {
+                bottom: 15px;
+                left: 10px;
+            }
+            .comments {
+                bottom: 15px;
+                left: 80px;
+            }
+            .share {
+                bottom: 15px;
+                right: 20px;
+            }
+        }
+    }
+    .rightSide {
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) and (min-width:480px){
+    .ideas {
+        grid-column: 1/7;
+        gap: 20px;
+        .shareIdea {
+            height: 25px;
+        }
+        .createPost {
+            .image {
+                width: 40px;
+            }
+            .input {
+                width: 90%;
+                height: 40px;
+                padding: 0 15px;
+            }
+        }
+        .explore {
+            height: 40px;
+            .filterBtn {
+                width: 90px;
+                height: 40px;
+                padding:  0 10px;
+            }
+        }
+        .post {
+            width: 100%;
+            height: 450px;
+            .hashTags {
+                top: 15px;
+                left: 15px;
+                gap: 10px;
+                .hash {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+                .hashCount {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+            }
+            .more {
+                top: 15px;
+                right: 15px;
+            }
+            .title {
+                top: 50px;
+                left: 15px;
+            }
+            .text {
+                top: 90px;
+                left: 15px;
+                height: 180px;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 10;
+                padding-right: 15px;
+            }
+            .roles {
+                bottom: 130px;
+                left: 15px;
+            }
+            .ul {
+                width: calc(100% - 65px);
+                bottom: 80px;
+                left: 30px;
+            }
+            .overlay {
+                height: 80px;
+                bottom: 80px;
+                .readMore {
+                    padding: 5px 10px;
+                    gap: 5px;
+                }
+            }
+            .details {
+                left: 15px;
+                bottom: 50px;
+            }
+            .arrow,
+            .comments,
+            .share {
+                gap: 2px;
+                padding:  5px 10px;
+            }
+            .arrow {
+                bottom: 15px;
+                left: 10px;
+            }
+            .comments {
+                bottom: 15px;
+                left: 80px;
+            }
+            .share {
+                bottom: 15px;
+                right: 20px;
+            }
+        }
+    }
+    .rightSide {
+        display: none;
+    }
+}
+@media only screen and (max-width: 480px)and (min-width:370px){
+    .ideas {
+        grid-column: 1/7;
+        gap: 20px;
+        .shareIdea {
+            height: 25px;
+        }
+        .createPost {
+            .image {
+                width: 40px;
+            }
+            .input {
+                width: 90%;
+                height: 40px;
+                padding: 0 15px;
+            }
+        }
+        .explore {
+            height: 40px;
+            .filterBtn {
+                width: 90px;
+                height: 40px;
+                padding:  0 10px;
+            }
+        }
+        .post {
+            width: 100%;
+            height: 450px;
+            .hashTags {
+                top: 15px;
+                left: 15px;
+                gap: 10px;
+                .hash {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+                .hashCount {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+            }
+            .more {
+                top: 15px;
+                right: 15px;
+            }
+            .title {
+                top: 50px;
+                left: 15px;
+            }
+            .text {
+                top: 90px;
+                left: 15px;
+                height: 180px;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 10;
+                padding-right: 15px;
+            }
+            .roles {
+                bottom: 130px;
+                left: 15px;
+            }
+            .ul {
+                width: calc(100% - 65px);
+                bottom: 80px;
+                left: 30px;
+            }
+            .overlay {
+                height: 80px;
+                bottom: 80px;
+                .readMore {
+                    padding: 5px 10px;
+                    gap: 5px;
+                }
+            }
+            .details {
+                left: 15px;
+                bottom: 50px;
+            }
+            .arrow,
+            .comments,
+            .share {
+                gap: 2px;
+                padding:  5px 10px;
+            }
+            .arrow {
+                bottom: 15px;
+                left: 10px;
+            }
+            .comments {
+                bottom: 15px;
+                left: 80px;
+            }
+            .share {
+                bottom: 15px;
+                right: 20px;
+            }
+        }
+    }
+    .rightSide {
+        display: none;
+    }
+}
+@media only screen and (max-width: 370px){
+    .ideas {
+        grid-column: 1/7;
+        gap: 20px;
+        .shareIdea {
+            height: 25px;
+        }
+        .createPost {
+            .image {
+                width: 40px;
+            }
+            .input {
+                width: 90%;
+                height: 40px;
+                padding: 0 15px;
+            }
+        }
+        .explore {
+            height: 40px;
+            .filterBtn {
+                width: 90px;
+                height: 40px;
+                padding:  0 10px;
+            }
+        }
+        .post {
+            width: 100%;
+            height: 450px;
+            .hashTags {
+                top: 15px;
+                left: 15px;
+                gap: 10px;
+                .hash {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+                .hashCount {
+                    height: 25px;
+                    padding: 0 10px;
+                    border-radius: 12.5px;
+                }
+            }
+            .more {
+                top: 15px;
+                right: 15px;
+            }
+            .title {
+                top: 50px;
+                left: 15px;
+            }
+            .text {
+                top: 90px;
+                left: 15px;
+                height: 180px;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 10;
+                padding-right: 15px;
+            }
+            .roles {
+                bottom: 130px;
+                left: 15px;
+            }
+            .ul {
+                width: calc(100% - 65px);
+                bottom: 80px;
+                left: 30px;
+            }
+            .overlay {
+                height: 80px;
+                bottom: 80px;
+                .readMore {
+                    padding: 5px 10px;
+                    gap: 5px;
+                }
+            }
+            .details {
+                left: 15px;
+                bottom: 50px;
+            }
+            .arrow,
+            .comments,
+            .share {
+                gap: 2px;
+                padding:  5px 10px;
+            }
+            .arrow {
+                bottom: 15px;
+                left: 10px;
+            }
+            .comments {
+                bottom: 15px;
+                left: 80px;
+            }
+            .share {
+                bottom: 15px;
+                right: 20px;
+            }
+        }
+    }
+    .rightSide {
+        display: none;
+    }
+}
