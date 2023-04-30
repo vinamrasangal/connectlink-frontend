@@ -162,6 +162,7 @@
         transition: 0.7s;
         .slideBtn {
             position: absolute;
+            z-index: 900;
             right: 0;
             top: 0;
             transform: translateX(100%);
@@ -187,16 +188,6 @@
                 left: 3px;
                 transform: rotateZ(20deg);
             }
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                transform: translateX(-100%);
-                background-color: #fff;
-                height: 45px;
-                width: 10px;
-            }
         }
         .logo {
             top: 20px;
@@ -237,7 +228,7 @@
         height: 100%;
         top: 0;
         right: 0;
-        z-index: 998;
+        z-index: 890;
         transition: 0.7s;
         &.active {
             width: calc(100% - 250px);
@@ -258,6 +249,7 @@
         transition: 0.7s;
         .slideBtn {
             position: absolute;
+            z-index: 900;
             right: 0;
             top: 0;
             transform: translateX(100%);
@@ -282,16 +274,6 @@
                 bottom: -23px;
                 left: 3px;
                 transform: rotateZ(20deg);
-            }
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                transform: translateX(-100%);
-                background-color: #ffffff;
-                height: 40px;
-                width: 10px;
             }
         }
         .logo {
@@ -333,7 +315,7 @@
         height: 100%;
         top: 0;
         right: 0;
-        z-index: 998;
+        z-index: 890;
         transition: 0.7s;
         &.active {
             width: calc(100% - 250px);
@@ -354,6 +336,7 @@
         transition: 0.7s;
         .slideBtn {
             position: absolute;
+            z-index: 900;
             right: 0;
             top: 0;
             transform: translateX(100%);
@@ -378,16 +361,6 @@
                 bottom: -23px;
                 left: 3px;
                 transform: rotateZ(20deg);
-            }
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                transform: translateX(-100%);
-                background-color: #ffffff;
-                height: 40px;
-                width: 10px;
             }
         }
         .logo {
@@ -429,7 +402,7 @@
         height: 100%;
         top: 0;
         right: 0;
-        z-index: 998;
+        z-index: 890;
         transition: 0.7s;
         &.active {
             width: calc(100% - 210px);
