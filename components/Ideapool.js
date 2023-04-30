@@ -5,31 +5,36 @@ import { FiMoreHorizontal,FiMessageCircle,FiShare2 } from 'react-icons/fi';
 import { BiLike } from 'react-icons/bi';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TbPointFilled } from 'react-icons/tb';
+import { useDispatch } from 'react-redux';
+import { CreatePostActions } from '../redux/showCreatePost';
 
 const Ideapool = () => {
+    const dispatch = useDispatch();
+    function handleClick(){
+        dispatch(CreatePostActions.showCreatePost())
+    }
     return (
         <>
             <section className={styles.ideas}>
                 <h2 className={`${styles.shareIdea} large-fs semi-bold dark-gray`}>Share an idea</h2>
                 <div className={styles.createPost}>
                     <img className={styles.image} src="/personal-image.png" alt="" />
-                    <input className={`${styles.input} medium-fs light light-gray`} placeholder='Share an idea...' type="text" />
+                    <input className={`${styles.input} medium-fs light light-gray`} placeholder='Share an idea...' type="text" onClick={handleClick} />
                 </div>
                 <div className={styles.explore}>
-                    <h2 className={`${styles.exploreH2} large-fs semi-bold dark-gray`}>Explore ideas</h2>
-                    <button className={`${styles.filterBtn} S-BTN dark-gray `}>
+                    <button className={`${styles.filterBtn} normal-gray `}>
                         <span className={`${styles.span} x-large-fs`}>
                             {BiFilter({})}
                         </span>
-                        <span className={styles.span}>
+                        <span className={`${styles.span} small-fs`}>
                             filter
                         </span>
-                    </button> 
+                    </button>
                 </div>
                 <article className={styles.post}>
                     <div className={`${styles.hashTags} small-fs normal`}>
                         <span className={styles.hash}> #Needideaclarity </span>
-                        <span className={`${styles.hashCount} normal-gray`}>4+</span>
+                        <span className={`${styles.hashCount} normal-gray`}>+4</span>
                     </div>
                     <span className={`${styles.more} large-fs normal-gray`}>{FiMoreHorizontal({})}</span>
                     <h2 className={`${styles.title} large-fs bold normal-gray `}> Social Media App for Pet Owners  </h2>
@@ -54,12 +59,7 @@ const Ideapool = () => {
                         <li className={styles.li}>Android developer</li>
                         <li className={styles.li}>UI/UX designer</li>
                     </ul>
-                    <div className={styles.overlay}>
-                        <button className={`${styles.readMore} S-BTN`}>
-                            <span className={styles.count}>Continue reading</span>
-                            <span className={styles.icon}>{MdKeyboardArrowDown({})}</span>
-                        </button>
-                    </div>
+                    <span className={`${styles.seeMore} medium-fs normal`}>See more</span>
                     <p className={`${styles.details} light-gray light medium-fs`}> <span className='semi-bold' >Posted by</span> Jenny Wilson <span className={styles.span}> {TbPointFilled({})} </span> 1hr ago </p>
                     <button className={styles.arrow}>
                         <span className={`${styles.icon} x-large-fs dark-gray`}>{BiLike({})}</span>
