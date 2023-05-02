@@ -10,11 +10,11 @@
     transform: translateY(-100%);
     transition: background-color 0.7s;
     .post {
-        transition: 0.7s;
         position: absolute;
         top: 0;
         left: 50%;
         transform: translate(-50%,-100%);
+        transition: 0.7s top, 0.7s transform ;
         height: fit-content;
         background-color: #fff;
         border-radius: 8px;
@@ -46,7 +46,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             .label {
                 display: block;
                 background-color: transparent;
@@ -54,17 +54,35 @@
             .input {
                 border-radius: 8px;
                 border: 2px solid $borders-gray;
+                resize: vertical;
             }
-            .rolesAndTags {
+            .add {
                 position: relative;
-                .RolesLable,
-                .RolesInput,
-                .tagsLabel,
-                .tagsInput {
+                width: 100%;
+                .linksLabel,
+                .linksInput,
+                .imageLabel,
+                .upload {
+                    margin: 0;
+                    position: absolute;
+                }
+                .upload {
+                    border: 2px solid $borders-gray;
+                }
+            }
+            .checkBoxes {
+                width: 100%;
+                position: relative;
+                .checkbox,
+                .label,
+                .p {
                     position: absolute;
                 }
             }
             .btns {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -124,34 +142,52 @@
             bottom: 20px;
             left: 20px;
             width: 720px;
-            height: 380px;
+            padding-bottom: 80px;
             .input {
                 padding: 10px 12px;
+                margin: 5px 0 10px 0;
             }
-            .rolesAndTags {
+            .add {
                 height: 75px;
-                width: 100%;
-                .RolesLable {
+                margin: 5px 0 10px 0;
+                .linksLabel {
                     top: 0;
                     left: 0;
                 }
-                .RolesInput {
-                    bottom: 0;
+                .linksInput {
+                    bottom: 0px;
                     left: 0;
-                    width: calc(50% - 10px);
+                    width: 340px;
                 }
-                .tagsLabel {
+                .imageLabel {
                     top: 0;
-                    right: 0;
-                    width: calc(50% - 10px);
-                    text-align: left;
+                    left: 360px;
                 }
-                .tagsInput {
+                .upload {
                     bottom: 0;
-                    right: 0;
-                    width: calc(50% - 10px);
-                    padding: 11px 10px;
+                    left: 360px;
+                    width: 120px;
+                    height: 47px;
+                    
                 }
+            }
+            .checkBoxes {
+                height: 40px;
+                margin: 5px 0 10px 0;
+                .checkbox {
+                    top: 4px;
+                    left: 0;
+                }
+                .label {
+                    padding: 0;
+                    
+                    top: 0;
+                    left: 20px;
+                }
+                .p {
+                    top: 18px;
+                    left: 20px;
+                }   
             }
             .btns {
                 margin-top: 30px;
@@ -199,34 +235,52 @@
             bottom: 20px;
             left: 20px;
             width: 680px;
-            height: 380px;
+            padding-bottom: 80px;
             .input {
                 padding: 10px 12px;
+                margin: 5px 0 10px 0;
             }
-            .rolesAndTags {
+            .add {
                 height: 75px;
-                width: 100%;
-                .RolesLable {
+                margin: 5px 0 10px 0;
+                .linksLabel {
                     top: 0;
                     left: 0;
                 }
-                .RolesInput {
-                    bottom: 0;
+                .linksInput {
+                    bottom: 0px;
                     left: 0;
-                    width: calc(50% - 10px);
+                    width: 340px;
                 }
-                .tagsLabel {
+                .imageLabel {
                     top: 0;
-                    right: 0;
-                    width: calc(50% - 10px);
-                    text-align: left;
+                    left: 360px;
                 }
-                .tagsInput {
+                .upload {
                     bottom: 0;
-                    right: 0;
-                    width: calc(50% - 10px);
-                    padding: 11px 10px;
+                    left: 360px;
+                    width: 120px;
+                    height: 47px;
+                    
                 }
+            }
+            .checkBoxes {
+                height: 40px;
+                margin: 5px 0 10px 0;
+                .checkbox {
+                    top: 4px;
+                    left: 0;
+                }
+                .label {
+                    padding: 0;
+                    
+                    top: 0;
+                    left: 20px;
+                }
+                .p {
+                    top: 18px;
+                    left: 20px;
+                }   
             }
             .btns {
                 margin-top: 30px;
@@ -274,34 +328,51 @@
             bottom: 10px;
             left: 10px;
             width: 440px;
-            height: 320px;
+            padding-bottom: 80px;
             .input {
                 padding: 6px 8px;
+                margin: 2px 0 10px 0;
             }
-            .rolesAndTags {
+            .add {
                 height: 60px;
-                width: 100%;
-                .RolesLable {
+                margin: 5px 0 10px 0;
+                .linksLabel {
                     top: 0;
                     left: 0;
                 }
-                .RolesInput {
-                    bottom: 0;
+                .linksInput {
+                    bottom: 0px;
                     left: 0;
-                    width: calc(50% - 10px);
+                    width: 280px;
                 }
-                .tagsLabel {
+                .imageLabel {
                     top: 0;
-                    right: 0;
-                    width: calc(50% - 10px);
-                    text-align: left;
+                    left: 290px;
                 }
-                .tagsInput {
+                .upload {
                     bottom: 0;
-                    right: 0;
-                    width: calc(50% - 10px);
-                    padding: 8px 6px;
+                    left: 290px;
+                    width: 100px;
+                    height: 37px;
                 }
+            }
+            .checkBoxes {
+                height: 40px;
+                margin: 5px 0 10px 0;
+                .checkbox {
+                    top: 4px;
+                    left: 0;
+                }
+                .label {
+                    padding: 0;
+                    
+                    top: 0;
+                    left: 20px;
+                }
+                .p {
+                    top: 18px;
+                    left: 20px;
+                }   
             }
             .btns {
                 margin-top: 30px;
@@ -349,34 +420,51 @@
             bottom: 5px;
             left: 5px;
             width: 330px;
-            height: 300px;
+            padding-bottom: 80px;
             .input {
                 padding: 2px 4px;
+                margin: 2px 0 10px 0;
             }
-            .rolesAndTags {
-                height: 110px;
-                width: 100%;
-                .RolesLable {
+            .add {
+                height: 42px;
+                margin: 2px 0 10px 0;
+                .linksLabel {
                     top: 0;
                     left: 0;
                 }
-                .RolesInput {
-                    top: 15px;
+                .linksInput {
+                    bottom: 0px;
                     left: 0;
-                    width: 100%;
+                    width: 220px;
                 }
-                .tagsLabel {
-                    top: 55px;
+                .imageLabel {
+                    top: 0;
+                    left: 230px;
+                }
+                .upload {
+                    bottom: 0;
+                    left: 230px;
+                    width: 100px;
+                    height: 27px;
+                }
+            }
+            .checkBoxes {
+                height: 40px;
+                margin: 5px 0 10px 0;
+                .checkbox {
+                    top: 4px;
                     left: 0;
-                    width: calc(50% - 10px);
-                    text-align: left;
                 }
-                .tagsInput {
-                    top: 70px;
-                    left: 0;
-                    width: 100%;
-                    padding: 2px 4px;
+                .label {
+                    padding: 0;
+                    
+                    top: 0;
+                    left: 20px;
                 }
+                .p {
+                    top: 18px;
+                    left: 20px;
+                }   
             }
             .btns {
                 margin-top: 40px;
@@ -413,47 +501,64 @@
                 transform: translateX(0);
             }
             &.second {
-                transform: translateX(-410px);
+                transform: translateX(-350px);
             }
             &.third {
-                transform: translateX(-820px);
+                transform: translateX(-700px);
             }
             &.fourth {
-                transform: translateX(-1230px);
+                transform: translateX(-1050px);
             }
         }
         .form {
             bottom: 5px;
             left: 5px;
             width: 270px;
-            height: 300px;
+            padding-bottom: 90px;
             .input {
                 padding: 2px 4px;
+                margin: 2px 0 10px 0;
             }
-            .rolesAndTags {
-                height: 110px;
-                width: 100%;
-                .RolesLable {
+            .add {
+                height: 90px;
+                margin: 2px 0 10px 0;
+                .linksLabel {
                     top: 0;
                     left: 0;
                 }
-                .RolesInput {
+                .linksInput {
                     top: 15px;
                     left: 0;
                     width: 100%;
                 }
-                .tagsLabel {
-                    top: 55px;
+                .imageLabel {
+                    top: 48px;
                     left: 0;
-                    width: calc(50% - 10px);
-                    text-align: left;
                 }
-                .tagsInput {
-                    top: 70px;
+                .upload {
+                    bottom: 0;
                     left: 0;
-                    width: 100%;
-                    padding: 2px 4px;
+                    width: 100px;
+                    height: 27px;
                 }
+            }
+            .checkBoxes {
+                height: 40px;
+                margin: 5px 0 10px 0;
+                .checkbox {
+                    top: 4px;
+                    left: 0;
+                }
+                .label {
+                    padding: 0;
+                    
+                    top: 0;
+                    left: 20px;
+                }
+                .p {
+                    top: 18px;
+                    left: 20px;
+                }   
             }
             .btns {
                 margin-top: 40px;
