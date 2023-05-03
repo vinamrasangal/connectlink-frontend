@@ -121,7 +121,7 @@ const EditProfile = () => {
                 <h2 className={`${styles.name} dark-gray normal x-large-fs`}>{userInfo.FName} {userInfo.LName}</h2>
                 <p className={`${styles.email} small-fs light light-gray`}>{userInfo.email}</p>
                 <button className={`${styles.shareBtn} S-BTN`}>Share</button>
-                <Link href='/profile/viewProfile'>
+                <Link href='/profile/viewProfile' target='_blank'>
                     <button className={`${styles.viewBtn} P-BTN`}>View profile</button>
                 </Link>
             </div>
