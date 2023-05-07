@@ -1,0 +1,473 @@
+@import './colors';
+.container {
+    .nav {
+        position: relative;
+        .search {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #fff;
+            border: 1px solid $borders-gray;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            .icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px 0 0 8px;
+            }
+        }
+        .filter {
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .icon {
+                display: flex;
+            }
+        }
+        .Requests {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .icon {
+                display: flex;
+            }
+        }
+    }
+    .users {
+        .usersHolder {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            width: 100%;
+            height: fit-content;
+            .user {
+                position: relative;
+                .image {
+                    position: absolute;
+                    border-radius: 50%;
+                }
+                .name {
+                    position: absolute;
+                }
+                .position {
+                    position: absolute;
+                    color: #6941C6;
+                }
+                .desc {
+                    position: absolute;
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width: 1400px){
+    .h2 {
+        grid-column: 1/13;
+        height: 40px;
+        margin-top: 20px;
+    }
+    .nav {
+        grid-column: 1/13;
+        height: 45px;
+        .search {
+            width: 300px;
+            height: 45px;
+            .icon {
+                width: 50px;
+                height: 45px;
+            }
+            .input {
+                width: 240px;
+            }
+        }
+        .filter {
+            left: 320px;
+            width: 120px;
+            height: 45px;
+            gap: 10px;
+        }
+        .Requests {
+            width: 160px;
+            height: 45px;
+            gap: 10px;
+        }
+    }
+    .users {
+        min-height: calc(100vh - 160px);
+        grid-column: 1/13;
+        margin-top: 20px;
+        .usersHolder {
+            justify-content: flex-start;
+            gap: 40px;
+            .user {
+                width: calc((100% / 4) - 30px);
+                min-width: 330px;
+                height: 140px;
+                .image {
+                    top: 0;
+                    left: 0;
+                    width: 80px;
+                }
+                .name {
+                    top: 0;
+                    left: 90px;
+                }
+                .position {
+                    top: 30px;
+                    left: 90px;
+                }
+                .desc {
+                    top: 60px;
+                    left: 90px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1400px) and (min-width:1200px){
+    .h2 {
+        grid-column: 1/13;
+        height: 40px;
+        margin-top: 20px;
+    }
+    .nav {
+        grid-column: 1/13;
+        height: 45px;
+        .search {
+            width: 300px;
+            height: 45px;
+            .icon {
+                width: 50px;
+                height: 45px;
+            }
+            .input {
+                width: 240px;
+            }
+        }
+        .filter {
+            left: 320px;
+            width: 120px;
+            height: 45px;
+            gap: 10px;
+        }
+        .Requests {
+            width: 160px;
+            height: 45px;
+            gap: 10px;
+        }
+    }
+    .users {
+        min-height: calc(100vh - 160px);
+        grid-column: 1/13;
+        margin-top: 20px;
+        .usersHolder {
+            justify-content: flex-start;
+            gap: 20px;
+            .user {
+                width: calc((100% / 3) - 15px);
+                min-width: 220px;
+                height: 140px;
+                .image {
+                    top: 0;
+                    left: 0;
+                    width: 70px;
+                }
+                .name {
+                    top: 0;
+                    left: 80px;
+                }
+                .position {
+                    top: 30px;
+                    left: 80px;
+                }
+                .desc {
+                    top: 60px;
+                    left: 80px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1200px) and (min-width:992px) {
+    .h2 {
+        grid-column: 1/13;
+        height: 40px;
+        margin-top: 20px;
+    }
+    .nav {
+        grid-column: 1/13;
+        height: 45px;
+        .search {
+            width: 300px;
+            height: 45px;
+            .icon {
+                width: 50px;
+                height: 45px;
+            }
+            .input {
+                width: 240px;
+            }
+        }
+        .filter {
+            left: 320px;
+            width: 120px;
+            height: 45px;
+            gap: 10px;
+        }
+        .Requests {
+            width: 160px;
+            height: 45px;
+            gap: 10px;
+        }
+    }
+    .users {
+        min-height: calc(100vh - 160px);
+        grid-column: 1/13;
+        margin-top: 20px;
+        .usersHolder {
+            justify-content: flex-start;
+            gap: 30px;
+            .user {
+                width: calc((100% / 2) - 20px);
+                min-width: 220px;
+                height: 140px;
+                .image {
+                    top: 0;
+                    left: 0;
+                    width: 70px;
+                }
+                .name {
+                    top: 0;
+                    left: 80px;
+                }
+                .position {
+                    top: 30px;
+                    left: 80px;
+                }
+                .desc {
+                    top: 60px;
+                    left: 80px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 992px) and (min-width:768px){
+    .h2 {
+        grid-column: 1/13;
+        height: 30px;
+        margin-top: 10px;
+    }
+    .nav {
+        grid-column: 1/13;
+        height: 40px;
+        .search {
+            width: 220px;
+            height: 40px;
+            .icon {
+                width: 40px;
+                height: 40px;
+            }
+            .input {
+                width: 180px;
+            }
+        }
+        .filter {
+            left: 230px;
+            width: 100px;
+            height: 40px;
+            gap: 5px;
+        }
+        .Requests {
+            width: 120px;
+            height: 40px;
+            gap: 5px;
+        }
+    }
+    .users {
+        min-height: calc(100vh - 110px);
+        grid-column: 1/13;
+        margin-top: 10px;
+        .usersHolder {
+            justify-content: flex-start;
+            gap: 20px;
+            .user {
+                width: calc((100% / 2) - 10px);
+                min-width: 235px;
+                height: 140px;
+                .image {
+                    top: 0;
+                    left: 0;
+                    width: 60px;
+                }
+                .name {
+                    top: 0;
+                    left: 70px;
+                }
+                .position {
+                    top: 20px;
+                    left: 70px;
+                }
+                .desc {
+                    top: 40px;
+                    left: 70px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) and (min-width:480px){
+    .h2 {
+        grid-column: 1/7;
+        height: 30px;
+        margin-top: 10px;
+    }
+    .nav {
+        grid-column: 1/7;
+        height: 40px;
+        .search {
+            width: 220px;
+            height: 40px;
+            .icon {
+                width: 40px;
+                height: 40px;
+            }
+            .input {
+                width: 180px;
+            }
+        }
+        .filter {
+            left: 230px;
+            width: 50px;
+            height: 40px;
+            gap: 5px;
+            .p {
+                display: none;
+            }
+        }
+        .Requests {
+            width: 50px;
+            height: 40px;
+            gap: 5px;
+            .p {
+                display: none;
+            }
+        }
+    }
+    .users {
+        min-height: calc(100vh - 110px);
+        grid-column: 1/7;
+        margin-top: 10px;
+        .usersHolder {
+            justify-content: flex-start;
+            gap: 20px;
+            .user {
+                width: calc((100% / 2) - 10px);
+                min-width: 180px;
+                height: 140px;
+                .image {
+                    top: 0;
+                    left: 0;
+                    width: 60px;
+                }
+                .name {
+                    top: 10px;
+                    left: 70px;
+                }
+                .position {
+                    top: 30px;
+                    left: 70px;
+                }
+                .desc {
+                    width: 100%;
+                    text-align: center;
+                    top: 60px;
+                    left: 0px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 480px){
+    .h2 {
+        grid-column: 1/7;
+        height: 30px;
+        margin-top: 10px;
+    }
+    .nav {
+        grid-column: 1/7;
+        height: 40px;
+        .search {
+            width: 180px;
+            height: 40px;
+            .icon {
+                width: 30px;
+                height: 40px;
+            }
+            .input {
+                width: 150px;
+            }
+        }
+        .filter {
+            left: 185px;
+            width: 40px;
+            height: 40px;
+            gap: 5px;
+            .p {
+                display: none;
+            }
+        }
+        .Requests {
+            width: 40px;
+            height: 40px;
+            gap: 5px;
+            .p {
+                display: none;
+            }
+        }
+    }
+    .users {
+        min-height: calc(100vh - 110px);
+        grid-column: 1/7;
+        margin-top: 10px;
+        .usersHolder {
+            justify-content: center;
+            gap: 10px;
+            .user {
+                width: 100%;
+                max-width: 300px;
+                height: 110px;
+                .image {
+                    top: 0;
+                    left: 0;
+                    width: 60px;
+                }
+                .name {
+                    top: 10px;
+                    left: 70px;
+                }
+                .position {
+                    top: 40px;
+                    left: 70px;
+                }
+                .desc {
+                    // width: 100%;
+                    // text-align: center;
+                    top: 60px;
+                    left: 70px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 370px){
+
+}
