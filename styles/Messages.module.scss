@@ -1,0 +1,1795 @@
+@import './colors';
+.container {
+    .holder {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        // overflow: hidden;
+        height: 100vh;
+        .users {
+            border-right: 1px solid #EAECF0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #fff;
+            height: 100vh;
+            .tabs {
+                background-color: #F9FAFB;
+                border: 1px solid #F2F4F7;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                .btn {
+                    border-radius: 8px;
+                    background-color: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    &.active {
+                        background-color: #fff;
+                        box-shadow: 2px 2px 1px #00000026;
+                    }
+                    .num {
+                        background-color: #F2F4F7;  
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+            .ul {
+                border-top: 1px solid #EAECF0;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                overflow-y: scroll;
+                -ms-overflow-style: none;  
+                scrollbar-width: none;  
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                .li {
+                    position: relative;
+                    border-bottom: 1px solid #EAECF0;
+                    cursor: pointer;
+                    .image {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background-color: #AA9C75;
+                        border-radius: 50%;
+                    }
+                    .isActive {
+                        position: absolute;
+                        border-radius: 50%;
+                        background-color: #D0D5DD;
+                        border: 1.5px solid #fff;
+                        &.active {
+                            background-color: #12B76A;
+                        }
+                    }
+                    .isNotRead {
+                        position: absolute;
+                        border-radius: 50%;
+                        background-color: transparent;
+                        top: 0;
+                        right: 0;
+                        &.active {
+                            background-color: #12B76A;
+                        }
+                    }
+                    .name,
+                    .email,
+                    .msg  {
+                        position: absolute;
+                    }
+                }
+            }
+        }
+        .chat {
+            position: relative;
+            height: 100vh;
+            overflow-y: scroll;
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            .header {
+                position: sticky;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #fff;
+                .icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: transparent;
+                    cursor: pointer;
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+            .ul {
+                position: relative;
+                // width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                .li {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    &.day {
+                        position: relative;
+                        background-color: $borders-gray;
+                        width: 100%;
+                        height: 1px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 20px;
+                        .p {
+                            background-color: #fff;
+                            padding: 0 10px;
+                        }
+                    }
+                    &.you {
+                        justify-content: flex-end;
+                        .content {
+                            position: relative;
+                            width: fit-content;
+                            .p {
+                                background-color: $primary-color;
+                                color: #fff;
+                                border-radius: 8px 0 8px 8px;
+                            }
+                            .name {
+                                text-transform: capitalize;
+                            }
+                            .name,
+                            .date {
+                                position: absolute;
+                            }
+                        }
+                    }
+                    &.user {
+                        justify-content: flex-start;
+                        .content {
+                            position: relative;
+                            width: fit-content;
+                            .image {
+                                position: absolute;
+                                border-radius: 50%;
+                                background-color: #fff;
+                            }
+                            .isActive {
+                                position: absolute;
+                                border: 1.5px solid #fff;
+                                border-radius: 50%;
+                                background-color: $borders-gray;
+                                &.yes {
+                                    background-color: #12B76A;
+                                }
+                            }
+                            .p {
+                                background-color: $BG-color; 
+                                color: $dark-gray;
+                                border-radius: 0 8px 8px 8px;
+                            }
+                            .name,
+                            .date {
+                                position: absolute;
+                            }
+                        }
+                    }
+                    &.attachment {
+                        .content {
+                            position: relative;
+                            .image {
+                                position: absolute;
+                                background-color: #fff;
+                                border-radius: 50%;
+                            }
+                            .isActive {
+                                position: absolute;
+                                border: 1.5px solid #fff;
+                                border-radius: 50%;
+                                background-color: $borders-gray;
+                                &.yes {
+                                    background-color: #12B76A;
+                                }
+                            }
+                            .name {
+                                position: absolute;
+                            }
+                            .date {
+                                position: absolute;
+                            }
+                            .file {
+                                position: absolute;
+                                background-color: #fff;
+                                border: 1px solid $borders-gray;
+                                border-radius: 0px 8px 8px 8px;
+                                box-shadow: 0px 1px 3px 0px #1018281A;
+                                .icon {
+                                    position: absolute;
+                                    top: 25%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 50%;
+                                    background-color: #F4EBFF;
+                                    color: $primary-color;
+                                    z-index: 2;
+                                }
+                                &::after {
+                                    content: '';
+                                    position: absolute;
+                                    width: 40px;
+                                    height: 40px;
+                                    background-color: #F9F5FF;
+                                    border-radius: 50%;
+                                    top: 25%;
+                                    left: 11px;
+                                    transform: translateY(-30%);
+                                }
+                                .fileName {
+                                    position: absolute;
+                                    top: 5px;
+                                    left: 60px;
+                                    width: 290px;
+                                    overflow: hidden;
+                                }
+                                .size {
+                                    position: absolute;
+                                    bottom: 5px;
+                                    left: 60px;
+                                }
+                            }
+                        }
+                        &.you {
+                            .file {
+                                background-color: $primary-color;
+                                border-radius: 8px 0 8px 8px;
+                                .fileName,
+                                .size {
+                                    color: #fff;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .sendMessage {
+                border-top: 1px solid $borders-gray;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .input {
+                    border: 1px solid $borders-gray;
+                    border-radius: 8px;
+                }
+                .sendBtn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $primary-color;
+                    color: #fff;
+                    border-radius: 8px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width:1200px){
+    .container {
+        .holder {
+            grid-column: 1/13;
+            .users {
+                padding: 20px 5px 0 5px;
+                gap: 30px;
+                width: 360px;
+                .h2 {
+                    height: 35px;
+                    width: 330px;
+                }
+                .tabs {
+                    width: 330px;
+                    height: 50px;
+                    .btn {
+                        height: 40px;
+                        width: 150px;
+                        .num {
+                            width: 24px;
+                            height: 24px;
+                        }
+                    }
+                }
+                .ul {
+                    min-height: calc(100vh - 165px);
+                    padding-top: 20px;
+                    gap: 10px;
+                    .li {
+                        width: 330px;
+                        padding: 50px 0;
+                        .image {
+                            width: 50px;
+                            height: 50px;
+                        }
+                        .isActive {
+                            width: 14px;
+                            height: 14px;
+                            top: 36px;
+                            left: 36px;
+                        }
+                        .isNotRead {
+                            width: 10px;
+                            height: 10px;
+                        }
+                        .name {
+                            top: 0;
+                            left: 60px;
+                        }
+                        .email {
+                            top: 20px;
+                            left: 60px;
+                        }
+                        .msg {
+                            bottom: 20px;
+                            left: 60px;
+                        }
+                    }
+                }
+            }
+            .chatHolder {
+                width: calc(100% - 360px);
+                .chat {
+                    .header {
+                        height: 50px;
+                        padding-left: 20px;
+                    }
+                    .ul {
+                        width: calc(100vw - 680px);
+                        min-height: calc(100vh - 190px);
+                        margin-bottom: 70px;
+                        gap: 40px;
+                        .li {
+                            padding: 0 0 0 20px;
+                            &.you {
+                                .p {
+                                    padding: 10px 14px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 45px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 0;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.user {
+                                .image {
+                                    width: 40px;
+                                    height: 40px;
+                                    top: -25px;
+                                }
+                                .isActive {
+                                    top: 5px;
+                                    left: 30px;
+                                    width: 10px;
+                                    height: 10px;
+                                }
+                                .p {
+                                    margin-left: 50px;
+                                    border-radius: 0 8px 8px 8px;
+                                    padding: 10px 14px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 45px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 50px;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.attachment {
+                                .content {
+                                    width: 400px;
+                                    height: 85px;
+                                    .image {
+                                        top: 0;
+                                        left: 0;
+                                        width: 40px;
+                                        border-radius: 50%;
+                                    }
+                                    .isActive {
+                                        top: 30px;
+                                        left: 30px;
+                                        width: 10px;
+                                        height: 10px;
+                                    }
+                                    .name {
+                                        top: 0;
+                                        left: 50px;
+                                        transform: translateY(0%);
+                                    }
+                                    .date {
+                                        right: 0;
+                                        top: 0;
+                                        transform: translateY(0%);
+                                    }
+                                    .file {
+                                        width: 350px;
+                                        height: 60px;
+                                        left: 50px;
+                                        bottom: 0;
+                                        .icon {
+                                            top: 25%;
+                                            left: 15px;
+                                            transform: translateY(-25%);
+                                            width: 32px;
+                                            height: 32px;
+                                        }
+                                        &::after {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 50%;
+                                            top: 25%;
+                                            left: 11px;
+                                            transform: translateY(-30%);
+                                        }
+                                        .fileName {
+                                            top: 5px;
+                                            left: 60px;
+                                            width: 290px;
+                                        }
+                                        .size {
+                                            bottom: 5px;
+                                            left: 60px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sendMessage {
+                        height: 70px;
+                        padding-left: 20px;
+                        .input {
+                            height: 45px;
+                            padding: 0 12px;
+                            width: calc(100% - 65px);
+                        }
+                        .sendBtn {
+                            width: 45px;
+                            height: 45px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1200px) and (min-width:992px) {
+    .container {
+        .holder {
+            grid-column: 1/13;
+            .users {
+                padding: 20px 5px 0 5px;
+                gap: 30px;
+                width: 300px;
+                .h2 {
+                    height: 35px;
+                    width: 280px;
+                }
+                .tabs {
+                    width: 280px;
+                    height: 40px;
+                    .btn {
+                        height: 30px;
+                        width: 140px;
+                        .num {
+                            width: 22px;
+                            height: 22px;
+                        }
+                    }
+                }
+                .ul {
+                    height: calc(100vh - 165px);
+                    padding-top: 20px;
+                    gap: 20px;
+                    .li {
+                        width: 280px;
+                        padding: 40px 0;
+                        .image {
+                            width: 40px;
+                            height: 40px;
+                        }
+                        .isActive {
+                            width: 12px;
+                            height: 12px;
+                            top: 30px;
+                            left: 30px;
+                        }
+                        .isNotRead {
+                            width: 8px;
+                            height: 8px;
+                        }
+                        .name {
+                            top: 0;
+                            left: 50px;
+                        }
+                        .email {
+                            top: 20px;
+                            left: 50px;
+                        }
+                        .msg {
+                            bottom: 10px;
+                            left: 50px;
+                        }
+                    }
+                }
+            }
+            .chatHolder {
+                width: calc(100% - 300px);
+                .chat {
+                    width: calc(100vw - 620px);
+                    .header {
+                        height: 50px;
+                        padding-left: 10px;
+                    }
+                    .ul {
+                        min-height: calc(100vh - 190px);
+                        margin-bottom: 70px;
+                        gap: 40px;
+                        .li {
+                            padding: 0 0 0 5px;
+                            &.you {
+                                .p {
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 35px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 0;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.user {
+                                .image {
+                                    width: 30px;
+                                    height: 30px;
+                                    top: -25px;
+                                }
+                                .isActive {
+                                    top: -2px;
+                                    left: 25px;
+                                    width: 8px;
+                                    height: 8px;
+                                }
+                                .p {
+                                    margin-left: 35px;
+                                    border-radius: 0 8px 8px 8px;
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 35px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 35px;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.attachment {
+                                .content {
+                                    width: 355px;
+                                    height: 85px;
+                                    .image {
+                                        top: 0;
+                                        left: 0;
+                                        width: 30px;
+                                        border-radius: 50%;
+                                    }
+                                    .isActive {
+                                        top: 24px;
+                                        left: 24px;
+                                        width: 8px;
+                                        height: 8px;
+                                    }
+                                    .name {
+                                        top: 0;
+                                        left: 35px;
+                                        transform: translateY(0%);
+                                    }
+                                    .date {
+                                        right: 0;
+                                        top: 0;
+                                        transform: translateY(0%);
+                                    }
+                                    .file {
+                                        width: 320px;
+                                        height: 60px;
+                                        left: 35px;
+                                        bottom: 0;
+                                        .icon {
+                                            top: 25%;
+                                            left: 15px;
+                                            transform: translateY(-25%);
+                                            width: 32px;
+                                            height: 32px;
+                                        }
+                                        &::after {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 50%;
+                                            top: 25%;
+                                            left: 11px;
+                                            transform: translateY(-30%);
+                                        }
+                                        .fileName {
+                                            top: 5px;
+                                            left: 60px;
+                                            width: 260px;
+                                        }
+                                        .size {
+                                            bottom: 5px;
+                                            left: 60px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sendMessage {
+                        height: 70px;
+                        padding-left: 20px;
+                        .input {
+                            height: 45px;
+                            padding: 0 12px;
+                            width: calc(100% - 65px);
+                        }
+                        .sendBtn {
+                            width: 45px;
+                            height: 45px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 992px) and (min-width:768px){
+    .container {
+        .holder {
+            grid-column: 1/13;
+            .users {
+                padding: 20px 5px 0 5px;
+                gap: 30px;
+                width: 300px;
+                overflow: hidden;
+                z-index: 2;
+
+                transition: width 0.7s, padding 0.7s;
+                .h2 {
+                    height: 35px;
+                    width: 280px;
+                    transform: translateX(0%);
+
+                    transition: transform 0.7s;
+                }
+                .tabs {
+                    width: 280px;
+                    height: 40px;
+                    transform: translateX(0%);
+
+                    transition: transform 0.7s;
+                    .btn {
+                        height: 30px;
+                        width: 140px;
+                        .num {
+                            width: 22px;
+                            height: 22px;
+                        }
+                    }
+                }
+                .ul {
+                    height: calc(100vh - 165px);
+                    padding-top: 20px;
+                    gap: 20px;
+                    .li {
+                        width: 280px;
+                        padding: 35px 0;
+
+                        transition: width 0.7s;
+                        .image {
+                            width: 40px;
+                            height: 40px;
+                            left: 0px;
+
+                            transition: left 0.7s;
+                        }
+                        .isActive {
+                            width: 12px;
+                            height: 12px;
+                            top: 30px;
+                            left: 30px;
+
+                            transition: left 0.7s;
+                        }
+                        .isNotRead {
+                            width: 8px;
+                            height: 8px;
+
+                            transition:transform  0.7s;
+                        }
+                        .name {
+                            top: 0;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .email {
+                            top: 20px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .msg {
+                            bottom: 10px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+            }
+            .chatHolder {
+                width: calc(100% - 300px);
+                transform: translateX(-100%);
+                transition:  0.7s;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                .chat {
+                    position: relative;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        height: 100%;
+                        width: 100px;
+                        background-color: #fff;
+                        top: 0;
+                        left: 70px;
+                        z-index: 10;
+
+                        transition: 0.7s;
+                    }
+                    .header {
+                        height: 50px;
+                        padding-left: 10px;
+                    }
+                    .ul {
+                        width: calc(100vw - 350px);
+                        min-height: calc(100vh - 190px);
+                        margin-bottom: 70px;
+                        gap: 40px;
+                        .li {
+                            padding: 0 0 0 5px;
+                            &.you {
+                                .p {
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 35px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 0;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.user {
+                                .image {
+                                    width: 30px;
+                                    height: 30px;
+                                    top: -25px;
+                                }
+                                .isActive {
+                                    top: -2px;
+                                    left: 25px;
+                                    width: 8px;
+                                    height: 8px;
+                                }
+                                .p {
+                                    margin-left: 35px;
+                                    border-radius: 0 8px 8px 8px;
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 35px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 35px;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.attachment {
+                                .content {
+                                    width: 355px;
+                                    height: 85px;
+                                    .image {
+                                        top: 0;
+                                        left: 0;
+                                        width: 30px;
+                                        border-radius: 50%;
+                                    }
+                                    .isActive {
+                                        top: 24px;
+                                        left: 24px;
+                                        width: 8px;
+                                        height: 8px;
+                                    }
+                                    .name {
+                                        top: 0;
+                                        left: 35px;
+                                        transform: translateY(0%);
+                                    }
+                                    .date {
+                                        right: 0;
+                                        top: 0;
+                                        transform: translateY(0%);
+                                    }
+                                    .file {
+                                        width: 320px;
+                                        height: 60px;
+                                        left: 35px;
+                                        bottom: 0;
+                                        .icon {
+                                            top: 25%;
+                                            left: 15px;
+                                            transform: translateY(-25%);
+                                            width: 32px;
+                                            height: 32px;
+                                        }
+                                        &::after {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 50%;
+                                            top: 25%;
+                                            left: 11px;
+                                            transform: translateY(-30%);
+                                        }
+                                        .fileName {
+                                            top: 5px;
+                                            left: 60px;
+                                            width: 260px;
+                                        }
+                                        .size {
+                                            bottom: 5px;
+                                            left: 60px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sendMessage {
+                        height: 70px;
+                        padding-left: 20px;
+                        .input {
+                            height: 45px;
+                            padding: 0 12px;
+                            width: calc(100% - 65px);
+                        }
+                        .sendBtn {
+                            width: 45px;
+                            height: 45px;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .users {
+                    width: 80px;
+                    padding: 20px 10px 0 0px;
+                    .h2 {
+                        transform: translateX(100%);
+                    }
+                    .tabs {
+                        transform: translateX(100%);
+                    }
+                    .ul {
+                        padding-top: 20px;
+                        gap: 20px;
+                        .li {
+                            width: 60px;
+                            height: 80px;
+                            overflow: hidden;
+                            .image {
+                                width: 40px;
+                                height: 40px;
+                                left: 10px;
+                            }
+                            .isActive {
+                                left: 40px;
+                            }
+                            .isNotRead {
+                                transform: translateX(100%);
+                            }
+                        }
+                    }
+                }
+                .chatHolder {
+                    transform: translateX(0%);
+                    width: calc(100% - 80px);
+                    .chat {
+                        &::after {
+                            width: 100px;
+                            left: -120px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) and (min-width:480px){
+    .container {
+        .holder {
+            grid-column: 1/13;
+            .users {
+                padding: 20px 5px 0 5px;
+                gap: 30px;
+                width: 300px;
+                overflow: hidden;
+                z-index: 2;
+
+                transition: width 0.7s, padding 0.7s;
+                .h2 {
+                    height: 35px;
+                    width: 280px;
+                    transform: translateX(0%);
+
+                    transition: transform 0.7s;
+                }
+                .tabs {
+                    width: 280px;
+                    height: 40px;
+                    transform: translateX(0%);
+
+                    transition: transform 0.7s;
+                    .btn {
+                        height: 30px;
+                        width: 140px;
+                        .num {
+                            width: 22px;
+                            height: 22px;
+                        }
+                    }
+                }
+                .ul {
+                    height: calc(100vh - 165px);
+                    padding-top: 20px;
+                    gap: 20px;
+                    .li {
+                        width: 280px;
+                        padding: 35px 0;
+
+                        transition: width 0.7s;
+                        .image {
+                            width: 40px;
+                            height: 40px;
+                            left: 0px;
+
+                            transition: left 0.7s;
+                        }
+                        .isActive {
+                            width: 12px;
+                            height: 12px;
+                            top: 30px;
+                            left: 30px;
+
+                            transition: left 0.7s;
+                        }
+                        .isNotRead {
+                            width: 8px;
+                            height: 8px;
+
+                            transition:transform  0.7s;
+                        }
+                        .name {
+                            top: 0;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .email {
+                            top: 20px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .msg {
+                            bottom: 10px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+            }
+            .chatHolder {
+                width: calc(100% - 300px);
+                transform: translateX(-100%);
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+
+                transition:  0.7s;
+                .chat {
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        height: 100%;
+                        width: 120px;
+                        background-color: #fff;
+                        top: 0;
+                        left: 0px;
+                        z-index: 10;
+
+                        transition: 0.7s;
+                    }
+                    .header {
+                        height: 50px;
+                        padding-left: 10px;
+                    }
+                    .ul {
+                        width: calc(100vw - 130px);
+                        min-height: calc(100vh - 190px);
+                        margin-bottom: 70px;
+                        gap: 40px;
+                        .li {
+                            padding: 0 0 0 5px;
+                            &.you {
+                                .p {
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 35px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 0;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.user {
+                                .image {
+                                    width: 30px;
+                                    height: 30px;
+                                    top: -25px;
+                                }
+                                .isActive {
+                                    top: -2px;
+                                    left: 25px;
+                                    width: 8px;
+                                    height: 8px;
+                                }
+                                .p {
+                                    margin-left: 35px;
+                                    border-radius: 0 8px 8px 8px;
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 35px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 35px;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.attachment {
+                                .content {
+                                    width: 355px;
+                                    height: 85px;
+                                    .image {
+                                        top: 0;
+                                        left: 0;
+                                        width: 30px;
+                                        border-radius: 50%;
+                                    }
+                                    .isActive {
+                                        top: 24px;
+                                        left: 24px;
+                                        width: 8px;
+                                        height: 8px;
+                                    }
+                                    .name {
+                                        top: 0;
+                                        left: 35px;
+                                        transform: translateY(0%);
+                                    }
+                                    .date {
+                                        right: 0;
+                                        top: 0;
+                                        transform: translateY(0%);
+                                    }
+                                    .file {
+                                        width: 320px;
+                                        height: 60px;
+                                        left: 35px;
+                                        bottom: 0;
+                                        .icon {
+                                            top: 25%;
+                                            left: 15px;
+                                            transform: translateY(-25%);
+                                            width: 32px;
+                                            height: 32px;
+                                        }
+                                        &::after {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 50%;
+                                            top: 25%;
+                                            left: 11px;
+                                            transform: translateY(-30%);
+                                        }
+                                        .fileName {
+                                            top: 5px;
+                                            left: 60px;
+                                            width: 260px;
+                                        }
+                                        .size {
+                                            bottom: 5px;
+                                            left: 60px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sendMessage {
+                        height: 70px;
+                        padding-left: 20px;
+                        .input {
+                            height: 45px;
+                            padding: 0 12px;
+                            width: calc(100% - 65px);
+                        }
+                        .sendBtn {
+                            width: 45px;
+                            height: 45px;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .users {
+                    width: 60px;
+                    padding: 20px 20px 0 0px;
+                    .h2 {
+                        transform: translateX(100%);
+                    }
+                    .tabs {
+                        transform: translateX(100%);
+                    }
+                    .ul {
+                        padding-top: 20px;
+                        gap: 20px;
+                        .li {
+                            width: 60px;
+                            height: 80px;
+                            overflow: hidden;
+                            .image {
+                                width: 40px;
+                                height: 40px;
+                                left: 10px;
+                            }
+                            .isActive {
+                                left: 40px;
+                            }
+                            .isNotRead {
+                                transform: translateX(100%);
+                            }
+                        }
+                    }
+                }
+                .chatHolder {
+                    transform: translateX(0%);
+                    width: calc(100% - 60px);
+                    .chat {
+                        &::after {
+                            width: 100px;
+                            left: -100px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 480px)and (min-width:370px){
+    .container {
+        .holder {
+            grid-column: 1/7;
+            .users {
+                padding: 20px 5px 0 5px;
+                gap: 30px;
+                width: 100%;
+                border-right: none;
+                overflow: hidden;
+                z-index: 2;
+
+                transition: width 0.7s, padding 0.7s;
+                .h2 {
+                    height: 35px;
+                    width: 320px;
+                    transform: translateX(0%);
+
+                    transition: transform 0.7s;
+                }
+                .tabs {
+                    width: 320px;
+                    height: 40px;
+                    transform: translateX(0%);
+
+                    transition: transform 0.7s;
+                    .btn {
+                        height: 30px;
+                        width: 140px;
+                        .num {
+                            width: 22px;
+                            height: 22px;
+                        }
+                    }
+                }
+                .ul {
+                    height: calc(100vh - 165px);
+                    padding-top: 20px;
+                    gap: 20px;
+                    .li {
+                        width: 320px;
+                        padding: 35px 0;
+
+                        transition: width 0.7s;
+                        .image {
+                            width: 40px;
+                            height: 40px;
+                            left: 0px;
+
+                            transition: left 0.7s;
+                        }
+                        .isActive {
+                            width: 12px;
+                            height: 12px;
+                            top: 30px;
+                            left: 30px;
+
+                            transition: left 0.7s;
+                        }
+                        .isNotRead {
+                            width: 8px;
+                            height: 8px;
+
+                            transition:transform  0.7s;
+                        }
+                        .name {
+                            top: 0;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .email {
+                            top: 20px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .msg {
+                            bottom: 10px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+            }
+            .chatHolder {
+                width: 0%;
+                transform: translateX(-100%);
+                transition:  0.7s;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                .chat {
+                    .header {
+                        height: 50px;
+                        padding-left: 10px;
+                    }
+                    .ul {
+                        width: calc(100vw - 50px);
+                        min-height: calc(100vh - 190px);
+                        margin-bottom: 70px;
+                        gap: 40px;
+                        .li {
+                            padding: 0 0 0 5px;
+                            &.you {
+                                .p {
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 25px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 0;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.user {
+                                .image {
+                                    width: 30px;
+                                    height: 30px;
+                                    top: -25px;
+                                }
+                                .isActive {
+                                    top: -2px;
+                                    left: 25px;
+                                    width: 8px;
+                                    height: 8px;
+                                }
+                                .p {
+                                    margin-left: 35px;
+                                    border-radius: 0 8px 8px 8px;
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 25px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 35px;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.attachment {
+                                .content {
+                                    width: 280px;
+                                    height: 70px;
+                                    .image {
+                                        top: 0;
+                                        left: 0;
+                                        width: 30px;
+                                        border-radius: 50%;
+                                    }
+                                    .isActive {
+                                        top: 24px;
+                                        left: 24px;
+                                        width: 8px;
+                                        height: 8px;
+                                    }
+                                    .name {
+                                        top: 0;
+                                        left: 35px;
+                                        transform: translateY(0%);
+                                    }
+                                    .date {
+                                        right: 0;
+                                        top: 0;
+                                        transform: translateY(0%);
+                                    }
+                                    .file {
+                                        width: 245px;
+                                        height: 50px;
+                                        left: 35px;
+                                        bottom: 0;
+                                        .icon {
+                                            top: 25%;
+                                            left: 15px;
+                                            transform: translateY(-25%);
+                                            width: 32px;
+                                            height: 32px;
+                                        }
+                                        &::after {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 50%;
+                                            top: 25%;
+                                            left: 11px;
+                                            transform: translateY(-30%);
+                                        }
+                                        .fileName {
+                                            top: 5px;
+                                            left: 60px;
+                                            width: 260px;
+                                        }
+                                        .size {
+                                            bottom: 5px;
+                                            left: 60px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sendMessage {
+                        height: 70px;
+                        padding-left: 20px;
+                        .input {
+                            height: 45px;
+                            padding: 0 12px;
+                            width: calc(100% - 65px);
+                        }
+                        .sendBtn {
+                            width: 45px;
+                            height: 45px;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .users {
+                    width: 0%;
+                    padding: 20px 0px 0 0px;
+                    .h2 {
+                        transform: translateX(100%);
+                    }
+                    .tabs {
+                        transform: translateX(100%);
+                    }
+                    .ul {
+                        padding-top: 20px;
+                        gap: 20px;
+                        .li {
+                            width: 60px;
+                            height: 80px;
+                            overflow: hidden;
+                            .image {
+                                width: 40px;
+                                height: 40px;
+                                left: 10px;
+                            }
+                            .isActive {
+                                left: 40px;
+                            }
+                            .isNotRead {
+                                transform: translateX(100%);
+                            }
+                        }
+                    }
+                }
+                .chatHolder {
+                    transform: translateX(0%);
+                    width: 100% ;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 370px){
+    .container {
+        .holder {
+            grid-column: 1/7;
+            .users {
+                padding: 20px 0px 0 0px;
+                gap: 30px;
+                width: 100%;
+                border-right: none;
+                overflow: hidden;
+                z-index: 2;
+    
+                transition: width 0.7s, padding 0.7s;
+                .h2 {
+                    height: 35px;
+                    width: 320px;
+                    transform: translateX(0%);
+    
+                    transition: transform 0.7s;
+                }
+                .tabs {
+                    width: 320px;
+                    height: 40px;
+                    transform: translateX(0%);
+    
+                    transition: transform 0.7s;
+                    .btn {
+                        height: 30px;
+                        width: 140px;
+                        .num {
+                            width: 22px;
+                            height: 22px;
+                        }
+                    }
+                }
+                .ul {
+                    height: calc(100vh - 165px);
+                    padding-top: 20px;
+                    gap: 20px;
+                    .li {
+                        width: 320px;
+                        padding: 35px 0;
+    
+                        transition: width 0.7s;
+                        .image {
+                            width: 40px;
+                            height: 40px;
+                            left: 0px;
+    
+                            transition: left 0.7s;
+                        }
+                        .isActive {
+                            width: 12px;
+                            height: 12px;
+                            top: 30px;
+                            left: 30px;
+    
+                            transition: left 0.7s;
+                        }
+                        .isNotRead {
+                            width: 8px;
+                            height: 8px;
+    
+                            transition:transform  0.7s;
+                        }
+                        .name {
+                            top: 0;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .email {
+                            top: 20px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                        .msg {
+                            bottom: 10px;
+                            left: 60px;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+            }
+            .chatHolder {
+                width: 0%;
+                transform: translateX(-100%);
+                transition:  0.7s;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                .chat {
+                    .header {
+                        height: 50px;
+                        padding-left: 10px;
+                    }
+                    .ul {
+                        width: 100vw;
+                        min-height: calc(100vh - 190px);
+                        margin-bottom: 70px;
+                        gap: 40px;
+                        .li {
+                            padding: 0 0 0 5px;
+                            &.you {
+                                .p {
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 25px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 0;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.user {
+                                .image {
+                                    width: 30px;
+                                    height: 30px;
+                                    top: -25px;
+                                }
+                                .isActive {
+                                    top: -2px;
+                                    left: 25px;
+                                    width: 8px;
+                                    height: 8px;
+                                }
+                                .p {
+                                    margin-left: 35px;
+                                    border-radius: 0 8px 8px 8px;
+                                    padding: 5px 8px;
+                                    max-width: 450px;
+                                    min-width: 150px;
+                                    min-height: 25px;
+                                }
+                                .name {
+                                    top: 0;
+                                    left: 35px;
+                                    transform: translateY(-100%);
+                                }
+                                .date {
+                                    top: 0;
+                                    right: 0;
+                                    transform: translateY(-100%);
+                                }
+                            }
+                            &.attachment {
+                                .content {
+                                    width: 280px;
+                                    height: 70px;
+                                    .image {
+                                        top: 0;
+                                        left: 0;
+                                        width: 30px;
+                                        border-radius: 50%;
+                                    }
+                                    .isActive {
+                                        top: 24px;
+                                        left: 24px;
+                                        width: 8px;
+                                        height: 8px;
+                                    }
+                                    .name {
+                                        top: 0;
+                                        left: 35px;
+                                        transform: translateY(0%);
+                                    }
+                                    .date {
+                                        right: 0;
+                                        top: 0;
+                                        transform: translateY(0%);
+                                    }
+                                    .file {
+                                        width: 245px;
+                                        height: 50px;
+                                        left: 35px;
+                                        bottom: 0;
+                                        .icon {
+                                            top: 25%;
+                                            left: 15px;
+                                            transform: translateY(-25%);
+                                            width: 32px;
+                                            height: 32px;
+                                        }
+                                        &::after {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 50%;
+                                            top: 25%;
+                                            left: 11px;
+                                            transform: translateY(-30%);
+                                        }
+                                        .fileName {
+                                            top: 5px;
+                                            left: 60px;
+                                            width: 260px;
+                                        }
+                                        .size {
+                                            bottom: 5px;
+                                            left: 60px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sendMessage {
+                        height: 70px;
+                        padding-left: 20px;
+                        .input {
+                            height: 45px;
+                            padding: 0 12px;
+                            width: calc(100% - 65px);
+                        }
+                        .sendBtn {
+                            width: 45px;
+                            height: 45px;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .users {
+                    width: 0%;
+                    padding: 20px 0px 0 0px;
+                    .h2 {
+                        transform: translateX(100%);
+                    }
+                    .tabs {
+                        transform: translateX(100%);
+                    }
+                    .ul {
+                        padding-top: 20px;
+                        gap: 20px;
+                        .li {
+                            width: 60px;
+                            height: 80px;
+                            overflow: hidden;
+                            .image {
+                                width: 40px;
+                                height: 40px;
+                                left: 10px;
+                            }
+                            .isActive {
+                                left: 40px;
+                            }
+                            .isNotRead {
+                                transform: translateX(100%);
+                            }
+                        }
+                    }
+                }
+                .chatHolder {
+                    transform: translateX(0%);
+                    width: 100% ;
+                }
+            }
+        }
+    }
+}
