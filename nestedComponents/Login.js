@@ -7,7 +7,7 @@ import { userAction } from '@/redux/User';
 import { signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider , signInWithPopup  } from 'firebase/auth';
 import { auth } from '@/config/firebaseConfig';
 import { RxEyeOpen,RxEyeClosed } from 'react-icons/rx';
-import {Link} from 'react-router-dom';
+import Link from 'next/link';
 
 const Login = () => {
     const [showPassword,setShowPassword] = useState(false);
@@ -128,7 +128,7 @@ const Login = () => {
         </form>
         <p className={`${styles.newAccount} small-fs light`}>
             Don't have an account? 
-            <Link to='/signup' className={styles.createAccount} >
+            <Link href='/signup' className={styles.createAccount} >
                 Create free account
             </Link>
         </p>

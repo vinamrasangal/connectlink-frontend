@@ -48,6 +48,9 @@ const SideBar = () => {
                     .then(url => {
                         setImageUrl(url)
                     })
+                    .catch(()=>{
+                        
+                    })
                 })
             }
         }

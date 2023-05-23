@@ -5,7 +5,6 @@ import Alert from '@/components/Alert';
 import { auth, db } from '@/config/firebaseConfig';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged,signOut } from 'firebase/auth';
-import Account from '@/components/Account';
 import Verification from '@/components/verification';
 import SideBar from '@/components/SideBar';
 import ProfileCreation from '@/components/ProfileCreation';
@@ -39,21 +38,22 @@ export default function App({ Component, pageProps }) {
 },[isFirstTime])
 
 useEffect(()=>{
-  let removeSnapShot = ()=>{};
+
   if(auth.currentUser){
     const docRef = doc(db,'userData',auth.currentUser.uid);
-    removeSnapShot = onSnapshot(docRef,(res)=>{
+    let removeSnapShot = onSnapshot(docRef,(res)=>{
         setIsFetching2(false);
         if(res.exists() && res.data().profileCreated){
           setIsProfileCreated(true);
         }
       })
+    return ()=> removeSnapShot();
+
     } else if(!isFetching1) {
       setTimeout(() => {
         setIsFetching2(false);
       }, 1000);
     }
-    return ()=> removeSnapShot();
 },[auth.currentUser,isFetching1]);
   return (
     <Provider store={store}>
@@ -82,7 +82,10 @@ useEffect(()=>{
                 }
               </>
             :
-              <Account />
+              <>
+                <SideBar />
+                <Component {...pageProps} />
+              </>
             }
         </>
       }

@@ -10,11 +10,14 @@ const Verification = () => {
     const dispatch = useDispatch();
     const [isEmailSent,setIsEmailSent] = useState(false);
     const [coolDownTimer,setCoolDownTimer] = useState(60);
+    const [isFetching,setIsFetching] = useState(true);
     function handleSendEmail(){
         if(!isEmailSent){
+            setIsFetching(true)
             let timer;
             sendEmailVerification(auth.currentUser)
             .then(()=>{
+                setIsFetching(false);
                 setIsEmailSent(true);
                 timer = setInterval(()=>{
                     setCoolDownTimer(prev => {
@@ -28,7 +31,10 @@ const Verification = () => {
                     })
                 },1000)
             })
-            .catch((err)=>dispatch(alertActions.showAlert({msg:err,type:'error'})));
+            .catch((err)=>{
+                dispatch(alertActions.showAlert({msg:err,type:'error'}))
+                setIsFetching(false)
+            });
         }
     }
     useEffect(()=>{
@@ -46,8 +52,8 @@ const Verification = () => {
                 <p className={styles.secondP}>
                     If you didn't receive the email, please check your spam folder or click the button below to send another confirmation.
                 </p>
-                <button className={`${styles.resendBtn} P-BTN ${isEmailSent? 'disabled':''}`} onClick={handleSendEmail}>Resend email</button>
-                {isEmailSent ? <p className={`${styles.resedP} small-fs light light-gray`}>you can resend email after {coolDownTimer}s</p> : ''}
+                <button className={`${styles.resendBtn} P-BTN ${(isEmailSent || isFetching) && 'disabled'}`} onClick={handleSendEmail}>Resend email</button>
+                {isEmailSent ? <p className={`${styles.resedP} small-fs light light-gray`}>you can resend email after {coolDownTimer} s</p> : ''}
                 <p className={styles.lastP}>
                     Once your email is verified, you can start exploring and using all the features of our platform. 
                     If you have any questions or need assistance, please don't hesitate to contact our <a href='' className={styles.spportTeam}>support team</a>.
