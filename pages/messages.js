@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Messages.module.scss';
 import Chat from '@/nestedComponents/Chat';
+import { useDispatch } from 'react-redux';
+import { currentPageAction } from '@/redux/CurrentPage';
 
 const messages = () => {
     const [showenUsers,setShowenUsers] = useState('messages');
@@ -8,6 +10,13 @@ const messages = () => {
 
     const [messages,setMessages] = useState(new Array(10).fill(0));
     const [requests,setRequests] = useState(new Array(5).fill(0));
+
+    const dispatch = useDispatch();
+
+
+    useEffect(()=>{
+        dispatch(currentPageAction.setPage({page:'messages'}))
+    },[])
     return (
         <section className={`container ${styles.container}`}>
             <div className={`${styles.holder} ${isShowen && styles.showen}`}>

@@ -17,11 +17,12 @@ import { ref,getDownloadURL } from 'firebase/storage';
 
 const SideBar = () => {
     const [active,setActive] = useState(false);
-    const [currentPage,setCurrentPage] = useState('home');
     const dispatch = useDispatch();
     const [imageUrl,setImageUrl] = useState(null);
     const [name,setName] = useState('')
     const user = useSelector(state => state.user);
+    const currentPage = useSelector(state => state.currentPage.page)
+    
 
     function handleSignOut(){
         signOut(auth)
@@ -69,7 +70,8 @@ const SideBar = () => {
                     <Link href='/'>
                         <li 
                             className={`${styles.li} ${currentPage === 'home' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('home')} >
+                            onClick={()=>setActive(false)}
+                            >
                             <span className={`${styles.icon} large-fs light-gray`}>{BiHomeAlt({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Home</p>
                         </li >
@@ -77,7 +79,7 @@ const SideBar = () => {
                     <Link href='/dashboard'>
                         <li 
                             className={`${styles.li} ${currentPage === 'dashboard' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('dashboard')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{FiBarChart2({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Dashboard</p>
@@ -86,7 +88,7 @@ const SideBar = () => {
                     <Link href='/profile'>
                         <li 
                             className={`${styles.li} ${currentPage === 'profile' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('profile')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{FiUser({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Profile</p>
@@ -95,7 +97,7 @@ const SideBar = () => {
                     <Link href='/messages'>
                         <li 
                             className={`${styles.li} ${currentPage === 'messages' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('messages')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{FiMessageSquare({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Messages</p>
@@ -104,7 +106,7 @@ const SideBar = () => {
                     <Link href='/connections'>
                         <li 
                             className={`${styles.li} ${currentPage === 'connections' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('connections')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{FiUsers({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Connections</p>
@@ -113,7 +115,7 @@ const SideBar = () => {
                     <Link href='/promotion'>
                         <li 
                             className={`${styles.li} ${currentPage === 'promotion' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('promotion')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{IoPricetagOutline({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Promotion & Advertising</p>
@@ -122,7 +124,7 @@ const SideBar = () => {
                     <Link href='/integrations'>
                         <li 
                             className={`${styles.li} ${currentPage === 'integrations' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('integrations')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{FiLayers({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Integrations</p>
@@ -133,7 +135,7 @@ const SideBar = () => {
                     <Link href='/support'>
                         <li 
                             className={`${styles.li} ${currentPage === 'support' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('support')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{FiHeadphones({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Support</p>
@@ -142,23 +144,41 @@ const SideBar = () => {
                     <Link href='/sittings'>
                         <li 
                             className={`${styles.li} ${currentPage === 'sittings' ? styles.active : '' }`} 
-                            onClick={()=>setCurrentPage('sittings')}
+                            onClick={()=>setActive(false)}
                         >
                             <span className={`${styles.icon} large-fs light-gray`}>{FiSettings({})}</span>
                             <p className={`${styles.text} small-fs normal normal-gray`}>Settings</p>
                         </li >
                     </Link>
                 </ul>
-                <div className={styles.account}>
-                    <img src={imageUrl} alt="" className={styles.profileImage}/>
-                    <p className={`${styles.name} small-fs normal dark-gray`}>{name}</p>
-                    {auth.currentUser?
-                        <span className={`${styles.email} small-fs light light-gray`}>{auth.currentUser.email}</span>
-                            :
-                        ''
-                    }
-                    <button className={`${styles.logOut} large-fs light-gray`} onClick={handleSignOut}>{FiLogOut({})}</button>
-                </div>
+                {user.isLoggedIN?
+                    <div className={styles.account}>
+                        <img src={imageUrl} alt="" className={styles.profileImage}/>
+                        <p className={`${styles.name} small-fs normal dark-gray`}>{name}</p>
+                        {auth.currentUser?
+                            <span className={`${styles.email} small-fs light light-gray`}>{auth.currentUser.email}</span>
+                                :
+                            ''
+                        }
+                        <button className={`${styles.logOut} large-fs light-gray`} onClick={handleSignOut}>{FiLogOut({})}</button>
+                    </div>
+                :
+                    <div className={styles.loggedOut}>
+                        <Link href='/signup'>
+                            <button className={`P-BTN ${styles.btn}`}>
+                                Sign up
+                            </button>
+                        </Link>
+                        <span className={` ${styles.span}`}>
+                            or
+                        </span>
+                        <Link href='/login'>
+                            <button className={`S-BTN ${styles.btn}`}>
+                                Log in
+                            </button>
+                        </Link>
+                    </div>
+                }
             </aside>
             <div className={`${styles.blurOverLay} ${active? `${styles.active}`:''}`}></div>
         </>

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from  '../styles/Connections.module.scss';
 import { CiSearch } from 'react-icons/ci';
 import { BiFilter } from 'react-icons/bi';
 import { FiUserCheck } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
+import { currentPageAction } from '@/redux/CurrentPage';
 
 const connections = () => {
+    const dispatch = useDispatch();
+
+
+    useEffect(()=>{
+        dispatch(currentPageAction.setPage({page:'connections'}))
+    },[])
     return (
         <section className={`container ${styles.container}`}>
             <h2 className={`${styles.h2} x-large-fs semi-bold dark-gray`}>Connections</h2>

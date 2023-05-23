@@ -73,6 +73,14 @@
             background-color: transparent;
         }
     }
+    .loggedOut {
+        position: absolute;
+        bottom: 0px;
+        border-top: 2px solid  $normal-gray;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 @media only screen and (min-width: 992px){
     .sidebar {
@@ -107,6 +115,13 @@
             }
             .email {
                 left: 50px;
+            }
+        }
+        .loggedOut {
+            height: 70px;
+            width: 260px;
+            .btn {
+                padding: 8px 24px;
             }
         }
         .blurOverLay {
@@ -147,6 +162,13 @@
             }
             .email {
                 left: 40px;
+            }
+        }
+        .loggedOut {
+            height: 60px;
+            width: 230px;
+            .btn {
+                padding: 8px 20px;
             }
         }
         .blurOverLay {
@@ -215,6 +237,13 @@
             }
             .email {
                 left: 40px;
+            }
+        }
+        .loggedOut {
+            height: 55px;
+            width: 230px;
+            .btn {
+                padding: 8px 20px;
             }
         }
         &.active {
@@ -304,6 +333,13 @@
                 left: 40px;
             }
         }
+        .loggedOut {
+            height: 55px;
+            width: 230px;
+            .btn {
+                padding: 8px 20px;
+            }
+        }
         &.active {
             transform: translateX(0%);
         }
@@ -389,6 +425,13 @@
             }
             .email {
                 left: 30px;
+            }
+        }
+        .loggedOut {
+            height: 55px;
+            width: 190px;
+            .btn {
+                padding: 8px 16px;
             }
         }
         &.active {

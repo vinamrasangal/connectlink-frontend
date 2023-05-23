@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EditProfile from '@/components/EditProfile';
+import { useDispatch } from 'react-redux';
+import { currentPageAction } from '@/redux/CurrentPage';
 
 
 const Profile = () => {
+
+    const dispatch = useDispatch();
+
+
+    useEffect(()=>{
+        dispatch(currentPageAction.setPage({page:'profile'}))
+    },[])
     return (
         <>
             <EditProfile />

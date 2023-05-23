@@ -4,16 +4,24 @@ import { TiLightbulb} from 'react-icons/ti';
 import { FiUsers,FiShoppingCart } from 'react-icons/fi';
 import { RxDashboard } from 'react-icons/rx';
 import {BrowserRouter as Router, Routes, Route , Link} from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Ideapool from '@/components/Ideapool';
 import CreatePost from '@/nestedComponents/CreatePost';
+import { useDispatch } from 'react-redux';
+import { currentPageAction } from '@/redux/CurrentPage';
+
 
 
 
 
 export default function Home() {
-  const [choosen,setChoosen] = useState('ideapool')
+  const [choosen,setChoosen] = useState('ideapool');
+  const dispatch = useDispatch();
 
+
+  useEffect(()=>{
+    dispatch(currentPageAction.setPage({page:'home'}))
+  },[])
 
   return (
     <>
