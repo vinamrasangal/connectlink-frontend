@@ -1,37 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Ideapool.module.scss';
 import { BiFilter } from 'react-icons/bi';
-import { FiMoreHorizontal,FiMessageCircle,FiShare2 } from 'react-icons/fi';
+import { FiMoreHorizontal,FiMessageCircle,FiShare2,FiUser } from 'react-icons/fi';
 import { BiLike } from 'react-icons/bi';
-import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TbPointFilled } from 'react-icons/tb';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CreatePostActions } from '../redux/showCreatePost';
+import { AiOutlineCheck } from 'react-icons/ai';
+import { getDownloadURL, ref } from 'firebase/storage';
+import { storage } from '@/config/firebaseConfig';
 
 const Ideapool = () => {
+    const [isSortShowen,setIsSortShowen] = useState(false);
+    const [isPostShowen,setIsPostShowen] = useState(false);
+    const [imageUrl,setImageUrl] = useState('')
+    const user = useSelector(state => state.user)
     const dispatch = useDispatch();
     function handleClick(){
         dispatch(CreatePostActions.showCreatePost())
     }
+    useEffect(()=>{
+        if(user.isLoggedIN){
+            if(user.userData.uid) {
+                const storageRef = ref(storage,`images/personalImage_${user.userData.uid}`);
+                getDownloadURL(storageRef)
+                .then(url => {
+                    setImageUrl(url)
+                })
+                .catch(()=>{
+                    
+                })
+            }
+        }
+    },[user.isLoggedIN])
     return (
         <>
             <section className={styles.ideas}>
                 <h2 className={`${styles.shareIdea} large-fs semi-bold dark-gray`}>Share an idea</h2>
                 <div className={styles.createPost}>
-                    <img className={styles.image} src="/personal-image.png" alt="" />
+                    {user.isLoggedIN?
+                        <img className={styles.image} src={imageUrl} alt="" />
+                    :
+                        <span className={`${styles.loggedOutIcon} x-large-fs dark-gray`}>
+                            {FiUser({})}
+                        </span>
+                    }
                     <input className={`${styles.input} medium-fs light light-gray`} placeholder='Share an idea...' type="text" onClick={handleClick} />
                 </div>
                 <div className={styles.explore}>
-                    <button className={`${styles.filterBtn} normal-gray `}>
-                        <span className={`${styles.span} x-large-fs`}>
-                            {BiFilter({})}
-                        </span>
-                        <span className={`${styles.span} small-fs`}>
-                            filter
-                        </span>
+                    <h2 className='x-large-fs semi-bold normal-gray'>Explore ideas</h2>
+                    <div className={styles.btns}>
+                        <button className={`${styles.btn} medium-fs normal normal-gray`}>Popular</button>
+                        <button className={`${styles.btn} medium-fs normal normal-gray`}>New</button>
+                        <button className={`${styles.btn} medium-fs normal normal-gray`}>Yours</button>
+                    </div>
+                    <button className={`${styles.filterBtn} S-BTN`} onClick={()=>setIsSortShowen(prev => !prev)}>
+                        <span className={`${styles.icon} x-large-fs `}>{BiFilter({})}</span>
+                        <p>Sort By</p>
                     </button>
+                    <ul className={`${styles.ul} ${isSortShowen && styles.showen} dark-gray normal medium-fs`} role='list'>
+                        <li className={`${styles.li}`}>
+                            <p className={styles.p}>
+                                Top post
+                            </p>
+                            <span className={styles.span}>
+                                {AiOutlineCheck({})}
+                            </span>
+                        </li>
+                        <li className={`${styles.li} ${styles.active}`}>
+                            <p className={styles.p}>
+                                New post
+                            </p>
+                            <span className={styles.span}>
+                                {AiOutlineCheck({})}
+                            </span>
+                        </li>
+                        <li className={`${styles.li}`}>
+                            <p className={styles.p}>
+                                Your post
+                            </p>
+                            <span className={styles.span}>
+                                {AiOutlineCheck({})}
+                            </span>
+                        </li>
+                    </ul>
                 </div>
-                <article className={styles.post}>
+                <article className={`${styles.post} ${isPostShowen && styles.showen}`}>
                     <div className={`${styles.hashTags} small-fs normal`}>
                         <span className={styles.hash}> #Needideaclarity </span>
                         <span className={`${styles.hashCount} normal-gray`}>+4</span>
@@ -54,12 +108,30 @@ const Ideapool = () => {
                     </p>
                     <h2 className={`${styles.roles} semi-bold normal-gray medium-fs`}>Open Roles</h2>
                     <ul className={`${styles.ul} normal-gray light medium-fs`}>
-                        <li className={styles.li}>Android developer</li>
-                        <li className={styles.li}>IOS developer</li>
-                        <li className={styles.li}>Android developer</li>
-                        <li className={styles.li}>UI/UX designer</li>
+                        <li className={styles.li}>
+                            <p className={styles.p}>Android developer</p>
+                            <span className={`${styles.span} light light-gray`}>1-2 YOE</span>
+                            <span className={`${styles.span} ${styles.join} normal`}>Join team</span>
+                        </li>
+                        <li className={styles.li}>
+                            <p className={styles.p}>IOS developer</p>
+                            <span className={`${styles.span} light light-gray`}>2-3 YOE</span>
+                            <span className={`${styles.span} ${styles.join} normal`}>Join team</span>
+                        </li>
+                        <li className={styles.li}>
+                            <p className={styles.p}>Backend developer</p>
+                            <span className={`${styles.span} light light-gray`}>3-4 YOE</span>
+                            <span className={`${styles.span} ${styles.join} normal`}>Join team</span>
+                        </li>
+                        <li className={styles.li}>
+                            <p className={styles.p}>UI/UX designer</p>
+                            <span className={`${styles.span} light light-gray`}>Any YOE</span>
+                            <span className={`${styles.span} ${styles.join} normal`}>Join team</span>
+                        </li>
                     </ul>
-                    <span className={`${styles.seeMore} medium-fs normal`}>See more</span>
+                    <span className={`${styles.seeMore} medium-fs normal`}
+                        onClick={()=>setIsPostShowen(prev => !prev)}
+                    >{isPostShowen? 'See less' : 'See more'}</span>
                     <p className={`${styles.details} light-gray light medium-fs`}> <span className='semi-bold' >Posted by</span> Jenny Wilson <span className={styles.span}> {TbPointFilled({})} </span> 1hr ago </p>
                     <button className={styles.arrow}>
                         <span className={`${styles.icon} x-large-fs dark-gray`}>{BiLike({})}</span>

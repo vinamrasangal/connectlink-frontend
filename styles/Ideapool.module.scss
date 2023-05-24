@@ -20,6 +20,13 @@
             background-color: #fff;
             border-radius: 50%;
         }
+        .loggedOutIcon {
+            background-color: $borders-gray;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .input {
             border-radius: 8px;
             border: 1px solid $borders-gray;
@@ -28,29 +35,25 @@
     .explore {
         position: relative;
         width: 100%;
-        // background-color: red;
-        .filterBtn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 0;
-            display:flex;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .btns {
+            display: flex;
             align-items: center;
-            justify-content: space-around;
-            background-color: $BG-color;
-            .span {
-                text-transform: capitalize;
-                display: flex;
+            justify-content: center;
+            gap: 20px;
+            .btn {
+                padding: 10px 16px;
+                border-radius: 8px;
+                background-color: $BG-color;
+                border: 1px solid $borders-gray;
+                &.active,
+                &:hover {
+                    background-color: #fff;
+                    border: 1px solid #1D2939;
+                }
             }
-        }
-        &::before {
-            position: absolute;
-            content:'';
-            width: 100%;
-            height: 1px;
-            background-color: $light-gray;
-            top: 50%;
-            transform: translateY(-50%);
         }
     }
     .post {
@@ -77,9 +80,7 @@
             }
         }
         .more,
-        .title,
-        .text,
-        .roles {
+        .title {
             position: absolute;
             display: flex;
         }
@@ -89,7 +90,6 @@
             -webkit-box-orient: vertical;
         }
         .ul {
-            position: absolute;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -99,6 +99,9 @@
             position: absolute;
             color: $primary-color;
             cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
         }
         .details {
             position: absolute;
@@ -186,6 +189,10 @@
             .image {
                 width: 50px;
             }
+            .loggedOutIcon {
+                height: 50px;
+                width: 50px;
+            }
             .input {
                 width: 92%;
                 height: 50px;
@@ -195,14 +202,15 @@
         .explore {
             height: 60px;
             .filterBtn {
-                width: 90px;
-                height: 40px;
-                padding:  0 10px;
+                display: none;
+            }
+            .ul {
+                display: none;
             }
         }
         .post {
             width: 100%;
-            height: 440px;
+            padding: 120px 20px 140px 20px;
             .hashTags {
                 top: 20px;
                 left: 20px;
@@ -227,24 +235,38 @@
                 left: 20px;
             }
             .text {
-                top: 105px;
-                left: 20px;
-                padding-right: 20px;
                 height: 120px;
                 display: -webkit-box;
                 overflow: hidden;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 5;
             }
-            .roles {
-                top: 230px;
-                left: 20px;
+            .roles{
+                margin-top: 10px;
             }
             .ul {
                 width: calc(100% - 65px);
-                top: 260px;
-                left: 35px;
+                margin-left: 20px;
                 gap: 0px 20px;
+                .li {
+                    align-items: center;
+                    gap: 40px;
+                    .p {
+                        max-width: 260px;
+                    }
+                    .span {
+                        display: none;
+                        width: 70px;
+                    }
+                    .join {
+                        cursor: pointer;
+                        color: $primary-color;
+                        width: 80px;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
             }
             .seeMore {
                 right: 20px;
@@ -271,6 +293,26 @@
             .share {
                 bottom: 20px;
                 right: 20px;
+            }
+            &.showen {
+                .text {
+                    height: fit-content;
+                    display: block;
+                }
+                .ul {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 0px;
+                    .li {
+                        display: flex;
+                        .p {
+                            min-width: 180px;
+                        }
+                        .span {
+                            display: block;
+                        }
+                    }
+                }
             }
         }
     }
@@ -330,6 +372,10 @@
             .image {
                 width: 40px;
             }
+            .loggedOutIcon {
+                width: 40px;
+                height: 40px;
+            }
             .input {
                 width: 90%;
                 height: 40px;
@@ -339,14 +385,15 @@
         .explore {
             height: 40px;
             .filterBtn {
-                width: 90px;
-                height: 40px;
-                padding:  0 10px;
+                display: none;
+            }
+            .ul {
+                display: none;
             }
         }
         .post {
             width: 100%;
-            height: 480px;
+            padding: 100px 20px 150px 20px;
             .hashTags {
                 top: 15px;
                 left: 15px;
@@ -371,24 +418,38 @@
                 left: 15px;
             }
             .text {
-                top: 90px;
-                left: 15px;
                 height: 190px;
                 display: -webkit-box;
                 overflow: hidden;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 8;
-                padding-right: 15px;
             }
             .roles {
-                top: 290px;
-                left: 15px;
+                margin-top: 10px;
             }
             .ul {
                 width: calc(100% - 65px);
-                top: 320px;
-                left: 30px;
-                gap: 0px 20px;
+                margin-left: 20px;
+                gap: 10px 20px;
+                .li {
+                    align-items: center;
+                    gap: 40px;
+                    .p {
+                        max-width: 260px;
+                    }
+                    .span {
+                        display: none;
+                        width: 70px;
+                    }
+                    .join {
+                        cursor: pointer;
+                        color: $primary-color;
+                        width: 80px;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
             }
             .seeMore {
                 right: 15px;
@@ -415,6 +476,26 @@
             .share {
                 bottom: 15px;
                 right: 20px;
+            }
+            &.showen {
+                .text {
+                    height: fit-content;
+                    display: block;
+                }
+                .ul {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 0px;
+                    .li {
+                        display: flex;
+                        .p {
+                            min-width: 180px;
+                        }
+                        .span {
+                            display: block;
+                        }
+                    }
+                }
             }
         }
     }
@@ -474,6 +555,10 @@
             .image {
                 width: 40px;
             }
+            .loggedOutIcon {
+                width: 40px;
+                height: 40px;
+            }
             .input {
                 width: 90%;
                 height: 40px;
@@ -483,14 +568,15 @@
         .explore {
             height: 40px;
             .filterBtn {
-                width: 90px;
-                height: 40px;
-                padding:  0 10px;
+                display: none;
+            }
+            .ul {
+                display: none;
             }
         }
         .post {
             width: 100%;
-            height: 440px;
+            padding: 90px 15px 140px;
             .hashTags {
                 top: 15px;
                 left: 15px;
@@ -522,17 +608,52 @@
                 overflow: hidden;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 8;
-                padding-right: 15px;
             }
             .roles {
-                top: 270px;
-                left: 15px;
+                margin-top: 10px;
             }
             .ul {
                 width: calc(100% - 65px);
-                top: 290px;
-                left: 30px;
-                gap: 0 20px;
+                gap: 10px 20px;
+                margin-left: 20px;
+                .li {
+                    gap: 20px;
+                    .p {
+                        max-width: 260px;
+                    }
+                    .span {
+                        display: none;
+                        width: 70px;
+                    }
+                    .join {
+                        cursor: pointer;
+                        color: $primary-color;
+                        width: 80px;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .text {
+                    height: fit-content;
+                    display: block;
+                }
+                .ul {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 0;
+                    .li {
+                        display: flex;
+                        .p {
+                            min-width: 180px;
+                        }
+                        .span {
+                            display: block;
+                        }
+                    }
+                }
             }
             .seeMore {
                 right: 15px;
@@ -577,6 +698,10 @@
             .image {
                 width: 40px;
             }
+            .loggedOutIcon {
+                width: 40px;
+                height: 40px;
+            }
             .input {
                 width: 90%;
                 height: 40px;
@@ -584,16 +709,62 @@
             }
         }
         .explore {
+            position: relative;
             height: 40px;
             .filterBtn {
-                width: 90px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 120px;
                 height: 40px;
-                padding:  0 10px;
+                gap: 10px;
+                .icon {
+                    display: flex;
+                }
+            }
+            .ul {
+                position: absolute;
+                z-index: 10;
+                top: 40px;
+                right: 0;
+                background-color: #fff;
+                width: 160px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px #0000005e;
+                display: none;
+                &.showen {
+                    display: block;
+                }
+                li {
+                    padding: 6px 10px;
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    .span {
+                        display: none;
+                    }
+                    &.active {
+                        background-color: #F9FAFB;
+                        span {
+                            display: flex;
+                            color: $primary-color;
+                        }
+                    }
+                    &:hover {
+                        background-color: #F9FAFB;
+                    }
+                }
+            }
+            .btns {
+                display: none;
             }
         }
         .post {
             width: 100%;
-            height: 420px;
+            padding: 100px 15px 120px 15px;
             .hashTags {
                 top: 15px;
                 left: 15px;
@@ -625,17 +796,52 @@
                 overflow: hidden;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 8;
-                padding-right: 15px;
             }
             .roles {
-                top: 260px;
-                left: 15px;
+                margin-top: 15px;
             }
             .ul {
                 width: calc(100% - 65px);
-                top: 280px;
-                left: 30px;
-                gap: 0 20px;
+                margin-left: 15px;
+                gap: 10px 20px;
+                .li {
+                    gap: 20px;
+                    .p {
+                        max-width: 260px;
+                    }
+                    .span {
+                        display: none;
+                        width: 70px;
+                    }
+                    .join {
+                        cursor: pointer;
+                        color: $primary-color;
+                        width: 80px;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .text {
+                    height: fit-content;
+                    display: block;
+                }
+                .ul {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 0;
+                    .li {
+                        display: flex;
+                        .p {
+                            min-width: 180px;
+                        }
+                        .span {
+                            display: block;
+                        }
+                    }
+                }
             }
             .seeMore {
                 right: 15px;
@@ -680,6 +886,10 @@
             .image {
                 width: 40px;
             }
+            .loggedOutIcon {
+                width: 40px;
+                height: 40px;
+            }
             .input {
                 width: 90%;
                 height: 40px;
@@ -689,14 +899,60 @@
         .explore {
             height: 40px;
             .filterBtn {
-                width: 90px;
+                width: 100px;
                 height: 40px;
                 padding:  0 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                .icon {
+                    display: flex;
+                }
+            }
+            .ul {
+                position: absolute;
+                z-index: 10;
+                top: 40px;
+                right: 0;
+                background-color: #fff;
+                width: 160px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px #0000005e;
+                display: none;
+                &.showen {
+                    display: block;
+                }
+                li {
+                    padding: 6px 10px;
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    .span {
+                        display: none;
+                    }
+                    &.active {
+                        background-color: #F9FAFB;
+                        span {
+                            display: flex;
+                            color: $primary-color;
+                        }
+                    }
+                    &:hover {
+                        background-color: #F9FAFB;
+                    }
+                }
+            }
+            .btns {
+                display: none;
             }
         }
         .post {
             width: 100%;
-            height: 430px;
+            padding: 90px 15px 120px 15px;
             .hashTags {
                 top: 15px;
                 left: 15px;
@@ -728,17 +984,52 @@
                 overflow: hidden;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 10;
-                padding-right: 15px;
             }
             .roles {
-                top: 280px;
-                left: 15px;
+                margin-top: 15px;
             }
             .ul {
                 width: calc(100% - 65px);
-                top: 300px;
-                left: 30px;
+                margin-left: 15px;
                 gap: 0 15px;
+                .li {
+                    gap: 10px;
+                    .p {
+                        max-width: 260px;
+                    }
+                    .span {
+                        display: none;
+                        width: 60px;
+                    }
+                    .join {
+                        cursor: pointer;
+                        color: $primary-color;
+                        width: 60px;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .text {
+                    height: fit-content;
+                    display: block;
+                }
+                .ul {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 0;
+                    .li {
+                        display: flex;
+                        .p {
+                            min-width: 140px;
+                        }
+                        .span {
+                            display: block;
+                        }
+                    }
+                }
             }
             .seeMore {
                 right: 15px;
@@ -783,6 +1074,10 @@
             .image {
                 width: 40px;
             }
+            .loggedOutIcon {
+                width: 40px;
+                height: 40px;
+            }
             .input {
                 width: 90%;
                 height: 40px;
@@ -795,11 +1090,57 @@
                 width: 90px;
                 height: 40px;
                 padding:  0 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                .icon {
+                    display: flex;
+                }
+            }
+            .ul {
+                position: absolute;
+                z-index: 10;
+                top: 40px;
+                right: 0;
+                background-color: #fff;
+                width: 130px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px #0000005e;
+                display: none;
+                &.showen {
+                    display: block;
+                }
+                li {
+                    padding: 6px 10px;
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    .span {
+                        display: none;
+                    }
+                    &.active {
+                        background-color: #F9FAFB;
+                        span {
+                            display: flex;
+                            color: $primary-color;
+                        }
+                    }
+                    &:hover {
+                        background-color: #F9FAFB;
+                    }
+                }
+            }
+            .btns {
+                display: none;
             }
         }
         .post {
             width: 100%;
-            height: 430px;
+            padding: 90px 15px 120px 15px;
             .hashTags {
                 top: 15px;
                 left: 15px;
@@ -831,17 +1172,52 @@
                 overflow: hidden;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 10;
-                padding-right: 15px;
             }
             .roles {
-                top: 280px;
-                left: 15px;
+                margin-top: 15px;
             }
             .ul {
                 width: calc(100% - 65px);
-                top: 300px;
-                left: 30px;
+                margin-left: 15px;
                 gap: 0 15px;
+                .li {
+                    gap: 5px;
+                    .p {
+                        max-width: 260px;
+                    }
+                    .span {
+                        display: none;
+                        width: 50px;
+                    }
+                    .join {
+                        cursor: pointer;
+                        color: $primary-color;
+                        width: 60px;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            &.showen {
+                .text {
+                    height: fit-content;
+                    display: block;
+                }
+                .ul {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 0;
+                    .li {
+                        display: flex;
+                        .p {
+                            min-width: 110px;
+                        }
+                        .span {
+                            display: block;
+                        }
+                    }
+                }
             }
             .seeMore {
                 right: 15px;

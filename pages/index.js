@@ -40,25 +40,25 @@ export default function Home() {
                     <li className={styles.li}>
                       <Link to='/' className={`${styles.link} ${choosen === 'ideapool' ? styles.active:''}`} onClick={()=> setChoosen('ideapool')}>
                         <span className={`${styles.span} large-fs light-gray`}>{TiLightbulb({})}</span>
-                        <span className={`${styles.span} medium-fs normal light-gray`}>Ideapool</span>
+                        <span className={`${styles.text}  medium-fs normal light-gray`}>Ideapool</span>
                       </Link>
                     </li>
                     <li className={styles.li}>
                       <Link to='/connections' className={`${styles.link} ${choosen === 'connections' ? styles.active:''}`} onClick={()=> setChoosen('connections')}>
                         <span className={`${styles.span} large-fs light-gray`} >{FiUsers({})}</span>
-                        <span className={`${styles.span} medium-fs normal light-gray`} >Connections</span>
+                        <span className={`${styles.text} medium-fs normal light-gray`} >Connections</span>
                       </Link>
                     </li>
                     <li className={styles.li}>
                       <Link to='/products' className={`${styles.link} ${choosen === 'products' ? styles.active:''}`} onClick={()=> setChoosen('products')}>
                         <span className={`${styles.span} large-fs light-gray`}>{RxDashboard({})}</span>
-                        <span className={`${styles.span} medium-fs normal light-gray`}>Products</span>
+                        <span className={`${styles.text} medium-fs normal light-gray`}>Products</span>
                       </Link>
                     </li>
                     <li className={styles.li}>
                       <Link to='/marketplace' className={`${styles.link} ${choosen === 'marketplace' ? styles.active:''}`} onClick={()=> setChoosen('marketplace')}>
                         <span className={`${styles.span} large-fs light-gray`}>{FiShoppingCart({})}</span>
-                        <span className={`${styles.span} medium-fs normal light-gray`}>Marketplace</span>
+                        <span className={`${styles.text} medium-fs normal light-gray`}>Marketplace</span>
                       </Link>
                     </li>
                   </ul>
