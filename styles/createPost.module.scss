@@ -20,6 +20,13 @@
         border-radius: 8px;
         box-shadow: 5px 5px 5px #00000040;
         overflow-x: hidden;
+        max-height: calc(100vh - 100px);
+        overflow-y: scroll;
+        -ms-overflow-style: none; 
+        scrollbar-width: none;  
+        &::-webkit-scrollbar {
+            display: none;
+        }
         .h2 {
             position: absolute;
         }
@@ -77,6 +84,38 @@
                 .label,
                 .p {
                     position: absolute;
+                }
+            }
+            .HireReqP {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .HireReqLabel {
+                    text-align: left;
+                }
+            }
+            .HireInputs {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .HireInput {
+                    border-radius: 8px;
+                    border: 2px solid $borders-gray;
+                    resize: vertical;
+                }
+            }
+            .addIcon {
+                color: $primary-color;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 5px;
+                .icon {
+                    cursor: pointer;
+                    color: $primary-color;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
             .btns {
@@ -157,18 +196,17 @@
                 .linksInput {
                     bottom: 0px;
                     left: 0;
-                    width: 340px;
+                    width: calc(50% - 10px);
                 }
                 .imageLabel {
                     top: 0;
-                    left: 360px;
+                    left: calc(50% + 10px);
                 }
                 .upload {
                     bottom: 0;
-                    left: 360px;
                     width: 120px;
                     height: 47px;
-                    
+                    left: calc(50% + 10px);
                 }
             }
             .checkBoxes {
@@ -188,6 +226,24 @@
                     top: 18px;
                     left: 20px;
                 }   
+            }
+            .HireReqP {
+                margin: 20px 0 0 0;
+                .HireReqLabel {
+                    width: calc(50% - 10px);
+                }
+            }
+            .HireInputs {
+                .HireInput {
+                    padding: 10px 12px;
+                    margin: 5px 0 10px 0;
+                    width: calc(50% - 10px);
+                }
+            }
+            .addIcon {
+                .icon {
+                    height: 20px;
+                }
             }
             .btns {
                 margin-top: 30px;
@@ -282,6 +338,19 @@
                     left: 20px;
                 }   
             }
+            .HireReqP {
+                margin: 10px 0 0 0;
+                .HireReqLabel {
+                    width: calc(50% - 10px);
+                }
+            }
+            .HireInputs {
+                .HireInput {
+                    padding: 10px 12px;
+                    margin: 5px 0 10px 0;
+                    width: calc(50% - 10px);
+                }
+            }
             .btns {
                 margin-top: 30px;
                 .cancelBtn,
@@ -374,6 +443,19 @@
                     left: 20px;
                 }   
             }
+            .HireReqP {
+                margin: 10px 0 0 0;
+                .HireReqLabel {
+                    width: calc(50% - 10px);
+                }
+            }
+            .HireInputs {
+                .HireInput {
+                    padding: 6px 8px;
+                    margin: 2px 0 10px 0;
+                    width: calc(50% - 10px);
+                }
+            }
             .btns {
                 margin-top: 30px;
                 .cancelBtn,
@@ -465,6 +547,19 @@
                     top: 18px;
                     left: 20px;
                 }   
+            }
+            .HireReqP {
+                margin: 10px 0 0 0;
+                .HireReqLabel {
+                    width: calc(50% - 10px);
+                }
+            }
+            .HireInputs {
+                .HireInput {
+                    padding: 2px 4px;
+                    margin: 2px 0 10px 0;
+                    width: calc(50% - 10px);
+                }
             }
             .btns {
                 margin-top: 40px;
@@ -559,6 +654,19 @@
                     top: 18px;
                     left: 20px;
                 }   
+            }
+            .HireReqP {
+                margin: 10px 0 0 0;
+                .HireReqLabel {
+                    width: calc(50% - 10px);
+                }
+            }
+            .HireInputs {
+                .HireInput {
+                    padding: 2px 4px;
+                    margin: 2px 0 10px 0;
+                    width: calc(50% - 10px);
+                }
             }
             .btns {
                 margin-top: 40px;
