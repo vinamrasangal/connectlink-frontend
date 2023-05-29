@@ -2,20 +2,19 @@ import React, { useEffect } from 'react';
 import styles from '../styles/Account.module.scss';
 import Logo from '@/nestedComponents/Logo';
 import Login from '@/nestedComponents/Login';
-import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import { auth } from '@/config/firebaseConfig';
 
 const login = () => {
-    const user = useSelector(state => state.user);
     const router = useRouter();
     useEffect(()=>{
-        if(user.isLoggedIN){
+        if(auth.currentUser){
             router.push('/')
         }
-    },[user.isLoggedIN])
+    },[])
     return (
         <>
-            {!user.isLoggedIN && 
+            {!auth.currentUser && 
                 <section className={styles.account}>
                     <aside className={styles.logo}>
                         <Logo styles={{s:{width:220,height:40,FS:28},m:{width:300,height:70,FS:38},l:{width:420,height:80,FS:54}}}/>

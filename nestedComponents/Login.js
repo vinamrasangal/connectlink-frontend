@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styles from '../styles/Account.module.scss';
 import { useSelector ,useDispatch } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
-import { userAction } from '@/redux/User';
 import { signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider , signInWithPopup  } from 'firebase/auth';
 import { auth } from '@/config/firebaseConfig';
 import { RxEyeOpen,RxEyeClosed } from 'react-icons/rx';
@@ -33,7 +32,7 @@ const Login = () => {
             setLoading(true)
             signInWithEmailAndPassword(auth,loginData.email,loginData.password)
             .then((user)=>{
-                dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:user}));
+                // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:user}));
                 dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
             })
             .catch((err)=> {
@@ -49,7 +48,7 @@ const Login = () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth,provider)
         .then((result)=>{
-            dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
+            // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
             dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
         })
         .catch((err)=> {
@@ -61,7 +60,7 @@ const Login = () => {
         const provider = new FacebookAuthProvider('apple.com');
         signInWithPopup(auth,provider)
         .then((result)=>{
-            dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
+            // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
             dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
         })
         .catch((err)=> {
@@ -73,7 +72,7 @@ const Login = () => {
         const provider = new OAuthProvider('apple.com');
         signInWithPopup(auth,provider)
         .then((result)=>{
-            dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
+            // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
             dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
         })
         .catch((err)=> {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/EditProfile.module.scss';
 import DropImage from '../nestedComponents/DropImage';
-import { FiUploadCloud } from 'react-icons/fi';
+import { FiUploadCloud,FiUser } from 'react-icons/fi';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsToggleOn,BsToggleOff } from 'react-icons/bs';
 import allCountries from '@/suggestions/allCountries';
@@ -9,7 +9,7 @@ import timeZones from '@/suggestions/timeZones';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../nestedComponents/Loading';
 import { doc, getDoc,updateDoc } from 'firebase/firestore';
-import { db } from '@/config/firebaseConfig';
+import { auth, db } from '@/config/firebaseConfig';
 import { storage } from '@/config/firebaseConfig';
 import { ref,getDownloadURL, uploadBytes } from 'firebase/storage';
 import { alertActions } from '@/redux/AlertController';
@@ -23,8 +23,7 @@ const EditProfile = () => {
     const [personalInfo,setPersonalInfo] = useState({Fname:'',Lname:'',email:''});
     const [image,setImage] = useState(null);
     const [imageUrl,setImageUrl] = useState(null);
-    const user = useSelector(state => state.user.userData);
-    const personalImageRef = ref(storage,`images/personalImage_${user.uid}`);
+    const personalImageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
     const [isFetching,setIsFetching] = useState(true);
     const [profile,setProfile] = useState({isAvailable:false,username:'',website:'',bio:'',country:'',timezone:''});
 
@@ -54,12 +53,11 @@ const EditProfile = () => {
             if(image.length > 0){
                 uploadBytes(personalImageRef,image[0]);
             }
-            const ref = doc(db,'userData',user.uid);
+            const ref = doc(db,'userData',auth.currentUser.uid);
             updateDoc(ref,{firstName:personalInfo.Fname , lastName: personalInfo.Lname, email:personalInfo.email})
             .then(()=> {
                 setUserInfo({FName:personalInfo.Fname,LName:personalInfo.Lname,email:personalInfo.email,userImage:imageUrl})
                 dispatch(alertActions.showAlert({msg:'profile updated successfully',type:'success'}))
-
             })
             .catch((err)=> dispatch(alertActions.showAlert({msg:err.message,type:'error'})))
         }
@@ -68,7 +66,7 @@ const EditProfile = () => {
 
     function handleSaveProfile(e){
         e.preventDefault();
-        const ref = doc(db,'userData',user.uid);
+        const ref = doc(db,'userData',auth.currentUser.uid);
         const { isAvailable,username,website,bio,country,timezone } = profile;
             updateDoc(ref,{
                 isAvailable,
@@ -83,8 +81,8 @@ const EditProfile = () => {
     }
 
     useEffect(()=>{
-        if(user.uid){
-            const docRef = doc(db,'userData', user.uid);
+        if(auth.currentUser.uid){
+            const docRef = doc(db,'userData', auth.currentUser.uid);
             getDoc(docRef)
             .then(res => {
                 setIsFetching(false);
@@ -98,26 +96,34 @@ const EditProfile = () => {
                     country:country || '',
                     timezone:timezone || ''
                 })
-
                 return res;
             }).then(res => {
                 const {firstName,lastName,email} = res.data();
-                const storageRef = ref(storage,`images/personalImage_${user.uid}`);
+                const storageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
                 getDownloadURL(storageRef)
                 .then(url => {
                     setImageUrl(url)
-                    setUserInfo({FName : firstName ,LName: lastName ,email:email,userImage:url});
+                    setUserInfo({FName : firstName ,LName: lastName ,email:email,userImage:url})
                 })
-
+                .catch(()=>{
+                    setImageUrl('')
+                    setUserInfo({FName : firstName ,LName: lastName ,email:email,userImage:''})
+                })
             })
         }
-    },[user])
+    },[])
 
     if(isFetching) return <section className={styles.loadingContainer}><Loading /></section>
     return (
         <section className={`${styles.container} container`}>
             <div className={styles.BgImage} style={{backgroundImage: 'url(/cover-image.jpg)'}}>
-                <img className={styles.personalImage} src={userInfo.userImage} alt="" />
+                {userInfo.userImage !== '' ?
+                    <img className={styles.personalImage} src={userInfo.userImage} alt="" />
+                :
+                    <span className={`${styles.loggedOutIcon} heading-fs dark-gray`}>
+                        {FiUser({})}
+                    </span>
+                }
                 <h2 className={`${styles.name} dark-gray normal x-large-fs`}>{userInfo.FName} {userInfo.LName}</h2>
                 <p className={`${styles.email} small-fs light light-gray`}>{userInfo.email}</p>
                 <button className={`${styles.shareBtn} S-BTN`}>Share</button>
@@ -157,7 +163,13 @@ const EditProfile = () => {
                         onChange={(e)=>handleInfoChange(e)}
                         className={`${styles.email} medium-fs light dark-gray`}
                     />
-                    <img className={styles.personalImage} src={imageUrl} alt="" />
+                    {imageUrl !== '' ?
+                        <img className={styles.personalImage} src={imageUrl} alt="" />
+                    :
+                        <span className={`${styles.loggedOutIcon} heading2-fs dark-gray`}>
+                            {FiUser({})}
+                        </span>
+                    }
                     <DropImage setAcceptedFile={setImage} setUrl={setImageUrl}>
                         <div className={styles.selectImage}>
                             <span className={styles.icon}>{FiUploadCloud({})}</span>

@@ -5,7 +5,7 @@ import { CiSearch } from 'react-icons/ci';
 import { BiHomeAlt } from 'react-icons/bi';
 import { FiBarChart2,FiUser,FiUsers,FiMessageSquare,FiLayers,FiHeadphones,FiSettings,FiLogOut } from 'react-icons/fi';
 import { IoPricetagOutline } from 'react-icons/io5';
-import { signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,6 @@ const SideBar = () => {
     const dispatch = useDispatch();
     const [imageUrl,setImageUrl] = useState(null);
     const [name,setName] = useState('')
-    const user = useSelector(state => state.user);
     const currentPage = useSelector(state => state.currentPage.page)
     
 
@@ -35,26 +34,32 @@ const SideBar = () => {
     }
 
 
+
     useEffect(()=>{
-        if(user.isLoggedIN){
-            if(user.userData.uid) {
-                const docRef = doc(db,'userData', user.userData.uid);
+        let removeAuthChange = onAuthStateChanged(auth,(response)=>{
+            if(response){
+                const docRef = doc(db,'userData', response.uid);
                 getDoc(docRef)
                 .then(res => {
                     const {firstName,lastName} = res.data();
                     setName(`${firstName} ${lastName}`)
-                    const storageRef = ref(storage,`images/personalImage_${user.userData.uid}`);
+                    const storageRef = ref(storage,`images/personalImage_${response.uid}`);
                     getDownloadURL(storageRef)
                     .then(url => {
                         setImageUrl(url)
                     })
                     .catch(()=>{
-                        
+                        setImageUrl('')
                     })
                 })
+            }else {
+                setImageUrl('')
+                setName(``)
             }
-        }
-    },[user.isLoggedIN])
+        })
+
+        return () => removeAuthChange
+    },[])
 
     return (
         <>
@@ -154,9 +159,15 @@ const SideBar = () => {
                         </li >
                     </Link>
                 </ul>
-                {user.isLoggedIN?
+                {auth?.currentUser?
                     <div className={styles.account}>
-                        <img src={imageUrl} alt="" className={styles.profileImage}/>
+                        {imageUrl !== '' ?
+                            <img src={imageUrl} alt="" className={styles.profileImage}/>
+                            :
+                            <span className={`${styles.loggedOutIcon} x-large-fs dark-gray`}>
+                                {FiUser({})}
+                            </span>
+                        }
                         <p className={`${styles.name} small-fs normal dark-gray`}>{name}</p>
                         {auth.currentUser?
                             <span className={`${styles.email} small-fs light light-gray`}>{auth.currentUser.email}</span>

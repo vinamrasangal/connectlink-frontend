@@ -2,10 +2,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { BiErrorCircle } from 'react-icons/bi';
 import { VscError,VscPass } from 'react-icons/vsc';
 import { alertActions } from '@/redux/AlertController';
-import { useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/config/firebaseConfig';
-import { userAction } from '@/redux/User';
+
 
 
 const Alert = () => {
@@ -18,17 +15,6 @@ const Alert = () => {
         }, 3000);
     }
 
-    useEffect(()=>{
-        const removeStateChanged = onAuthStateChanged(auth,(res)=>{
-        if(res === null) {
-            dispatch(userAction.setUser({isLoggedIN:false,userData:null,rememberMe:false}))
-        }else {
-            dispatch(userAction.setUser({isLoggedIN:true,userData:auth.currentUser,rememberMe:true}))
-        }
-        })
-
-        return () => removeStateChanged();
-    },[])
     return (
         <article className={`alert ${alert.type} ${alert.showen?'showen' :''}`}>
             <p className='TXT-normal'>{alert.msg}</p>

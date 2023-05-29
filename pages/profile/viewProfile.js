@@ -8,28 +8,36 @@ import { doc,getDoc } from 'firebase/firestore';
 import { ref,getDownloadURL } from 'firebase/storage';
 import { useSelector } from 'react-redux';
 import Loading from '../../nestedComponents/Loading';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const ViewProfile = () => {
-    const user = useSelector(state => state.user.userData);
     const [data,setData] = useState({});
     const [isFetching,setIsFetching] = useState(true);
     const [imageUrl,setImageUrl] = useState('');
 
     useEffect(()=>{
-        if(user.uid){
-            const docRef = doc(db,'userData', user.uid);
-            getDoc(docRef)
-            .then(res => {
-                setData(res.data());
-                const storageRef = ref(storage,`images/personalImage_${user.uid}`);
-                getDownloadURL(storageRef)
-                .then(url => {
-                    setImageUrl(url);
-                    setIsFetching(false);
-                })
-            });
-        }
-    },[user])
+        let removeAuthChange = onAuthStateChanged(auth,(response)=>{
+            if(response.uid){
+                const docRef = doc(db,'userData', response.uid);
+                getDoc(docRef)
+                .then(res => {
+                    setData(res.data());
+                    const storageRef = ref(storage,`images/personalImage_${response.uid}`);
+                    getDownloadURL(storageRef)
+                    .then(url => {
+                        setImageUrl(url);
+                    })
+                    .catch(()=> setImageUrl(''))
+                    .finally(()=> setIsFetching(false))
+                });
+            }else {
+                setImageUrl('')
+                setData({})
+            }
+        })
+
+        return () => removeAuthChange
+    },[])
 
     if(isFetching) return <section className={styles.loadingContainer}><Loading /></section>
     return (

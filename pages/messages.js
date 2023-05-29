@@ -3,6 +3,7 @@ import styles from '../styles/Messages.module.scss';
 import Chat from '@/nestedComponents/Chat';
 import { useDispatch } from 'react-redux';
 import { currentPageAction } from '@/redux/CurrentPage';
+import { auth } from '@/config/firebaseConfig';
 
 const messages = () => {
     const [showenUsers,setShowenUsers] = useState('messages');
@@ -17,6 +18,7 @@ const messages = () => {
     useEffect(()=>{
         dispatch(currentPageAction.setPage({page:'messages'}))
     },[])
+    if(!auth.currentUser) return <></>
     return (
         <section className={`container ${styles.container}`}>
             <div className={`${styles.holder} ${isShowen && styles.showen}`}>

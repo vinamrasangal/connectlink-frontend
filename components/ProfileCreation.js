@@ -12,7 +12,7 @@ import { AiOutlineDelete,AiOutlineArrowRight,AiOutlineArrowLeft } from 'react-ic
 import { setDoc,doc } from 'firebase/firestore';
 import { db } from '@/config/firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
-import { userAction } from '@/redux/User';
+
 
 
 
@@ -176,14 +176,14 @@ const ProfileCreation = () => {
         }
     }
 
-    useEffect(()=>{
-        const removeStateChanged =onAuthStateChanged(auth,(res)=>{
-            if (res) {
-                dispatch(userAction.setUser({isLoggedIN:true,rememberMe:formData.rememberMe,userData:auth.currentUser}));
-            }
-        })
-        return () => removeStateChanged();
-    },[])
+    // useEffect(()=>{
+    //     const removeStateChanged =onAuthStateChanged(auth,(res)=>{
+    //         if (res) {
+    //             dispatch(userAction.setUser({isLoggedIN:true,rememberMe:formData.rememberMe,userData:auth.currentUser}));
+    //         }
+    //     })
+    //     return () => removeStateChanged();
+    // },[])
 
     return (
         <>

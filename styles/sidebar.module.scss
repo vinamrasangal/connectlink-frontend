@@ -47,12 +47,22 @@
         border-top: 2px solid  $normal-gray;
         .profileImage {
             position: absolute;
-            width: 40px;
             background-color: #fff;
             border-radius: 50%;
             top: 50%;
             left: 0;
             transform: translateY(-50%);
+        }
+        .loggedOutIcon {
+            position: absolute;
+            background-color: $borders-gray;
+            border-radius: 50%;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .name {
             position: absolute;
@@ -110,6 +120,10 @@
             .profileImage {
                 width: 40px;
             }
+            .loggedOutIcon {
+                width: 40px;
+                height: 40px;
+            }
             .name {
                 left: 50px;
             }
@@ -156,6 +170,10 @@
             width: 230px;
             .profileImage {
                 width: 30px;
+            }
+            .loggedOutIcon {
+                width: 30px;
+                height: 30px;
             }
             .name {
                 left: 40px;
@@ -231,6 +249,10 @@
             width: 230px;
             .profileImage {
                 width: 30px;
+            }
+            .loggedOutIcon {
+                width: 30px;
+                height: 30px;
             }
             .name {
                 left: 40px;
@@ -326,6 +348,10 @@
             .profileImage {
                 width: 30px;
             }
+            .loggedOutIcon {
+                width: 30px;
+                height: 30px;
+            }
             .name {
                 left: 40px;
             }
@@ -419,6 +445,10 @@
             width: 190px;
             .profileImage {
                 width: 25px;
+            }
+            .loggedOutIcon {
+                width: 25px;
+                height: 25px;
             }
             .name {
                 left: 30px;

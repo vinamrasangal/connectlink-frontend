@@ -8,8 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CreatePostActions } from '../redux/showCreatePost';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { storage } from '@/config/firebaseConfig';
+import { auth, storage } from '@/config/firebaseConfig';
 import ShareComponent from '@/nestedComponents/ShareComponent';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 const Ideapool = () => {
@@ -18,31 +19,32 @@ const Ideapool = () => {
     const [imageUrl,setImageUrl] = useState('')
     const [shareData,setShareData] = useState(
         {url:'',quote:'',hashtag:'',isShowen:false})
-    const user = useSelector(state => state.user)
     const dispatch = useDispatch();
     function handleClick(){
         dispatch(CreatePostActions.showCreatePost())
     }
     useEffect(()=>{
-        if(user.isLoggedIN){
-            if(user.userData.uid) {
-                const storageRef = ref(storage,`images/personalImage_${user.userData.uid}`);
+        onAuthStateChanged(auth,(res)=>{
+            if(res){
+                const storageRef = ref(storage,`images/personalImage_${res.uid}`);
                 getDownloadURL(storageRef)
                 .then(url => {
                     setImageUrl(url)
                 })
                 .catch(()=>{
-                    
+                    setImageUrl('')
                 })
+            }else {
+                setImageUrl('')
             }
-        }
-    },[user.isLoggedIN])
+        })
+    },[])
     return (
         <>
             <section className={styles.ideas}>
                 <h2 className={`${styles.shareIdea} large-fs semi-bold dark-gray`}>Share an idea</h2>
                 <div className={styles.createPost}>
-                    {user.isLoggedIN?
+                    {(auth?.currentUser && imageUrl !== '')?
                         <img className={styles.image} src={imageUrl} alt="" />
                     :
                         <span className={`${styles.loggedOutIcon} x-large-fs dark-gray`}>

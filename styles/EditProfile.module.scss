@@ -1,8 +1,4 @@
 @import './colors';
-// .loadingContainer {
-//     background-color: red;
-//     height: 100vh;
-// }
 .BgImage{
     position: relative;
     background-position: center;
@@ -14,6 +10,16 @@
         background-color: #fff;
         border: 2px solid #fff;
         box-shadow: 2px 5px 10px #00000048;
+    }
+    .loggedOutIcon {
+        position: absolute;
+        border-radius: 50%;
+        background-color: $borders-gray;
+        border: 2px solid #fff;
+        box-shadow: 2px 5px 10px #00000048;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .name {
         text-transform: capitalize;
@@ -81,6 +87,16 @@
             background-color: #fff;
             border: 2px solid #fff;
             box-shadow: 1px 1px 5px #00000048;
+        }
+        .loggedOutIcon {
+            position: absolute;
+            border-radius: 50%;
+            background-color: $borders-gray;
+            border: 2px solid #fff;
+            box-shadow: 1px 1px 5px #00000048;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .selectImage {
             position: absolute;
@@ -242,6 +258,12 @@
             height: 140px;
             left: 20px;
         }
+        .loggedOutIcon {
+            bottom: -60%;
+            height: 140px;
+            width: 140px;
+            left: 20px;
+        }
         .name {
             left: 170px;
         }
@@ -302,6 +324,12 @@
                 left: 20px;
                 top: 200px;
                 width: 65px;
+            }
+            .loggedOutIcon {
+                left: 20px;
+                top: 200px;
+                width: 65px;
+                height: 65px;
             }
             .selectImage {
                 top: 200px;
@@ -438,6 +466,12 @@
             left: 10px;
             bottom: -55%;
         }
+        .loggedOutIcon {
+            height: 100px;
+            width: 100px;
+            left: 10px;
+            bottom: -55%;
+        }
         .name {
             left: 120px;
         }
@@ -497,6 +531,12 @@
                 left: 10px;
                 top: 150px;
                 width: 55px;
+            }
+            .loggedOutIcon {
+                left: 10px;
+                top: 150px;
+                width: 55px;
+                height: 55px;
             }
             .selectImage {
                 top: 150px;
@@ -632,6 +672,12 @@
             left: 0px;
             bottom: -55%;
         }
+        .loggedOutIcon {
+            height: 80px;
+            width: 80px;
+            left: 0px;
+            bottom: -55%;
+        }
         .name {
             left: 90px;
         }
@@ -691,6 +737,12 @@
                 left: 10px;
                 top: 150px;
                 width: 55px;
+            }
+            .loggedOutIcon {
+                left: 10px;
+                top: 150px;
+                width: 55px;
+                height: 55px;
             }
             .selectImage {
                 top: 150px;
@@ -826,6 +878,12 @@
             left: 0px;
             bottom: -45%;
         }
+        .loggedOutIcon {
+            height: 60px;
+            width: 60px;
+            left: 0px;
+            bottom: -45%;
+        }
         .name {
             left: 65px;
         }
@@ -888,6 +946,13 @@
                 transform: translateX(-50%);
                 top: 200px;
                 width: 60px;
+            }
+            .loggedOutIcon {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 200px;
+                width: 60px;
+                height: 60px;
             }
             .selectImage {
                 top: 270px;
