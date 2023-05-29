@@ -9,11 +9,15 @@ import { CreatePostActions } from '../redux/showCreatePost';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { storage } from '@/config/firebaseConfig';
+import ShareComponent from '@/nestedComponents/ShareComponent';
+
 
 const Ideapool = () => {
     const [isSortShowen,setIsSortShowen] = useState(false);
     const [isPostShowen,setIsPostShowen] = useState(false);
     const [imageUrl,setImageUrl] = useState('')
+    const [shareData,setShareData] = useState(
+        {url:'',quote:'',hashtag:'',isShowen:false})
     const user = useSelector(state => state.user)
     const dispatch = useDispatch();
     function handleClick(){
@@ -141,12 +145,20 @@ const Ideapool = () => {
                         <span className={`${styles.icon} x-large-fs dark-gray`}>{FiMessageCircle({})}</span>
                         <span className={`${styles.count} medium-fs light light-gray`}>20</span>
                     </button>
-                    <button className={styles.share}>
+                    <button className={styles.share} 
+                    onClick={()=>setShareData({url:'https://www.example.com',quote:'Dummy text!',hashtag:'#muo',isShowen:true})}>
                         <span className={`${styles.icon} x-large-fs dark-gray`}>{FiShare2({})}</span>
                         <span className={`${styles.count} medium-fs light light-gray`}>999</span>
                     </button>
                 </article>
             </section>
+            <ShareComponent 
+                url={shareData.url} 
+                quote={shareData.quote} 
+                hashtag={shareData.hashtag} 
+                isShowen={shareData.isShowen}
+                setShareData={setShareData}
+                />
             <section className={styles.rightSide}>
                 <article className={styles.interests}>
                     <h2 className={`${styles.h2} large-fs light normal-gray`}>Interests</h2>
