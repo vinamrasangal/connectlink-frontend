@@ -10,6 +10,7 @@ import SideBar from '@/components/SideBar';
 import ProfileCreation from '@/components/ProfileCreation';
 import { doc, onSnapshot } from 'firebase/firestore';
 import Loading from '@/nestedComponents/Loading';
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 
 export default function App({ Component, pageProps }) {
@@ -56,39 +57,41 @@ useEffect(()=>{
     }
 },[auth.currentUser,isFetching1]);
   return (
-    <Provider store={store}>
-      <Alert />
-      {isFetching1 || isFetching2 ?
-      <section className='loading-holder'>
-        <Loading />
-      </section>
-      :
-        <>
-          {userStatus.isLoggedIn ?
-              <>
-                {!userStatus.isEmailVerified?
-                    <Verification />
-                  :
-                  <>
-                  {isProfileCreated?
+    <GoogleOAuthProvider clientId='143187157687-me0h129maovoq0r7elmfmoa04v2hq8bl.apps.googleusercontent.com'>
+      <Provider store={store}>
+        <Alert />
+        {isFetching1 || isFetching2 ?
+        <section className='loading-holder'>
+          <Loading />
+        </section>
+        :
+          <>
+            {userStatus.isLoggedIn ?
+                <>
+                  {!userStatus.isEmailVerified?
+                      <Verification />
+                    :
                     <>
-                      <SideBar />
-                      <Component {...pageProps} />
+                    {isProfileCreated?
+                      <>
+                        <SideBar />
+                        <Component {...pageProps} />
+                      </>
+                    :
+                      <ProfileCreation />
+                    }
                     </>
-                  :
-                    <ProfileCreation />
                   }
-                  </>
-                }
-              </>
-            :
-              <>
-                <SideBar />
-                <Component {...pageProps} />
-              </>
-            }
-        </>
-      }
-    </Provider>
+                </>
+              :
+                <>
+                  <SideBar />
+                  <Component {...pageProps} />
+                </>
+              }
+          </>
+        }
+      </Provider>
+    </GoogleOAuthProvider>
     )
 }

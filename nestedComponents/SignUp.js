@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import styles from '../styles/Account.module.scss';
 import { useDispatch } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
-import { auth,db } from '@/config/firebaseConfig';
-import { createUserWithEmailAndPassword,updateProfile,setPersistence,browserSessionPersistence } from 'firebase/auth';
-import { doc,setDoc } from 'firebase/firestore';
 import { RxEyeOpen,RxEyeClosed } from 'react-icons/rx';
+import useSignup from '@/hooks/useSignup';
+import validator from 'validator';
 
 const SignUp = () => {
     const [signUpData,setSignUpData] = useState({name:'',email:'',category:'',password:'',confirmPassword:'',agreement:false});
-    const [loading,setLoading] = useState(false);
     const [showPassword,setShowPassword] = useState(false);
     const [showConfirmPassword,setShowConfirmPassword] = useState(false);
     const dispatch = useDispatch();
+    const {loading,signup} = useSignup()
 
     function handleChange(e){
         const name = e.target.name
@@ -30,7 +29,7 @@ const SignUp = () => {
             dispatch(alertActions.showAlert({msg:'make sure to fill up all the inputs',showen:true,type:'warrning'}));
         }else if(!agreement){
             dispatch(alertActions.showAlert({msg:'make sure to agree the platform conditions',showen:true,type:'warrning'}));
-        }else if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+        }else if(!validator.isEmail(email)){
             dispatch(alertActions.showAlert({msg:'please use a valid email address',showen:true,type:'error'}));
         }else if(!/^(?=.{8,})/.test(password)){
             dispatch(alertActions.showAlert({msg:'the password should be at least 8 characters',showen:true,type:'error'}));
@@ -44,23 +43,8 @@ const SignUp = () => {
             dispatch(alertActions.showAlert({msg:'make sure to match the password',showen:true,type:'error'}));
         }
         else {
-            setLoading(true);
-            setPersistence(auth,browserSessionPersistence)
-            .then(async ()=>{
-                try {
-                    const res = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
-                    updateProfile(res.user, { displayName: signUpData.name });
-                    const Ref = doc(db, 'userData', res.user.uid);
-                    setDoc(Ref, { category: signUpData.category });
-                    dispatch(alertActions.showAlert({ msg: 'created account successfully', showen: true, type: 'success' }));
-                } catch (err) {
-                    dispatch(alertActions.showAlert({ msg: err.message, showen: true, type: 'error' }));
-                }
-            })
-            .catch(err => dispatch(alertActions.showAlert({ msg: err.message, showen: true, type: 'error' })))
-            .finally(()=> setLoading(false))
+            signup(signUpData.name,signUpData.email,signUpData.password)
         }
-        
     }
     return (
         <article className={styles.signUp}>

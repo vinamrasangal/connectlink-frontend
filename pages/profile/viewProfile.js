@@ -16,27 +16,25 @@ const ViewProfile = () => {
     const [imageUrl,setImageUrl] = useState('');
 
     useEffect(()=>{
-        let removeAuthChange = onAuthStateChanged(auth,(response)=>{
-            if(response.uid){
-                const docRef = doc(db,'userData', response.uid);
-                getDoc(docRef)
-                .then(res => {
-                    setData(res.data());
-                    const storageRef = ref(storage,`images/personalImage_${response.uid}`);
-                    getDownloadURL(storageRef)
-                    .then(url => {
-                        setImageUrl(url);
-                    })
-                    .catch(()=> setImageUrl(''))
-                    .finally(()=> setIsFetching(false))
-                });
-            }else {
-                setImageUrl('')
-                setData({})
-            }
-        })
+        if(auth.currentUser){
+            const docRef = doc(db,'userData', auth.currentUser.uid);
+            getDoc(docRef)
+            .then(res => {
+                setData(res.data());
+                const storageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
+                getDownloadURL(storageRef)
+                .then(url => {
+                    setImageUrl(url);
+                })
+                .catch(()=> setImageUrl(''))
+                .finally(()=> setIsFetching(false))
+            });
+        }else {
+            setImageUrl('')
+            setData({})
+            setIsFetching(false)
+        }
 
-        return () => removeAuthChange
     },[])
 
     if(isFetching) return <section className={styles.loadingContainer}><Loading /></section>

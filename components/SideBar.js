@@ -5,61 +5,23 @@ import { CiSearch } from 'react-icons/ci';
 import { BiHomeAlt } from 'react-icons/bi';
 import { FiBarChart2,FiUser,FiUsers,FiMessageSquare,FiLayers,FiHeadphones,FiSettings,FiLogOut } from 'react-icons/fi';
 import { IoPricetagOutline } from 'react-icons/io5';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
-import { alertActions } from '@/redux/AlertController';
-import { auth } from '@/config/firebaseConfig';
-import { doc, onSnapshot,getDoc } from 'firebase/firestore';
-import { storage,db } from '@/config/firebaseConfig';
-import { ref,getDownloadURL } from 'firebase/storage';
+import useLogout from '@/hooks/useLogout';
 
 const SideBar = () => {
+    const user = useSelector(state => state.userController.user);
     const [active,setActive] = useState(false);
-    const dispatch = useDispatch();
     const [imageUrl,setImageUrl] = useState(null);
-    const [name,setName] = useState('')
-    const currentPage = useSelector(state => state.currentPage.page)
+    const currentPage = useSelector(state => state.currentPage.page);
+    const { logout } = useLogout()
     
 
     function handleSignOut(){
-        signOut(auth)
-        .then(()=>{
-            dispatch(alertActions.showAlert({msg:'logged out successfully',type:'success'}));
-        })
-        .catch((err)=>{
-            dispatch(alertActions.showAlert({msg:err.message,type:'error'}));
-        })
+        logout()
     }
 
-
-
-    useEffect(()=>{
-        let removeAuthChange = onAuthStateChanged(auth,(response)=>{
-            if(response){
-                const docRef = doc(db,'userData', response.uid);
-                getDoc(docRef)
-                .then(res => {
-                    const {firstName,lastName} = res.data();
-                    setName(`${firstName} ${lastName}`)
-                    const storageRef = ref(storage,`images/personalImage_${response.uid}`);
-                    getDownloadURL(storageRef)
-                    .then(url => {
-                        setImageUrl(url)
-                    })
-                    .catch(()=>{
-                        setImageUrl('')
-                    })
-                })
-            }else {
-                setImageUrl('')
-                setName(``)
-            }
-        })
-
-        return () => removeAuthChange
-    },[])
 
     return (
         <>
@@ -159,7 +121,7 @@ const SideBar = () => {
                         </li >
                     </Link>
                 </ul>
-                {auth?.currentUser?
+                {user?
                     <div className={styles.account}>
                         {imageUrl !== '' ?
                             <img src={imageUrl} alt="" className={styles.profileImage}/>
@@ -168,12 +130,13 @@ const SideBar = () => {
                                 {FiUser({})}
                             </span>
                         }
-                        <p className={`${styles.name} small-fs normal dark-gray`}>{name}</p>
-                        {auth.currentUser?
+                        <p className={`${styles.name} small-fs normal dark-gray`}>{user.username}</p>
+                        {/* {auth.currentUser?
                             <span className={`${styles.email} small-fs light light-gray`}>{auth.currentUser.email}</span>
                                 :
                             ''
-                        }
+                        } */}
+                        <span className={`${styles.email} small-fs light light-gray`}>{user.email}</span>
                         <button className={`${styles.logOut} large-fs light-gray`} onClick={handleSignOut}>{FiLogOut({})}</button>
                     </div>
                 :

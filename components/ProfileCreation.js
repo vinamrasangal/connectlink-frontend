@@ -51,6 +51,8 @@ const ProfileCreation = () => {
         volunteer:[],
         agreement:false
     });
+    // console.log(formData)
+    // console.log(personalImage[0])
     function handleShowAddHistory(e,type) {
         e.preventDefault();
         if(showenAddHistory === type ) {

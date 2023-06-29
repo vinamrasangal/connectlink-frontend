@@ -3,15 +3,17 @@ import Image from 'next/image';
 import styles from '../styles/Account.module.scss';
 import { useSelector ,useDispatch } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
-import { signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider , signInWithPopup  } from 'firebase/auth';
-import { auth } from '@/config/firebaseConfig';
 import { RxEyeOpen,RxEyeClosed } from 'react-icons/rx';
 import Link from 'next/link';
+import useGoogleAccount from '@/hooks/useGoogleAccount';
+import useLogin from '@/hooks/useLogin';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
+    const {loading,login } = useLogin()
+    const { continueWithGoogle } = useGoogleAccount()
     const [showPassword,setShowPassword] = useState(false);
     const [loginData,setLoginData] = useState({email:'',password:'',rememberMe:false});
-    const [loading,setLoading] = useState(false);
     const dispatch = useDispatch();
 
     function handleLoginChange(e){
@@ -29,55 +31,23 @@ const Login = () => {
         if(loginData.email === '' || loginData.password === ''){
             dispatch(alertActions.showAlert({msg:'make sure to fill up the inputs',showen:true,type:'warrning'}));
         }else {
-            setLoading(true)
-            signInWithEmailAndPassword(auth,loginData.email,loginData.password)
-            .then((user)=>{
-                // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:user}));
-                dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
-            })
-            .catch((err)=> {
-                dispatch(alertActions.showAlert({msg:err.message,showen:true,type:'error'}));
-            })
-            .finally(()=>{
-                setLoading(false)
-            })
+            login(loginData.email,loginData.password,loginData.rememberMe);
         }
     }
 
-    function handleLoginWithGoogle(){
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth,provider)
-        .then((result)=>{
-            // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
-            dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
-        })
-        .catch((err)=> {
-            dispatch(alertActions.showAlert({msg:err.message,showen:true,type:'error'}));
-        })
-    }
+    const handleLoginWithGoogle = useGoogleLogin({
+        onSuccess: tokenResponse => {
+            continueWithGoogle(tokenResponse)
+        },
+        onError: res => dispatch(alertActions.showAlert({msg:res.error_description,type:'error',showen:true}))
+    })
 
     function handleLoginWithFacebook(){
-        const provider = new FacebookAuthProvider('apple.com');
-        signInWithPopup(auth,provider)
-        .then((result)=>{
-            // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
-            dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
-        })
-        .catch((err)=> {
-            dispatch(alertActions.showAlert({msg:err.message,showen:true,type:'error'}));
-        })
+        
     }
 
     function handleLoginWithApple(){
-        const provider = new OAuthProvider('apple.com');
-        signInWithPopup(auth,provider)
-        .then((result)=>{
-            // dispatch(userAction.setUser({isLoggedIN:true,rememberMe:loginData.rememberMe,userData:result.user}));
-            dispatch(alertActions.showAlert({msg:'logged in successfully',showen:true,type:'success'}));
-        })
-        .catch((err)=> {
-            dispatch(alertActions.showAlert({msg:err.message,showen:true,type:'error'}));
-        })
+        
     }
     return (
         <article className={styles.logIn}>
