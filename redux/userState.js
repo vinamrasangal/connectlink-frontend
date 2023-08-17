@@ -10,6 +10,7 @@ export const userController = createSlice({
                 email:action.payload.email,
                 token:action.payload.token
             }
+            
         },
         clearData(state,payload){
             state.user = null

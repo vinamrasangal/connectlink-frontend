@@ -10,7 +10,8 @@ import SideBar from '@/components/SideBar';
 import ProfileCreation from '@/components/ProfileCreation';
 import { doc, onSnapshot } from 'firebase/firestore';
 import Loading from '@/nestedComponents/Loading';
-import { GoogleOAuthProvider } from '@react-oauth/google'
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import {BrowserRouter as Router, Routes, Route , Link} from 'react-router-dom';
 
 
 export default function App({ Component, pageProps }) {
@@ -59,6 +60,7 @@ useEffect(()=>{
   return (
     <GoogleOAuthProvider clientId='143187157687-me0h129maovoq0r7elmfmoa04v2hq8bl.apps.googleusercontent.com'>
       <Provider store={store}>
+        
         <Alert />
         {isFetching1 || isFetching2 ?
         <section className='loading-holder'>
@@ -84,6 +86,7 @@ useEffect(()=>{
                   }
                 </>
               :
+
                 <>
                   <SideBar />
                   <Component {...pageProps} />

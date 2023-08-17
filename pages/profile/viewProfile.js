@@ -1,46 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/ViewProfile.module.scss';
-import { FiUserPlus,FiMessageCircle,FiArrowUpRight } from 'react-icons/fi';
-import { MdOutlineExpandMore,MdOutlineOpenInNew } from 'react-icons/md';
+import { FiUserPlus, FiMessageCircle, FiArrowUpRight } from 'react-icons/fi';
+import { MdOutlineExpandMore, MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import { auth,db, storage } from '@/config/firebaseConfig';
-import { doc,getDoc } from 'firebase/firestore';
-import { ref,getDownloadURL } from 'firebase/storage';
+import { auth, db, storage } from '@/config/firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
+import { ref, getDownloadURL } from 'firebase/storage';
 import { useSelector } from 'react-redux';
 import Loading from '../../nestedComponents/Loading';
 import { onAuthStateChanged } from 'firebase/auth';
 
 const ViewProfile = () => {
-    const [data,setData] = useState({});
-    const [isFetching,setIsFetching] = useState(true);
-    const [imageUrl,setImageUrl] = useState('');
+    const [data, setData] = useState({});
+    const [isFetching, setIsFetching] = useState(true);
+    const [imageUrl, setImageUrl] = useState('');
 
-    useEffect(()=>{
-        if(auth.currentUser){
-            const docRef = doc(db,'userData', auth.currentUser.uid);
-            getDoc(docRef)
-            .then(res => {
-                setData(res.data());
-                const storageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
-                getDownloadURL(storageRef)
-                .then(url => {
-                    setImageUrl(url);
-                })
-                .catch(()=> setImageUrl(''))
-                .finally(()=> setIsFetching(false))
-            });
-        }else {
-            setImageUrl('')
-            setData({})
-            setIsFetching(false)
+    useEffect(() => {
+        const getProfile = async () => {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const json = await res.json();
+            console.log(json)
+            if (res.ok) {
+                if (rememberMe) {
+                    window.localStorage.setItem('user', JSON.stringify(json));
+                }
+                dispatch(alertActions.showAlert({ msg: 'logged in successfully', showen: true, type: 'success' }));
+                dispatch(userActions.setUserData({ username: json.username, email: json.email, token: json.token }));
+            } else {
+                dispatch(alertActions.showAlert({ msg: json.message, showen: true, type: 'error' }));
+            }
         }
+        // if(auth.currentUser){
+        //     const docRef = doc(db,'userData', auth.currentUser.uid);
+        //     getDoc(docRef)
+        //     .then(res => {
+        //         setData(res.data());
+        //         const storageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
+        //         getDownloadURL(storageRef)
+        //         .then(url => {
+        //             setImageUrl(url);
+        //         })
+        //         .catch(()=> setImageUrl(''))
+        //         .finally(()=> setIsFetching(false))
+        //     });
+        // }else {
+        //     setImageUrl('')
+        //     setData({})
+        //     setIsFetching(false)
+        // }
 
-    },[])
+    }, [])
 
-    if(isFetching) return <section className={styles.loadingContainer}><Loading /></section>
+    if (isFetching) return <section className={styles.loadingContainer}><Loading /></section>
     return (
         <section className={styles.container}>
-            <div className={styles.images} style={{backgroundImage: 'url(/cover-image.jpg)'}}>
+            <div className={styles.images} style={{ backgroundImage: 'url(/cover-image.jpg)' }}>
                 <img className={styles.personalImage} src={imageUrl} alt="" />
             </div>
             <article className={styles.contact}>
@@ -73,47 +92,47 @@ const ViewProfile = () => {
                         <span className={`${styles.workType} small-fs semi-bold`}>Design</span>
                         <h2 className={`${styles.workH2} large-fs semi-bold dark-gray`}>UX review presentations {FiArrowUpRight({})}</h2>
                         <p className={`${styles.workDesc} medium-fs light light-gray`}>
-                            How do you create compelling presentations 
+                            How do you create compelling presentations
                             that wow your colleagues and impress your managers?
                         </p>
                     </div>
                 </div>
                 <h2 className={`${styles.linksH2} x-large-fs semi-bold black`}>Links</h2>
                 <div className={styles.links}>
-                    {data.facebook !== ''?
+                    {data.facebook !== '' ?
                         <div className={styles.link}>
-                            <img src="/facebook.png" alt="" className={styles.linkIcon}/>
+                            <img src="/facebook.png" alt="" className={styles.linkIcon} />
                             <p className={`${styles.name} dark-gray normal medium-fs`}>Facebook</p>
                             <a href={data.facebook} target='_blank' className={`${styles.linkURL} light-gray light small-fs`}>{data.facebook}</a>
                         </div>
-                    :
+                        :
                         ''
                     }
-                    {data.instagram !== ''?
+                    {data.instagram !== '' ?
                         <div className={styles.link}>
-                            <img src="/instagram.png" alt="" className={styles.linkIcon}/>
+                            <img src="/instagram.png" alt="" className={styles.linkIcon} />
                             <p className={`${styles.name} dark-gray normal medium-fs`}>Instagram</p>
                             <a href={data.instagram} target='_blank' className={`${styles.linkURL} light-gray light small-fs`}>{data.instagram}</a>
                         </div>
-                    :
+                        :
                         ''
                     }
-                    {data.linkedIn !== ''?
+                    {data.linkedIn !== '' ?
                         <div className={styles.link}>
-                            <img src="/linkedIn.png" alt="" className={styles.linkIcon}/>
+                            <img src="/linkedIn.png" alt="" className={styles.linkIcon} />
                             <p className={`${styles.name} dark-gray normal medium-fs`}>LinkedIn</p>
                             <a href={data.linkedIn} target='_blank' className={`${styles.linkURL} light-gray light small-fs`}>{data.linkedIn}</a>
                         </div>
-                    :
+                        :
                         ''
                     }
-                    {data.twitter !== ''?
+                    {data.twitter !== '' ?
                         <div className={styles.link}>
-                            <img src="/twitter.png" alt="" className={styles.linkIcon}/>
+                            <img src="/twitter.png" alt="" className={styles.linkIcon} />
                             <p className={`${styles.name} dark-gray normal medium-fs`}>Twitter</p>
                             <a href={data.linkedIn} target='_blank' className={`${styles.linkURL} light-gray light small-fs`}>{data.twitter}</a>
                         </div>
-                    :
+                        :
                         ''
                     }
                 </div>
