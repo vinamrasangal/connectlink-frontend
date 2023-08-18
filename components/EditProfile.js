@@ -8,10 +8,10 @@ import allCountries from '@/suggestions/allCountries';
 import timeZones from '@/suggestions/timeZones';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../nestedComponents/Loading';
-import { doc, getDoc,updateDoc } from 'firebase/firestore';
-import { auth, db } from '@/config/firebaseConfig';
-import { storage } from '@/config/firebaseConfig';
-import { ref,getDownloadURL, uploadBytes } from 'firebase/storage';
+// import { doc, getDoc,updateDoc } from 'firebase/firestore';
+// import { auth, db } from '@/config/firebaseConfig';
+// import { storage } from '@/config/firebaseConfig';
+// import { ref,getDownloadURL, uploadBytes } from 'firebase/storage';
 import { alertActions } from '@/redux/AlertController';
 import Link from 'next/link';
 

@@ -8,22 +8,28 @@ import { IoPricetagOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
-import useLogout from '@/hooks/useLogout';
+import { useRouter } from 'next/router';
+import { logout } from '../redux/ActionCreators/authAction';
 
 const SideBar = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    // const user = JSON.parse(localStorage.getItem('user'));
+    // const user = { login: true }
+    const user = useSelector(state => state.auth.user)
+    console.log(user)
+    const router = useRouter();
     const [active, setActive] = useState(false);
     const [imageUrl, setImageUrl] = useState(null);
-    const currentPage = useSelector(state => state.currentPage.page);
-    const { logout } = useLogout()
+    const dispatch = useDispatch();
+    const currentPage = 'home';
 
-    // useEffect(() => {
-    //     localStorage.setItem('user', JSON.stringify(user))
-    // }, [])
+
+
 
     function handleSignOut() {
-        logout();
+        dispatch(logout());
         localStorage.clear();
+        // window.localStorage.setItem('user', null)
+        router.push('/login')
     }
 
 
@@ -166,4 +172,4 @@ const SideBar = () => {
     )
 }
 
-export default SideBar
+export default SideBar;

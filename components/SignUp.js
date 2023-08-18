@@ -3,9 +3,9 @@ import styles from '../styles/Account.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
 import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
-import useSignup from '@/hooks/useSignup';
 import validator from 'validator';
 import { useRouter } from 'next/router';
+import { userSignup } from '../redux/ActionCreators/authAction';
 
 
 const SignUp = () => {
@@ -13,11 +13,13 @@ const SignUp = () => {
     const [signUpData, setSignUpData] = useState({ name: '', email: '', category: '', password: '', confirmPassword: '', agreement: false });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const alert = useSelector(state => state.alertController);
+    const [loading, setLoading] = useState(false);
+    const signUp = useSelector(state => state.auth)
+    const error = useSelector(state => state.error);
 
     const dispatch = useDispatch();
 
-    const { loading, signup } = useSignup()
+    // const { loading, signup } = useSignup()
 
     function handleChange(e) {
         const name = e.target.name
@@ -49,12 +51,22 @@ const SignUp = () => {
             dispatch(alertActions.showAlert({ msg: 'make sure to match the password', showen: true, type: 'error' }));
         }
         else {
-            signup(signUpData.name, signUpData.email, signUpData.password);
-            if (alert.type === 'error') {
-                router.push('/signup')
-            } else {
-                router.push('/');
+            setLoading(true);
+            const obj = {
+                username: signUpData.name,
+                email: signUpData.email,
+                password: signUpData.password
             }
+            dispatch(userSignup(obj))
+            setLoading(false);
+            if (signUp) {
+                router.push('/login')
+            }
+            // if (alert.type === 'error') {
+            //     router.push('/signup')
+            // } else {
+            //     router.push('/');
+            // }
         }
     }
     return (

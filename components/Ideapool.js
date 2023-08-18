@@ -1,52 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Ideapool.module.scss';
 import { BiFilter } from 'react-icons/bi';
-import { FiMoreHorizontal,FiMessageCircle,FiShare2,FiUser } from 'react-icons/fi';
+import { FiMoreHorizontal, FiMessageCircle, FiShare2, FiUser } from 'react-icons/fi';
 import { BiLike } from 'react-icons/bi';
 import { TbPointFilled } from 'react-icons/tb';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreatePostActions } from '../redux/showCreatePost';
+// import { CreatePostActions } from '../redux/showCreatePost';
+import { openPost } from '../redux/ActionCreators/postAction';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { auth, storage } from '@/config/firebaseConfig';
 import ShareComponent from '@/nestedComponents/ShareComponent';
-import { onAuthStateChanged } from 'firebase/auth';
 
 
 const Ideapool = () => {
-    const [isSortShowen,setIsSortShowen] = useState(false);
-    const [isPostShowen,setIsPostShowen] = useState(false);
-    const [imageUrl,setImageUrl] = useState('')
-    const [shareData,setShareData] = useState(
-        {url:'',quote:'',hashtag:'',isShowen:false})
+    const [isSortShowen, setIsSortShowen] = useState(false);
+    const [isPostShowen, setIsPostShowen] = useState(false);
+    const [imageUrl, setImageUrl] = useState('')
+    const [shareData, setShareData] = useState(
+        { url: '', quote: '', hashtag: '', isShowen: false })
+    const auth = useSelector(state => state.auth.user)
     const dispatch = useDispatch();
-    function handleClick(){
-        dispatch(CreatePostActions.showCreatePost())
+
+
+    const handleClick = () => {
+        console.log('ffff')
+        dispatch(openPost())
     }
-    useEffect(()=>{
-        onAuthStateChanged(auth,(res)=>{
-            if(res){
-                const storageRef = ref(storage,`images/personalImage_${res.uid}`);
-                getDownloadURL(storageRef)
-                .then(url => {
-                    setImageUrl(url)
-                })
-                .catch(()=>{
-                    setImageUrl('')
-                })
-            }else {
-                setImageUrl('')
-            }
-        })
-    },[])
+    useEffect(() => {
+        // onAuthStateChanged(auth, (res) => {
+        //     if (res) {
+        //         const storageRef = ref(storage, `images/personalImage_${res.uid}`);
+        //         getDownloadURL(storageRef)
+        //             .then(url => {
+        //                 setImageUrl(url)
+        //             })
+        //             .catch(() => {
+        //                 setImageUrl('')
+        //             })
+        //     } else {
+        //         setImageUrl('')
+        //     }
+        // })
+    }, [])
     return (
         <>
             <section className={styles.ideas}>
                 <h2 className={`${styles.shareIdea} large-fs semi-bold dark-gray`}>Share an idea</h2>
                 <div className={styles.createPost}>
-                    {(auth?.currentUser && imageUrl !== '')?
+                    {(auth && imageUrl !== '') ?
                         <img className={styles.image} src={imageUrl} alt="" />
-                    :
+                        :
                         <span className={`${styles.loggedOutIcon} x-large-fs dark-gray`}>
                             {FiUser({})}
                         </span>
@@ -60,7 +62,7 @@ const Ideapool = () => {
                         <button className={`${styles.btn} medium-fs normal normal-gray`}>New</button>
                         <button className={`${styles.btn} medium-fs normal normal-gray`}>Yours</button>
                     </div>
-                    <button className={`${styles.filterBtn} S-BTN`} onClick={()=>setIsSortShowen(prev => !prev)}>
+                    <button className={`${styles.filterBtn} S-BTN`} onClick={() => setIsSortShowen(prev => !prev)}>
                         <span className={`${styles.icon} x-large-fs `}>{BiFilter({})}</span>
                         <p>Sort By</p>
                     </button>
@@ -99,17 +101,17 @@ const Ideapool = () => {
                     <span className={`${styles.more} large-fs normal-gray`}>{FiMoreHorizontal({})}</span>
                     <h2 className={`${styles.title} large-fs bold normal-gray `}> Social Media App for Pet Owners  </h2>
                     <p className={`${styles.text} normal-gray light medium-fs`}>
-                        I want to create a social media app specifically for pet owners. 
-                        The app will allow users to connect with other pet owners, 
-                        share pictures and videos of their pets, and find pet-friendly 
-                        events and businesses in their area. I believe this app will fill 
-                        a gap in the market for pet owners who want a dedicated platform 
+                        I want to create a social media app specifically for pet owners.
+                        The app will allow users to connect with other pet owners,
+                        share pictures and videos of their pets, and find pet-friendly
+                        events and businesses in their area. I believe this app will fill
+                        a gap in the market for pet owners who want a dedicated platform
                         to connect with others who share their love for pets.
-                        I want to create a social media app specifically for pet owners. 
-                        The app will allow users to connect with other pet owners, 
-                        share pictures and videos of their pets, and find pet-friendly 
-                        events and businesses in their area. I believe this app will fill 
-                        a gap in the market for pet owners who want a dedicated platform 
+                        I want to create a social media app specifically for pet owners.
+                        The app will allow users to connect with other pet owners,
+                        share pictures and videos of their pets, and find pet-friendly
+                        events and businesses in their area. I believe this app will fill
+                        a gap in the market for pet owners who want a dedicated platform
                         to connect with others who share their love for pets.
                     </p>
                     <h2 className={`${styles.roles} semi-bold normal-gray medium-fs`}>Open Roles</h2>
@@ -136,8 +138,8 @@ const Ideapool = () => {
                         </li>
                     </ul>
                     <span className={`${styles.seeMore} medium-fs normal`}
-                        onClick={()=>setIsPostShowen(prev => !prev)}
-                    >{isPostShowen? 'See less' : 'See more'}</span>
+                        onClick={() => setIsPostShowen(prev => !prev)}
+                    >{isPostShowen ? 'See less' : 'See more'}</span>
                     <p className={`${styles.details} light-gray light medium-fs`}> <span className='semi-bold' >Posted by</span> Jenny Wilson <span className={styles.span}> {TbPointFilled({})} </span> 1hr ago </p>
                     <button className={styles.arrow}>
                         <span className={`${styles.icon} x-large-fs dark-gray`}>{BiLike({})}</span>
@@ -147,20 +149,20 @@ const Ideapool = () => {
                         <span className={`${styles.icon} x-large-fs dark-gray`}>{FiMessageCircle({})}</span>
                         <span className={`${styles.count} medium-fs light light-gray`}>20</span>
                     </button>
-                    <button className={styles.share} 
-                    onClick={()=>setShareData({url:'https://www.example.com',quote:'Dummy text!',hashtag:'#muo',isShowen:true})}>
+                    <button className={styles.share}
+                        onClick={() => setShareData({ url: 'https://www.example.com', quote: 'Dummy text!', hashtag: '#muo', isShowen: true })}>
                         <span className={`${styles.icon} x-large-fs dark-gray`}>{FiShare2({})}</span>
                         <span className={`${styles.count} medium-fs light light-gray`}>999</span>
                     </button>
                 </article>
             </section>
-            <ShareComponent 
-                url={shareData.url} 
-                quote={shareData.quote} 
-                hashtag={shareData.hashtag} 
+            <ShareComponent
+                url={shareData.url}
+                quote={shareData.quote}
+                hashtag={shareData.hashtag}
                 isShowen={shareData.isShowen}
                 setShareData={setShareData}
-                />
+            />
             <section className={styles.rightSide}>
                 <article className={styles.interests}>
                     <h2 className={`${styles.h2} large-fs light normal-gray`}>Interests</h2>

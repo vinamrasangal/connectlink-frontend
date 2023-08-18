@@ -4,18 +4,16 @@ import { CiSearch } from 'react-icons/ci';
 import { BiFilter } from 'react-icons/bi';
 import { FiUserCheck } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { currentPageAction } from '@/redux/CurrentPage';
-import { auth } from '@/config/firebaseConfig';
 
 const connections = () => {
 
     const dispatch = useDispatch();
 
 
-    useEffect(()=>{
-        dispatch(currentPageAction.setPage({page:'connections'}))
-    },[])
-    if(!auth.currentUser) return <></>
+    // useEffect(()=>{
+    //     dispatch(currentPageAction.setPage({page:'connections'}))
+    // },[])
+    // if(!auth.currentUser) return <></>
     return (
         <section className={`container ${styles.container}`}>
             <h2 className={`${styles.h2} x-large-fs semi-bold dark-gray`}>Connections</h2>

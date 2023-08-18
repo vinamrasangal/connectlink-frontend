@@ -1,27 +1,29 @@
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import styles from '../styles/Home.module.scss';
-import { TiLightbulb} from 'react-icons/ti';
-import { FiUsers,FiShoppingCart } from 'react-icons/fi';
+import { TiLightbulb } from 'react-icons/ti';
+import { FiUsers, FiShoppingCart } from 'react-icons/fi';
 import { RxDashboard } from 'react-icons/rx';
-import {BrowserRouter as Router, Routes, Route , Link} from 'react-router-dom';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Ideapool from '@/components/Ideapool';
+const Ideapool = dynamic(() => import('@/components/Ideapool'), { ssr: false });
 import CreatePost from '@/nestedComponents/CreatePost';
 import { useDispatch } from 'react-redux';
-import { currentPageAction } from '@/redux/CurrentPage';
+
+// import { currentPageAction } from '@/redux/CurrentPage';
 
 
 
 
 
 export default function Home() {
-  const [choosen,setChoosen] = useState('ideapool');
+  const [choosen, setChoosen] = useState('ideapool');
   const dispatch = useDispatch();
 
 
-  useEffect(()=>{
-    dispatch(currentPageAction.setPage({page:'home'}))
-  },[])
+  useEffect(() => {
+
+  }, [])
 
   return (
     <>
@@ -34,39 +36,35 @@ export default function Home() {
       <main className={styles.main}>
         <CreatePost />
         <section className={`${styles.container} container`}>
-            <Router>
-                <nav className={styles.nav}>
-                  <ul className={styles.ul} role='list'>
-                    <li className={styles.li}>
-                      <Link to='/' className={`${styles.link} ${choosen === 'ideapool' ? styles.active:''}`} onClick={()=> setChoosen('ideapool')}>
-                        <span className={`${styles.span} large-fs light-gray`}>{TiLightbulb({})}</span>
-                        <span className={`${styles.text}  medium-fs normal light-gray`}>Ideapool</span>
-                      </Link>
-                    </li>
-                    <li className={styles.li}>
-                      <Link to='/connections' className={`${styles.link} ${choosen === 'connections' ? styles.active:''}`} onClick={()=> setChoosen('connections')}>
-                        <span className={`${styles.span} large-fs light-gray`} >{FiUsers({})}</span>
-                        <span className={`${styles.text} medium-fs normal light-gray`} >Connections</span>
-                      </Link>
-                    </li>
-                    <li className={styles.li}>
-                      <Link to='/products' className={`${styles.link} ${choosen === 'products' ? styles.active:''}`} onClick={()=> setChoosen('products')}>
-                        <span className={`${styles.span} large-fs light-gray`}>{RxDashboard({})}</span>
-                        <span className={`${styles.text} medium-fs normal light-gray`}>Products</span>
-                      </Link>
-                    </li>
-                    <li className={styles.li}>
-                      <Link to='/marketplace' className={`${styles.link} ${choosen === 'marketplace' ? styles.active:''}`} onClick={()=> setChoosen('marketplace')}>
-                        <span className={`${styles.span} large-fs light-gray`}>{FiShoppingCart({})}</span>
-                        <span className={`${styles.text} medium-fs normal light-gray`}>Marketplace</span>
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-                  <Routes>
-                      <Route path="/" element={<Ideapool />} />
-                  </Routes>
-              </Router>
+          <nav className={styles.nav}>
+            <ul className={styles.ul} role='list'>
+              <li className={styles.li}>
+                <Link href='/ideapool' className={`${styles.link} ${choosen === 'ideapool' ? styles.active : ''}`} onClick={() => setChoosen('ideapool')}>
+                  <span className={`${styles.span} large-fs light-gray`}>{TiLightbulb({})}</span>
+                  <span className={`${styles.text}  medium-fs normal light-gray`}>Ideapool</span>
+                </Link>
+              </li>
+              <li className={styles.li}>
+                <Link href='/connections' className={`${styles.link} ${choosen === 'connections' ? styles.active : ''}`} onClick={() => setChoosen('connections')}>
+                  <span className={`${styles.span} large-fs light-gray`} >{FiUsers({})}</span>
+                  <span className={`${styles.text} medium-fs normal light-gray`} >Connections</span>
+                </Link>
+              </li>
+              <li className={styles.li}>
+                <Link href='/products' className={`${styles.link} ${choosen === 'products' ? styles.active : ''}`} onClick={() => setChoosen('products')}>
+                  <span className={`${styles.span} large-fs light-gray`}>{RxDashboard({})}</span>
+                  <span className={`${styles.text} medium-fs normal light-gray`}>Products</span>
+                </Link>
+              </li>
+              <li className={styles.li}>
+                <Link href='/marketplace' className={`${styles.link} ${choosen === 'marketplace' ? styles.active : ''}`} onClick={() => setChoosen('marketplace')}>
+                  <span className={`${styles.span} large-fs light-gray`}>{FiShoppingCart({})}</span>
+                  <span className={`${styles.text} medium-fs normal light-gray`}>Marketplace</span>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <Ideapool/>
         </section>
       </main>
     </>

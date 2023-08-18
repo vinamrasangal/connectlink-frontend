@@ -6,18 +6,20 @@ import { alertActions } from '@/redux/AlertController';
 import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
 import Link from 'next/link';
 import useGoogleAccount from '@/hooks/useGoogleAccount';
-import useLogin from '@/hooks/useLogin';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useRouter } from 'next/router';
+import { userLogin } from '../redux/ActionCreators/authAction';
+
 
 const Login = () => {
     const router = useRouter();
-    const { loading, login } = useLogin()
-    const { continueWithGoogle } = useGoogleAccount()
+    const [loading, setLoading] = useState(false);
+    // const { loading, login } = useLogin()
+    // const { continueWithGoogle } = useGoogleAccount()
     const [showPassword, setShowPassword] = useState(false);
     const [loginData, setLoginData] = useState({ email: '', password: '', rememberMe: false });
-    const alert = useSelector(state => state.alertController);
-
+    const auth = useSelector(state => state.auth);
+    console.log(auth)
     const dispatch = useDispatch();
 
     function handleLoginChange(e) {
@@ -30,17 +32,29 @@ const Login = () => {
         }
     }
 
-    function handleLoginWithEmail(e) {
+    const handleLoginWithEmail = (e) => {
         e.preventDefault();
         if (loginData.email === '' || loginData.password === '') {
             dispatch(alertActions.showAlert({ msg: 'make sure to fill up the inputs', showen: true, type: 'warrning' }));
         } else {
-            login(loginData.email, loginData.password, loginData.rememberMe);
-            if (alert.type === 'error') {
-                router.push('/login')
-            } else {
-                router.push('/');
+            setLoading(true);
+            const login = {
+                email: loginData.email,
+                password: loginData.password,
+                rememberMe: loginData.rememberMe
             }
+            dispatch(userLogin(login));
+            setLoading(false);
+            // if (auth.isAuthorized) {
+            //     setTimeout(() => {
+            //         router.push('/connections')
+            //     }, 1500);
+            // }
+            // if (alert.type === 'error') {
+            //     router.push('/login')
+            // } else {
+            //     router.push('/');
+            // }
         }
     }
 

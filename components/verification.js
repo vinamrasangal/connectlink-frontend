@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/verification.module.scss';
 import Logo from '../nestedComponents/Logo';
-import { sendEmailVerification } from 'firebase/auth';
-import { auth } from '@/config/firebaseConfig';
 import { useDispatch } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
 
@@ -42,7 +40,7 @@ const Verification = () => {
     },[])
     return (
         <section className={styles.verificationContainer}>
-            <article className={`${styles.verification} black normal large-fs`}>
+            {/* <article className={`${styles.verification} black normal large-fs`}>
                 <Logo styles={{s:{width:220,height:40,FS:28},m:{width:300,height:70,FS:38},l:{width:420,height:80,FS:54}}}/>
                 <h2 className={`${styles.heading} heading-fs bold`}>Verify Your Email</h2>
                 <p className={styles.firstP}>
@@ -58,7 +56,7 @@ const Verification = () => {
                     Once your email is verified, you can start exploring and using all the features of our platform. 
                     If you have any questions or need assistance, please don't hesitate to contact our <a href='' className={styles.spportTeam}>support team</a>.
                 </p>
-            </article>
+            </article> */}
         </section>
     )
 }
