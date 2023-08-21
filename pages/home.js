@@ -3,7 +3,7 @@ import { CiSearch } from 'react-icons/ci';
 import { BiFilter } from 'react-icons/bi';
 import { FiUserCheck } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import CreatePost from '@/nestedComponents/CreatePost';
+import CreatePost from '@/components/CreatePost';
 import styles from '../styles/Home.module.scss';
 
 

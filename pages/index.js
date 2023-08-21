@@ -7,8 +7,9 @@ import { RxDashboard } from 'react-icons/rx';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 const Ideapool = dynamic(() => import('@/components/Ideapool'), { ssr: false });
-import CreatePost from '@/nestedComponents/CreatePost';
-import { useDispatch } from 'react-redux';
+import CreatePost from '@/components/CreatePost';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 // import { currentPageAction } from '@/redux/CurrentPage';
 
@@ -18,12 +19,17 @@ import { useDispatch } from 'react-redux';
 
 export default function Home() {
   const [choosen, setChoosen] = useState('ideapool');
+  const router = useRouter();
   const dispatch = useDispatch();
 
+  const user = useSelector(state => state.auth.user);
 
   useEffect(() => {
-
+    if (user) {
+      router.push('/')
+    }
   }, [])
+
 
   return (
     <>
@@ -64,7 +70,7 @@ export default function Home() {
               </li>
             </ul>
           </nav>
-          <Ideapool/>
+          <Ideapool />
         </section>
       </main>
     </>

@@ -10,3 +10,5 @@ export const LOGOUT = 'LOGOUT';
 // post
 export const CLOSE_POST = 'CLOSE_POST';
 export const OPEN_POST = 'OPEN_POST';
+export const GET_ALL_POSTS = 'GET_ALL_POSTS';
+export const ADD_QUESTION = 'ADD_QUESTION';

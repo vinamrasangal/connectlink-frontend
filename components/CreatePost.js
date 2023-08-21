@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/createPost.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { CreatePostActions } from '../redux/showCreatePost';
-import { closePost } from '../redux/ActionCreators/postAction';
-import DropImage from './DropImage';
+import { closePost, addQuestion, addDiscussion } from '../redux/ActionCreators/postAction';
+import DropImage from '../nestedComponents/DropImage';
 import { FiUpload } from 'react-icons/fi';
 import { MdAdd } from 'react-icons/md';
 
@@ -12,6 +11,7 @@ const CreatePost = () => {
     const [image, setImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
     const [current, setCurrent] = useState(1);
+    const [discussErrors, setDiscussErrors] = useState({ title: '', desc: '', tags: '', });
     const dispatch = useDispatch();
 
     const [ideaFormData, setIdeaFormData] = useState({
@@ -25,6 +25,11 @@ const CreatePost = () => {
     });
     const [postInput, setPostInput] = useState('');
 
+
+    const onTabChange = (type) => {
+        setCurrent(type);
+        setDiscussErrors({ title: '', desc: '', tags: '' });
+    }
     function handleAddRoles() {
         setIdeaFormData(prev => ({ ...prev, roles: [...prev.roles, { role: '', YOE: '' }] }))
     }
@@ -59,20 +64,112 @@ const CreatePost = () => {
 
     function questionFormChange(e) {
         const { name, value } = e.target
+        const newErrors = { ...discussErrors };
+        if (name === 'title' && value === '') {
+            newErrors.title = 'Question is required';
+        } else {
+            newErrors.title = '';
+        }
+        if (name === 'desc' && value === '') {
+            newErrors.desc = 'Description is required';
+        } else {
+            newErrors.desc = '';
+        }
+        if (name === 'tags' && value === '') {
+            newErrors.tags = 'Tags is required';
+        } else {
+            newErrors.tags = '';
+        }
+        setDiscussErrors(newErrors)
         setQuestionFormData(prev => ({ ...prev, [name]: value }))
     }
     function discussionFormChange(e) {
         const { name, value } = e.target
-        setDiscussionFormData(prev => ({ ...prev, [name]: value }))
+        const newErrors = { ...discussErrors };
+        if (name === 'title' && value === '') {
+            newErrors.title = 'Title is required';
+        } else {
+            newErrors.title = '';
+        }
+        if (name === 'desc' && value === '') {
+            newErrors.desc = 'Description is required';
+        } else {
+            newErrors.desc = '';
+        }
+        if (name === 'tags' && value === '') {
+            newErrors.tags = 'Tags is required';
+        } else {
+            newErrors.tags = '';
+        }
+        setDiscussErrors(newErrors)
+        setDiscussionFormData(prev => ({ ...prev, [name]: value }));
     }
 
-    function handleCancel(e) {
+
+
+    const handleCancel = (e) => {
         e.preventDefault();
         dispatch(closePost());
+        setCurrent(1);
+        setQuestionFormData({
+            title: '', desc: '', tags: ''
+        });
+        setDiscussionFormData({
+            title: '', desc: '', tags: ''
+        });
+        setIdeaFormData({
+            title: '', desc: '', industury: '', tags: '', links: '', discussion: false, requirement: false, roles: [{ role: '', YOE: '' }]
+        })
+
     }
 
     const submitPost = (e, type) => {
         e.preventDefault();
+        if (type === 'post') {
+
+        }
+        else if (type === 'question') {
+            const errors = {}
+            if (!questionFormData.title) {
+                errors.title = 'Question is required';
+                setDiscussErrors(errors)
+            }
+            else if (!questionFormData.desc) {
+                console.log('hhh')
+                errors.desc = 'Description is required';
+                setDiscussErrors(errors)
+            }
+            else if (!questionFormData.tags) {
+                errors.tags = 'Tags is required';
+                setDiscussErrors(errors)
+            } else {
+                setDiscussErrors({ title: '', desc: '', tags: '' });
+                dispatch(addQuestion(questionFormData));
+                handleCancel(e);
+            }
+        }
+        else if (type === 'discussion') {
+            const errors = {}
+            if (!discussionFormData.title) {
+                errors.title = 'Title is required';
+                setDiscussErrors(errors)
+            }
+            else if (!discussionFormData.desc) {
+                errors.desc = 'Description is required';
+                setDiscussErrors(errors)
+            }
+            else if (!discussionFormData.tags) {
+                errors.tags = 'Tags is required';
+                setDiscussErrors(errors)
+            }
+            else {
+                setDiscussErrors({ title: '', desc: '', tags: '' });
+                dispatch(addDiscussion(discussionFormData));
+                handleCancel(e);
+            }
+            console.log(errors)
+
+        }
     }
 
 
@@ -82,10 +179,10 @@ const CreatePost = () => {
             <article className={styles.post}>
                 <h2 className={`${styles.h2} large-fs semi-bold black`}>Create Post</h2>
                 <ul className={`${styles.ul} medium-fs normal`} role='list'>
-                    <li className={`${styles.li} ${current === 1 ? styles.active : ''}`} onClick={() => setCurrent(1)}>Share Your Idea</li>
-                    <li className={`${styles.li} ${current === 2 ? styles.active : ''}`} onClick={() => setCurrent(2)}>Ask Question</li>
-                    <li className={`${styles.li} ${current === 3 ? styles.active : ''}`} onClick={() => setCurrent(3)}>Discussion</li>
-                    <li className={`${styles.li} ${current === 4 ? styles.active : ''}`} onClick={() => setCurrent(4)}>Post</li>
+                    <li className={`${styles.li} ${current === 1 ? styles.active : ''}`} onClick={() => onTabChange(1)}>Share Your Idea</li>
+                    <li className={`${styles.li} ${current === 2 ? styles.active : ''}`} onClick={() => onTabChange(2)}>Ask Question</li>
+                    <li className={`${styles.li} ${current === 3 ? styles.active : ''}`} onClick={() => onTabChange(3)}>Discussion</li>
+                    {/* <li className={`${styles.li} ${current === 4 ? styles.active : ''}`} onClick={() => setCurrent(4)}>Post</li> */}
                 </ul>
                 <div
                     className={`${styles.formsHolder} ${current === 1 ? styles.first : ''} ${current === 2 ? styles.second : ''} ${current === 3 ? styles.third : ''} ${current === 4 ? styles.fourth : ''}`}
@@ -217,21 +314,22 @@ const CreatePost = () => {
                             </>
                         }
                         <div className={styles.btns}>
-                            <button className={`${styles.cancelBtn} S-BTN`} onClick={(e) => handleCancel(e)}>Cancel</button>
+                            <button className={`${styles.cancelBtn} S-BTN`} onClick={handleCancel}>Cancel</button>
                             <button className={`${styles.postBtn} P-BTN`} onClick={(e) => submitPost(e, 'post')}>Post Idea</button>
                         </div>
                     </form>
-                    <form action="" className={styles.form}>
+                    <form className={styles.form}>
                         <label className='small-fs normal dark-gray' htmlFor="title">Question</label>
                         <input
                             className={`${styles.input} medium-fs light normal-gray`}
                             type="text"
                             id='title'
                             placeholder='What do you want to ask?'
-                            value={questionFormData.question}
-                            name='question'
+                            value={questionFormData.title}
+                            name='title'
                             onChange={(e) => questionFormChange(e)}
                         />
+                        {discussErrors?.title && <span className={styles.error}>{discussErrors.title}</span>}
                         <label className='small-fs normal dark-gray' htmlFor="desc">Description</label>
                         <input
                             className={`${styles.input} medium-fs light normal-gray`}
@@ -242,6 +340,7 @@ const CreatePost = () => {
                             name='desc'
                             onChange={(e) => questionFormChange(e)}
                         />
+                        {discussErrors?.desc && <span className={styles.error}>{discussErrors.desc}</span>}
                         <label className='small-fs normal dark-gray' htmlFor="tags">Tags</label>
                         <input
                             className={`${styles.input} medium-fs light normal-gray`}
@@ -252,14 +351,13 @@ const CreatePost = () => {
                             name='tags'
                             onChange={(e) => questionFormChange(e)}
                         />
-
-
+                        {discussErrors?.tags && <span className={styles.error}>{discussErrors.tags}</span>}
                         <div className={styles.btns}>
-                            <button className={`${styles.cancelBtn} S-BTN`}>Cancel</button>
+                            <button className={`${styles.cancelBtn} S-BTN`} onClick={handleCancel}>Cancel</button>
                             <button className={`${styles.postBtn} P-BTN`} onClick={(e) => submitPost(e, 'question')}>Ask Question</button>
                         </div>
                     </form>
-                    <form action="" className={styles.form}>
+                    <form className={styles.form}>
                         <label className='small-fs normal dark-gray' htmlFor="title">Title</label>
                         <input
                             className={`${styles.input} medium-fs light normal-gray`}
@@ -270,6 +368,7 @@ const CreatePost = () => {
                             name='title'
                             onChange={(e) => discussionFormChange(e)}
                         />
+                        {discussErrors?.title && <span className={styles.error}>{discussErrors.title}</span>}
                         <label className='small-fs normal dark-gray' htmlFor="desc">Description</label>
                         <input
                             className={`${styles.input} medium-fs light normal-gray`}
@@ -280,6 +379,8 @@ const CreatePost = () => {
                             name='desc'
                             onChange={(e) => discussionFormChange(e)}
                         />
+                        {discussErrors?.desc && <span className={styles.error}>{discussErrors.desc}</span>}
+
                         <label className='small-fs normal dark-gray' htmlFor="tags">Tags</label>
                         <input
                             className={`${styles.input} medium-fs light normal-gray`}
@@ -290,12 +391,14 @@ const CreatePost = () => {
                             name='tags'
                             onChange={(e) => discussionFormChange(e)}
                         />
+                        {discussErrors?.tags && <span className={styles.error}>{discussErrors.tags}</span>}
+
                         <div className={styles.btns}>
-                            <button className={`${styles.cancelBtn} S-BTN`}>Cancel</button>
+                            <button className={`${styles.cancelBtn} S-BTN`} onClick={handleCancel}>Cancel</button>
                             <button className={`${styles.postBtn} P-BTN`} onClick={(e) => submitPost(e, 'discussion')}>Post </button>
                         </div>
                     </form>
-                    <form action="" className={styles.form}>
+                    <form className={styles.form}>
                         <textarea
                             className={styles.input}
                             type="text"

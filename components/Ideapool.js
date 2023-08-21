@@ -5,7 +5,7 @@ import { FiMoreHorizontal, FiMessageCircle, FiShare2, FiUser } from 'react-icons
 import { BiLike } from 'react-icons/bi';
 import { TbPointFilled } from 'react-icons/tb';
 import { useDispatch, useSelector } from 'react-redux';
-// import { CreatePostActions } from '../redux/showCreatePost';
+import { getPosts } from '../redux/ActionCreators/postAction';
 import { openPost } from '../redux/ActionCreators/postAction';
 import { AiOutlineCheck } from 'react-icons/ai';
 import ShareComponent from '@/nestedComponents/ShareComponent';
@@ -25,21 +25,9 @@ const Ideapool = () => {
         console.log('ffff')
         dispatch(openPost())
     }
+
     useEffect(() => {
-        // onAuthStateChanged(auth, (res) => {
-        //     if (res) {
-        //         const storageRef = ref(storage, `images/personalImage_${res.uid}`);
-        //         getDownloadURL(storageRef)
-        //             .then(url => {
-        //                 setImageUrl(url)
-        //             })
-        //             .catch(() => {
-        //                 setImageUrl('')
-        //             })
-        //     } else {
-        //         setImageUrl('')
-        //     }
-        // })
+        dispatch(getPosts())
     }, [])
     return (
         <>
