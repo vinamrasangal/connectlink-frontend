@@ -11,121 +11,63 @@ import Loading from '../nestedComponents/Loading';
 // import { doc, getDoc,updateDoc } from 'firebase/firestore';
 // import { auth, db } from '@/config/firebaseConfig';
 // import { storage } from '@/config/firebaseConfig';
-// import { ref,getDownloadURL, uploadBytes } from 'firebase/storage';
+// import { ref,getDownloadURL, uploadBytes } from 'firebase/storage'; 
 import { alertActions } from '@/redux/AlertController';
 import Link from 'next/link';
+import { getProfile } from '@/redux/ActionCreators/profileAction';
 
 
 
 const EditProfile = () => {
+    
+    
     const dispatch = useDispatch();
-    const [userInfo,setUserInfo] = useState({LName:'',FName:'',email:'',userImage:''})
-    const [personalInfo,setPersonalInfo] = useState({Fname:'',Lname:'',email:''});
+    // const [userInfo,setUserInfo] = useState({LName:'',FName:'',email:'',userImage:''})
+    // const [personalInfo,setPersonalInfo] = useState({Fname:'',Lname:'',email:''});
     const [image,setImage] = useState(null);
-    const [imageUrl,setImageUrl] = useState(null);
-    const personalImageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
+    const [imageUrl,setImageUrl] = useState(null);;
     const [isFetching,setIsFetching] = useState(true);
-    const [profile,setProfile] = useState({isAvailable:false,username:'',website:'',bio:'',country:'',timezone:''});
+    const [profile,setProfile] = useState({ Fname:'',Lname:'', isAvailable:false,username:'',website:'',bio:'',country:'',timezone:'', email:'', profilePicture:'',coverPicture:'',});
+
 
     function handleInfoChange(e){
         const { value, name} = e.target;
         setPersonalInfo(prev => ({...prev,[name]:value}));
     }
 
-    function handleProfileChange(e){
-        const { value, name} = e.target;
-        if(name === 'bio'){
-            if(value.length <= 300){
-                setProfile(prev => ({...prev,[name]:value}));
-            }
-        }else {
-            setProfile(prev => ({...prev,[name]:value}));
-        }
-    }
-
-    function handleSaveInfo(e){
-        e.preventDefault();
-        if(personalInfo.Fname.length === 0){
-            dispatch(alertActions.showAlert({msg:'First name cannot be empty',type:'warrning'}))
-        } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(personalInfo.email)) {
-            dispatch(alertActions.showAlert({msg:'please use a valid email address',showen:true,type:'warrning'}));
-        } else {
-            if(image.length > 0){
-                uploadBytes(personalImageRef,image[0]);
-            }
-            const ref = doc(db,'userData',auth.currentUser.uid);
-            updateDoc(ref,{firstName:personalInfo.Fname , lastName: personalInfo.Lname, email:personalInfo.email})
-            .then(()=> {
-                setUserInfo({FName:personalInfo.Fname,LName:personalInfo.Lname,email:personalInfo.email,userImage:imageUrl})
-                dispatch(alertActions.showAlert({msg:'profile updated successfully',type:'success'}))
-            })
-            .catch((err)=> dispatch(alertActions.showAlert({msg:err.message,type:'error'})))
-        }
-
-    }
-
-    function handleSaveProfile(e){
-        e.preventDefault();
-        const ref = doc(db,'userData',auth.currentUser.uid);
-        const { isAvailable,username,website,bio,country,timezone } = profile;
-            updateDoc(ref,{
-                isAvailable,
-                username,
-                websiteURL:website,
-                bio,
-                country,
-                timezone
-            })
-            .then(()=> dispatch(alertActions.showAlert({msg:'profile updated successfully',type:'success'})))
-            .catch((err)=> dispatch(alertActions.showAlert({msg:err.message,type:'error'})))
-    }
-
+    
     useEffect(()=>{
-        if(auth.currentUser.uid){
-            const docRef = doc(db,'userData', auth.currentUser.uid);
-            getDoc(docRef)
-            .then(res => {
-                setIsFetching(false);
-                const {firstName,lastName,email,websiteURL,bio,username,isAvailable,country,timezone} = res.data();
-                setPersonalInfo({Fname:firstName,Lname:lastName,email});
-                setProfile({
-                    isAvailable: isAvailable || false,
-                    username: username || '',
-                    website:websiteURL,
-                    bio,
-                    country:country || '',
-                    timezone:timezone || ''
-                })
-                return res;
-            }).then(res => {
-                const {firstName,lastName,email} = res.data();
-                const storageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
-                getDownloadURL(storageRef)
-                .then(url => {
-                    setImageUrl(url)
-                    setUserInfo({FName : firstName ,LName: lastName ,email:email,userImage:url})
-                })
-                .catch(()=>{
-                    setImageUrl('')
-                    setUserInfo({FName : firstName ,LName: lastName ,email:email,userImage:''})
-                })
-            })
-        }
+        dispatch(getProfile());
+        const {username, email,profilePicture,coverPicture} =  data;
+        setProfile(prev =>({...prev,username:username, email:email, profilePicture:profilePicture ,coverPicture:coverPicture }))
     },[])
+    
+    const data = useSelector(state => state.users.profile)
+  
+    
+    
 
-    if(isFetching) return <section className={styles.loadingContainer}><Loading /></section>
+
+    
+
+
+    
+
+
     return (
+        
+ 
         <section className={`${styles.container} container`}>
             <div className={styles.BgImage} style={{backgroundImage: 'url(/cover-image.jpg)'}}>
-                {userInfo.userImage !== '' ?
-                    <img className={styles.personalImage} src={userInfo.userImage} alt="" />
+                {profile?.profilePicture !== '' ?
+                    <img className={styles.personalImage} src={profile.profilePicture} alt="" />
                 :
                     <span className={`${styles.loggedOutIcon} heading-fs dark-gray`}>
                         {FiUser({})}
                     </span>
                 }
-                <h2 className={`${styles.name} dark-gray normal x-large-fs`}>{userInfo.FName} {userInfo.LName}</h2>
-                <p className={`${styles.email} small-fs light light-gray`}>{userInfo.email}</p>
+                <h2 className={`${styles.name} dark-gray normal x-large-fs`}>{profile?.username}</h2>
+                <p className={`${styles.email} small-fs light light-gray`}>{profile?.email}</p>
                 <button className={`${styles.shareBtn} S-BTN`}>Share</button>
                 <Link href='/profile/viewProfile'>
                     <button className={`${styles.viewBtn} P-BTN`}>View profile</button>
@@ -138,12 +80,12 @@ const EditProfile = () => {
                 <p className='normal normal-gray medium-fs'>Personal info</p>
                 <p className='light small-fs light-gray'>Update your photo and personal details.</p>
                 <form action="" className={styles.form}>
-                    <label htmlFor="Fname" className={`${styles.FnameLabel} small-fs normal normal-gray`}>First name</label>
+                    <label htmlFor="Fname" className={`${styles.FnameLabel} small-fs normal normal-gray`}>First Name</label>
                     <input 
                         type="text" 
                         id='Fname'
                         name='Fname'
-                        value={personalInfo.Fname}
+                        value={profile?.Fname}
                         onChange={(e)=>handleInfoChange(e)}
                         className={`${styles.FnameInput} medium-fs light dark-gray`}
                     />
@@ -152,7 +94,7 @@ const EditProfile = () => {
                         type="text" 
                         id='Lname'
                         name='Lname'
-                        value={personalInfo.Lname}
+                        value={profile?.Lname}
                         onChange={(e)=>handleInfoChange(e)}
                         className={`${styles.LnameInput} medium-fs light dark-gray`}
                     />
@@ -162,12 +104,12 @@ const EditProfile = () => {
                         type="text" 
                         id='email'
                         name='email'
-                        value={personalInfo.email}
+                        value={profile?.email}
                         onChange={(e)=>handleInfoChange(e)}
                         className={`${styles.email} medium-fs light dark-gray`}
                     />
-                    {imageUrl !== '' ?
-                        <img className={styles.personalImage} src={imageUrl} alt="" />
+                    {profile?.profilePicture !== '' ?
+                        <img className={styles.personalImage} src={profile.profilePicture} alt="" />
                     :
                         <span className={`${styles.loggedOutIcon} heading2-fs dark-gray`}>
                             {FiUser({})}
@@ -207,7 +149,7 @@ const EditProfile = () => {
                         type="text" 
                         id='username'
                         name='username'
-                        value={profile.username}
+                        value={profile?.username}
                         onChange={(e)=>handleProfileChange(e)}
                         className={`${styles.username} medium-fs light dark-gray`}
                     />
@@ -217,7 +159,7 @@ const EditProfile = () => {
                         type="text" 
                         id='website'
                         name='website'
-                        value={profile.website}
+                        value={profile?.website}
                         onChange={(e)=>handleProfileChange(e)}
                         className={`${styles.website} medium-fs light dark-gray`}
                     />
@@ -226,7 +168,7 @@ const EditProfile = () => {
                         type="text" 
                         id='bio'
                         name='bio'
-                        value={profile.bio}
+                        value={profile?.bio}
                         onChange={(e)=>handleProfileChange(e)}
                         className={`${styles.bio} medium-fs light dark-gray`}
                     />
@@ -237,7 +179,7 @@ const EditProfile = () => {
                         id="country" 
                         className={`${styles.country} medium-fs light dark-gray`}
                         onChange={(e)=>handleProfileChange(e)}
-                        value={profile.country}
+                        value={profile?.country}
                         >
                         <option value="">choose your country </option>
                         {allCountries.map((e,i)=> <option key={i} value={e.name} className={styles.option}>{e.code} - {e.name} </option>)}
@@ -248,7 +190,7 @@ const EditProfile = () => {
                         id="timezone" 
                         className={`${styles.timezone} medium-fs light dark-gray`}
                         onChange={(e)=>handleProfileChange(e)}
-                        value={profile.timezone}
+                        value={profile?.timezone}
                         >
                         <option value=""> choose your timezone </option>
                         {timeZones.map((e,i)=> <option key={i} value={e.offset}>{e.offset} - {e.name} </option>)}

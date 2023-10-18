@@ -15,7 +15,7 @@ const SideBar = () => {
     // const user = JSON.parse(localStorage.getItem('user'));
     // const user = { login: true }
     const user = useSelector(state => state.auth.user)
-    console.log(user)
+    // console.log(user)
     const router = useRouter();
     const [active, setActive] = useState(false);
     const [imageUrl, setImageUrl] = useState(null);

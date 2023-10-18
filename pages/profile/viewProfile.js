@@ -3,12 +3,12 @@ import styles from '../../styles/ViewProfile.module.scss';
 import { FiUserPlus, FiMessageCircle, FiArrowUpRight } from 'react-icons/fi';
 import { MdOutlineExpandMore, MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import { auth, db, storage } from '@/config/firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
-import { ref, getDownloadURL } from 'firebase/storage';
+// import { auth, db, storage } from '@/config/firebaseConfig';
+// import { doc, getDoc } from 'firebase/firestore';
+// import { ref, getDownloadURL } from 'firebase/storage';
 import { useSelector } from 'react-redux';
 import Loading from '../../nestedComponents/Loading';
-import { onAuthStateChanged } from 'firebase/auth';
+// import { onAuthStateChanged } from 'firebase/auth';
 
 const ViewProfile = () => {
     const [data, setData] = useState({});
@@ -31,6 +31,7 @@ const ViewProfile = () => {
                 }
                 dispatch(alertActions.showAlert({ msg: 'logged in successfully', showen: true, type: 'success' }));
                 dispatch(userActions.setUserData({ username: json.username, email: json.email, token: json.token }));
+                setIsFetching(false);
             } else {
                 dispatch(alertActions.showAlert({ msg: json.message, showen: true, type: 'error' }));
             }
@@ -53,7 +54,7 @@ const ViewProfile = () => {
         //     setData({})
         //     setIsFetching(false)
         // }
-
+        getProfile();
     }, [])
 
     if (isFetching) return <section className={styles.loadingContainer}><Loading /></section>

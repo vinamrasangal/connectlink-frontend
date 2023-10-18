@@ -1,5 +1,5 @@
-import { getApiCall, postApiCall, } from "@/utils/request";
-import { OPEN_POST, CLOSE_POST, GET_ALL_POSTS, ADD_QUESTION } from "../actionType";
+import { getApiCall, postApiCall, putApiCall } from "@/utils/request";
+import { OPEN_POST, CLOSE_POST, GET_ALL_POSTS, ADD_QUESTION, LIKEDISLIKE_POST, ADD_COMMENT } from "../actionType";
 import { returnErrors } from "./errorAction";
 
 
@@ -15,7 +15,7 @@ export const openPost = () => async (dispatch) => {
 
 export const getPosts = (obj) => async (dispatch) => {
     try {
-        const response = await getApiCall(`api/posts/timeline/all`);
+        const response = await getApiCall(`api/posts/all`);
         console.log(response.data)
         if (response.data) {
             dispatch({ type: GET_ALL_POSTS, payload: response.data });
@@ -59,3 +59,37 @@ export const addDiscussion = (obj) => async (dispatch) => {
         returnErrors(dispatch, error.response?.data.message, error.response?.status)
     }
 }
+
+export const likeDislike = (obj, postId) => async (dispatch)=>{
+    try{
+        const response = await putApiCall(`api/posts/likedisikepost/${postId}`,obj)
+        console.log(response.data);
+        if(response.data.success){
+            dispatch({type:LIKEDISLIKE_POST, payload:postId})
+            returnErrors(dispatch, response.data.message, response.status)
+        }
+        else {
+            returnErrors(dispatch, response.data.message, response.status)
+        }  
+    }catch(error){
+        returnErrors(dispatch, error.response?.data.message, error.response?.status)
+    }
+}
+
+
+export const addComment = (obj, postId) => async (dispatch)=>{
+    try{
+        const response = await putApiCall(`api/posts/commentpost/${postId}`,obj)
+        console.log(response.data);
+        if(response.data.success){
+            dispatch({type:ADD_COMMENT, payload:response.data})
+            returnErrors(dispatch, response.data.message, response.status)
+        }
+        else {
+            returnErrors(dispatch, response.data.message, response.status)
+        }  
+    }catch(error){
+        returnErrors(dispatch, error.response?.data.message, error.response?.status)
+    }
+}
+

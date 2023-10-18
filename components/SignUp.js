@@ -6,7 +6,9 @@ import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
 import validator from 'validator';
 import { useRouter } from 'next/router';
 import { userSignup } from '../redux/ActionCreators/authAction';
-
+import { clearErrors, returnErrors } from '@/redux/ActionCreators/errorAction';
+import Snackbar  from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const SignUp = () => {
     const router = useRouter();
@@ -17,9 +19,16 @@ const SignUp = () => {
     const signUp = useSelector(state => state.auth)
     const error = useSelector(state => state.error);
 
+
     const dispatch = useDispatch();
 
+
+
     // const { loading, signup } = useSignup()
+
+    function snackClosed(){
+        dispatch(clearErrors);
+    }
 
     function handleChange(e) {
         const name = e.target.name
@@ -33,44 +42,68 @@ const SignUp = () => {
     function handleClick(e) {
         e.preventDefault();
         const { name, email, category, password, confirmPassword, agreement } = signUpData
+
         if (name === '' || email === '' || category === '' || password === '' || confirmPassword === '') {
-            dispatch(alertActions.showAlert({ msg: 'make sure to fill up all the inputs', showen: true, type: 'warrning' }));
+            dispatch(returnErrors(dispatch,"make sure to fill up all the inputs",202))
         } else if (!agreement) {
-            dispatch(alertActions.showAlert({ msg: 'make sure to agree the platform conditions', showen: true, type: 'warrning' }));
+            dispatch(returnErrors(dispatch,"make sure to agree to terms and conditions of platform",202))
         } else if (!validator.isEmail(email)) {
-            dispatch(alertActions.showAlert({ msg: 'please use a valid email address', showen: true, type: 'error' }));
+            dispatch(returnErrors(dispatch,"please use a valid email adress",202))
         } else if (!/^(?=.{8,})/.test(password)) {
-            dispatch(alertActions.showAlert({ msg: 'the password should be at least 8 characters', showen: true, type: 'error' }));
+            // dispatch(alertActions.showAlert({ msg: 'the password should be at least 8 characters', showen: true, type: 'error' }));
+            dispatch(returnErrors(dispatch,"Password should be atleast 8 charectors",202))
         } else if (!/^(?=.*[a-z])/.test(password)) {
-            dispatch(alertActions.showAlert({ msg: 'the password should be at least contain 1 lowercase', showen: true, type: 'error' }));
+            // dispatch(alertActions.showAlert({ msg: 'the password should be at least contain 1 lowercase', showen: true, type: 'error' }));
+            dispatch(returnErrors(dispatch,"the password should at least contain 1 lowercase",202))
         } else if (!/(?=.*[A-Z])/.test(password)) {
-            dispatch(alertActions.showAlert({ msg: 'the password should be at least contain 1 uppercase', showen: true, type: 'error' }));
+            // dispatch(alertActions.showAlert({ msg: 'the password should be at least contain 1 uppercase', showen: true, type: 'error' }));
+            dispatch(returnErrors(dispatch,"the password should at least contain 1 Uppercase",202))
         } else if (!/(?=.*[0-9])/.test(password)) {
-            dispatch(alertActions.showAlert({ msg: 'the password should be at least contain 1 number', showen: true, type: 'error' }));
+            // dispatch(alertActions.showAlert({ msg: 'the password should be at least contain 1 number', showen: true, type: 'error' }));
+            dispatch(returnErrors(dispatch,"the password should at least contain 1 number",202))
         } else if (password !== confirmPassword) {
-            dispatch(alertActions.showAlert({ msg: 'make sure to match the password', showen: true, type: 'error' }));
+            // dispatch(alertActions.showAlert({ msg: 'make sure to match the password', showen: true, type: 'error' }));
+            dispatch(returnErrors(dispatch,"make sure to match password",202))
         }
-        else {
+        else{
             setLoading(true);
             const obj = {
-                username: signUpData.name,
+                username:signUpData.name,
                 email: signUpData.email,
-                password: signUpData.password
+                password:signUpData.password
             }
+            console.log(obj);
+            console.log(signUp);
             dispatch(userSignup(obj))
             setLoading(false);
+
+            
+
             if (signUp) {
                 router.push('/login')
             }
+        
             // if (alert.type === 'error') {
             //     router.push('/signup')
             // } else {
             //     router.push('/');
             // }
+
         }
+        
     }
     return (
         <article className={styles.signUp}>
+            <Snackbar
+                anchorOrigin={{vertical:'bottom', horizontal:'left'}}
+                open={error.successMessage}
+                autoHideDuration={3000}
+                onClose={snackClosed}
+            >
+                <Alert onClose={snackClosed} severity='error' sx={{width:'100%'}}>
+                    {error.successMessageText}
+                </Alert>
+            </Snackbar>
             <form action="" className={`${styles.form} medium-fs normal-gray`} >
                 <label htmlFor="name" className={`${styles.formLabel} normal`}>Username</label>
                 <input

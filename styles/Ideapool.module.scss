@@ -212,6 +212,110 @@
         }
     }
 }
+
+.commentSection{
+    height:auto;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #fff;
+    padding: 10px 1%;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #0000002c;
+
+    .commentInput {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        .image {
+            background-color: #fff;
+            border-radius: 50%;
+            }
+        .loggedOutIcon {
+            background-color: $borders-gray;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+        .sendCommentIcon{
+            color: $primary-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .input {
+            border-radius: 8px;
+            border: 1px solid $borders-gray;
+            width:90%;
+            padding: 12px;
+        }
+    }
+
+    .commentArea {
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            margin-top: 10px;
+        .image {
+            background-color: #fff;
+            border-radius: 50%;
+            }
+        .loggedOutIcon {
+            background-color: $borders-gray;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            }
+
+        .commentBubble{
+            background-color: $borders-gray;
+            height: auto;
+            border-radius: 8px;
+            width:80%;
+            display: flex;
+            flex-direction: column;
+            margin-left: 8px;
+            padding:10px ;
+                
+            .userInfo{
+                display: flex;
+                align-items: flex-start;
+                .userName{
+                    color:#344054;
+                    display: flex;
+                }
+                .commentTime{
+                    color: #667085;
+                    display: flex;
+                    margin-left: 10px;
+
+                }
+            }
+
+            .commentText{
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            }
+                
+            
+        }
+     
+    
+    
+    }
+}
+
+
+
+
 .rightSide {
     min-height: 100vh;
     display: flex;

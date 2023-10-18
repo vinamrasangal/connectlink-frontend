@@ -25,7 +25,7 @@ function postApiCall(url, body) {
 
 function putApiCall(url, body) {
     return axios
-        .put(process.env.REACT_APP_API_KEY + url, body, {
+        .put(process.env.NEXT_PUBLIC_API_BASE_URL + url, body, {
             headers: { Authorization: AuthStr },
         })
         .then((data) => {
@@ -35,7 +35,7 @@ function putApiCall(url, body) {
 
 function deleteApiCall(url, body) {
     return axios.delete(process.env.REACT_APP_API_KEY + url, {
-        headers: { Authorization: AuthStr },
+        headers: { Authorization: AuthStr},
         data: body
     }).then((data) => {
         return data;

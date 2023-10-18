@@ -45,6 +45,7 @@ const Login = () => {
             }
             dispatch(userLogin(login));
             setLoading(false);
+            router.push("/");
             // if (auth.isAuthorized) {
             //     setTimeout(() => {
             //         router.push('/connections')

@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import EditProfile from '@/components/EditProfile';
-import { useDispatch } from 'react-redux';
+// import EditProfile from '@/components/EditProfile';
+import { useDispatch, useSelector } from 'react-redux';
 import { currentPageAction } from '@/redux/CurrentPage';
-import { auth } from '@/config/firebaseConfig';
+import EditProfile from '@/components/EditProfile';
+import ViewProfile from './viewProfile';
+// import ViewProfile from './viewProfile';
 
 
 const Profile = () => {
-    
     const dispatch = useDispatch();
-    
-    
-    useEffect(()=>{
-        dispatch(currentPageAction.setPage({page:'profile'}))
-    },[])
-    if(!auth.currentUser) return <></>
-    return (
-        <>
-            <EditProfile />
-        </>
-    )
-}
 
+    if(typeof window !== "undefined" && localStorage.getItem("loginToken")) {
+    return <>
+    <EditProfile/>
+    </>}
+
+    
+    
+    
+}
 export default Profile
