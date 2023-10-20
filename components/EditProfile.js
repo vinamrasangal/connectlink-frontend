@@ -14,7 +14,7 @@ import Loading from '../nestedComponents/Loading';
 // import { ref,getDownloadURL, uploadBytes } from 'firebase/storage'; 
 import { alertActions } from '@/redux/AlertController';
 import Link from 'next/link';
-import { getProfile } from '@/redux/ActionCreators/profileAction';
+import { editProfile, getProfile } from '@/redux/ActionCreators/profileAction';
 
 
 
@@ -27,33 +27,48 @@ const EditProfile = () => {
     const [image,setImage] = useState(null);
     const [imageUrl,setImageUrl] = useState(null);;
     const [isFetching,setIsFetching] = useState(true);
-    const [profile,setProfile] = useState({ Fname:'',Lname:'', isAvailable:false,username:'',website:'',bio:'',country:'',timezone:'', email:'', profilePicture:'',coverPicture:'',});
+    const [profile,setProfile] = useState({ Fname:'',Lname:'', isAvailable:false, username:'',bio:'',country:'',timezone:'', email:'', profilePicture:'',coverPicture:'',portfolioUrl:'',linkedinUrl:'',industry:''});
 
 
     function handleInfoChange(e){
         const { value, name} = e.target;
-        setPersonalInfo(prev => ({...prev,[name]:value}));
+        setProfile(prev => ({...prev,[name]:value}));
     }
 
+    function handleSaveInfo(e){
+        e.preventDefault();
+        const obj = {
+            firstName:profile.Fname,
+            lastName:profile.Lname,
+            bio:profile.bio,
+            // industry:profile.industry,
+            // linkedinUrl:profile.linkedinUrl,
+            portfolioUrl:profile.portfolioUrl,
+            // email:profile.email,
+            // country:profile.country,
+            // timezone:profile.timezone,
+
+        }
+        console.log(obj);
+        dispatch(editProfile(obj));
+        dispatch(getProfile());
+        
+    }
+    
+    const data = useSelector(state => state.users.profile);
     
     useEffect(()=>{
         dispatch(getProfile());
-        const {username, email,profilePicture,coverPicture} =  data;
-        setProfile(prev =>({...prev,username:username, email:email, profilePicture:profilePicture ,coverPicture:coverPicture }))
+        const {username, email,profilePicture,coverPicture,firstName,lastName, linkedinUrl, bio, portfolioUrl,industry, country, timezone} =  data;
+        setProfile(prev =>({...prev, email:email, profilePicture:profilePicture ,coverPicture:coverPicture, Fname:firstName, Lname:lastName, bio:bio,portfolioUrl:portfolioUrl,country:country, timezone:timezone} ))
+        setIsFetching(false);
     },[])
     
-    const data = useSelector(state => state.users.profile)
   
     
     
 
-
-    
-
-
-    
-
-
+    if (isFetching) return <section className={styles.loadingContainer}><Loading /></section>
     return (
         
  
@@ -66,7 +81,7 @@ const EditProfile = () => {
                         {FiUser({})}
                     </span>
                 }
-                <h2 className={`${styles.name} dark-gray normal x-large-fs`}>{profile?.username}</h2>
+                <h2 className={`${styles.name} dark-gray normal x-large-fs`}>{profile?.Fname} {profile?.Lname}</h2>
                 <p className={`${styles.email} small-fs light light-gray`}>{profile?.email}</p>
                 <button className={`${styles.shareBtn} S-BTN`}>Share</button>
                 <Link href='/profile/viewProfile'>
@@ -123,7 +138,7 @@ const EditProfile = () => {
                     </DropImage>
                     <div className={styles.line}></div>
                     <button className={`${styles.cancelBtn} S-BTN`}>cancel</button>
-                    <button className={`${styles.saveBtn} P-BTN`} onClick={(e)=>handleSaveInfo(e)}>save changes</button>
+                    <button onClick={handleSaveInfo} className={`${styles.saveBtn} P-BTN`} >save changes</button>
                 </form>
             </article>
             <div className={styles.articlesLine}></div>
@@ -135,14 +150,14 @@ const EditProfile = () => {
                         className={`heading2-fs ${styles.availableBtn}`}
                         onClick={()=> setProfile(prev=>({...prev,isAvailable:!prev.isAvailable}))}
                         >
-                        {profile.isAvailable ?
+                        {profile?.isAvailable ?
                             BsToggleOn({})
                         :
                             BsToggleOff({})
                         }
                     </span>
-                    <p className={`${styles.availableTxt} normal normal-gray medium-fs`}>{profile.isAvailable? '' :'Not'} Available for projects</p>
-                    <p className={`${styles.availableState} light small-fs light-gray`}>I’m {profile.isAvailable? 'open and available' :'Not available'} for freelance work.</p>
+                    <p className={`${styles.availableTxt} normal normal-gray medium-fs`}>{profile?.isAvailable? '' :'Not'} Available for projects</p>
+                    <p className={`${styles.availableState} light small-fs light-gray`}>I’m {profile?.isAvailable? 'open and available' :'Not available'} for freelance work.</p>
                     <p className={`${styles.usernameUrl} light medium-fs light-gray`}>myconnectlink.com/</p>
                     <label htmlFor="username" className={`${styles.usernameLable} small-fs normal normal-gray`}>Username</label>
                     <input 
@@ -150,17 +165,17 @@ const EditProfile = () => {
                         id='username'
                         name='username'
                         value={profile?.username}
-                        onChange={(e)=>handleProfileChange(e)}
+                        onChange={(e)=>handleInfoChange(e)}
                         className={`${styles.username} medium-fs light dark-gray`}
                     />
-                    <p className={`${styles.websiteHttp} light medium-fs light-gray`}>http://</p>
+                    <p className={`${styles.websiteHttp} light medium-fs light-gray`}>https://</p>
                     <label htmlFor="website" className={`${styles.websiteLabel} small-fs normal normal-gray`}>Website</label>
                     <input 
                         type="text" 
-                        id='website'
-                        name='website'
-                        value={profile?.website}
-                        onChange={(e)=>handleProfileChange(e)}
+                        id='portfolioUrl'
+                        name='portfolioUrl'
+                        value={profile?.portfolioUrl}
+                        onChange={(e)=>handleInfoChange(e)}
                         className={`${styles.website} medium-fs light dark-gray`}
                     />
                     <label htmlFor="bio" className={`${styles.bioLabel} small-fs normal normal-gray`}>Bio</label>
@@ -169,16 +184,16 @@ const EditProfile = () => {
                         id='bio'
                         name='bio'
                         value={profile?.bio}
-                        onChange={(e)=>handleProfileChange(e)}
+                        onChange={(e)=>handleInfoChange(e)}
                         className={`${styles.bio} medium-fs light dark-gray`}
                     />
-                    <p className={`${styles.leftChar} light small-fs light-gray`}>{300 - profile.bio.length} characters left</p>
+                    <p className={`${styles.leftChar} light small-fs light-gray`}>{300 - profile.bio?.length} characters left</p>
                     <label htmlFor="country" className={`${styles.countryLabel} small-fs normal normal-gray`}>Country</label>
                     <select
                         name="country" 
                         id="country" 
                         className={`${styles.country} medium-fs light dark-gray`}
-                        onChange={(e)=>handleProfileChange(e)}
+                        onChange={(e)=>handleInfoChange(e)}
                         value={profile?.country}
                         >
                         <option value="">choose your country </option>
@@ -189,7 +204,7 @@ const EditProfile = () => {
                         name="timezone" 
                         id="timezone" 
                         className={`${styles.timezone} medium-fs light dark-gray`}
-                        onChange={(e)=>handleProfileChange(e)}
+                        onChange={(e)=>handleInfoChange(e)}
                         value={profile?.timezone}
                         >
                         <option value=""> choose your timezone </option>
@@ -197,7 +212,7 @@ const EditProfile = () => {
                     </select>
                     <div className={styles.line}></div>
                     <button className={`${styles.cancelBtn} S-BTN`}>cancel</button>
-                    <button className={`${styles.saveBtn} P-BTN`} onClick={(e)=>handleSaveProfile(e)}>save changes</button>
+                    <button onClick={(e)=>handleSaveInfo(e)} className={`${styles.saveBtn} P-BTN`} >save changes</button>
                 </form>
             </article>
         </section>

@@ -18,7 +18,7 @@ export const getPosts = (obj) => async (dispatch) => {
         const response = await getApiCall(`api/posts/all`);
         console.log(response.data)
         if (response.data) {
-            dispatch({ type: GET_ALL_POSTS, payload: response.data });
+            dispatch({ type: GET_ALL_POSTS, payload: response.data.AllPost });
         }
         else {
             returnErrors(dispatch, response.data.message, response.status)
@@ -60,12 +60,13 @@ export const addDiscussion = (obj) => async (dispatch) => {
     }
 }
 
-export const likeDislike = (obj, postId) => async (dispatch)=>{
+export const likeDislike = (postId,isLiked) => async (dispatch)=>{
+    const obj = {postId}
     try{
-        const response = await putApiCall(`api/posts/likedisikepost/${postId}`,obj)
+        const response = await putApiCall(`api/posts/likedisikepost`,obj)
         console.log(response.data);
         if(response.data.success){
-            dispatch({type:LIKEDISLIKE_POST, payload:postId})
+            dispatch({type:LIKEDISLIKE_POST, payload:{postId,isLiked}})
             returnErrors(dispatch, response.data.message, response.status)
         }
         else {
@@ -77,12 +78,13 @@ export const likeDislike = (obj, postId) => async (dispatch)=>{
 }
 
 
-export const addComment = (obj, postId) => async (dispatch)=>{
+export const addComment = (postId,obj) => async (dispatch)=>{
+    console.log(postId,obj);
     try{
         const response = await putApiCall(`api/posts/commentpost/${postId}`,obj)
         console.log(response.data);
         if(response.data.success){
-            dispatch({type:ADD_COMMENT, payload:response.data})
+            dispatch({type:ADD_COMMENT, payload:{obj,postId}})
             returnErrors(dispatch, response.data.message, response.status)
         }
         else {

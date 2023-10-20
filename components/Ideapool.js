@@ -23,7 +23,7 @@ const Ideapool = () => {
     const auth = useSelector(state => state.auth.user)
     const dispatch = useDispatch();
     const post = useSelector(state=> state.post);
-    const PostArray = post.allPosts.AllPost
+    const PostArray = post.allPosts
     const currentUser = useSelector(state=> state.users.profile)
     
 
@@ -92,7 +92,8 @@ const Ideapool = () => {
                         </li>
                     </ul>
                 </div>
-                {PostArray?.map((post)=><IdeapoolArticle key={post._id} title={post.title} type={post.type} tags={post.tags} desc={post.desc} question={post.question} likes= {post.likes} islike = {post.isLike} comments={post.comments} currentUser={currentUser} postId = {post._id} />)}
+                {PostArray?.map((post)=>
+                <IdeapoolArticle key={post._id} title={post.title} type={post.type} tags={post.tags} desc={post.desc} question={post.question} likes= {post.likes} isLiked = {post.isLiked} comments={post.comments} currentUser={currentUser} postId = {post._id} />)}
                 
             </section>
             <section className={styles.rightSide}>

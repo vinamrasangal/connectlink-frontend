@@ -2,7 +2,7 @@ import { OPEN_POST, CLOSE_POST, GET_ALL_POSTS , LIKEDISLIKE_POST, ADD_COMMENT } 
 
 let intialState = {
     isShow: false,
-    allPosts:{},
+    allPosts:[],
 }
 
 export default function postReducer(state = intialState, action) {
@@ -10,6 +10,7 @@ export default function postReducer(state = intialState, action) {
     switch (action.type) {
         case GET_ALL_POSTS:
             stateCopy.allPosts = action.payload;
+            return stateCopy;
         case CLOSE_POST:
             stateCopy.isShow = false;
             return stateCopy;
@@ -17,13 +18,21 @@ export default function postReducer(state = intialState, action) {
             stateCopy.isShow = true;
             return stateCopy;
         case LIKEDISLIKE_POST:
-            stateCopy.allPosts.AllPost.forEach(element => {
-                if(element._id === action.payload){
-                    element.isLike  === true;
+            stateCopy.allPosts.forEach((element) => {
+                if (element._id === action.payload.postId) {
+                    element.isLiked = !action.payload.isLiked; 
                 }
             });
             return stateCopy;
         case ADD_COMMENT:
+            let obj = {
+                text:action.payload.obj.desc,
+            }
+            stateCopy.allPosts.forEach((element) => {
+                if (element._id === action.payload.postId) {
+                    element.comments = [obj, ...element.comments] 
+                }
+            });
             return stateCopy
         default:
             return stateCopy;

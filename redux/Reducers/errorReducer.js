@@ -12,9 +12,9 @@ export default function errorReducer(state = intialState, action) {
     switch (action.type) {
         case GET_ERRORS:
             if (action.payload.status === 401) {
-                localStorage.clear();
+                // localStorage.clear();
                 stateCopy.status = action.payload.status;
-                window.location.replace('/login');
+                // window.location.replace('/login');
             }
             else if (action.payload.status === 404) {
                 stateCopy.successMessage = true;

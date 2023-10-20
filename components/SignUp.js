@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 
 const SignUp = () => {
     const router = useRouter();
-    const [signUpData, setSignUpData] = useState({ name: '', email: '', category: '', password: '', confirmPassword: '', agreement: false });
+    const [signUpData, setSignUpData] = useState({ Fname:"", Lname:"", username: '', email: '', category: '', password:'', confirmPassword: '', agreement: false });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -41,9 +41,9 @@ const SignUp = () => {
     }
     function handleClick(e) {
         e.preventDefault();
-        const { name, email, category, password, confirmPassword, agreement } = signUpData
+        const {Fname,Lname, email, category, password, confirmPassword, agreement } = signUpData
 
-        if (name === '' || email === '' || category === '' || password === '' || confirmPassword === '') {
+        if (Fname === ""|| Lname==="" || email === '' || category === '' || password === '' || confirmPassword === '') {
             dispatch(returnErrors(dispatch,"make sure to fill up all the inputs",202))
         } else if (!agreement) {
             dispatch(returnErrors(dispatch,"make sure to agree to terms and conditions of platform",202))
@@ -68,7 +68,8 @@ const SignUp = () => {
         else{
             setLoading(true);
             const obj = {
-                username:signUpData.name,
+                firstname:signUpData.Fname,
+                lastname:signUpData.Lname,
                 email: signUpData.email,
                 password:signUpData.password
             }
@@ -105,15 +106,25 @@ const SignUp = () => {
                 </Alert>
             </Snackbar>
             <form action="" className={`${styles.form} medium-fs normal-gray`} >
-                <label htmlFor="name" className={`${styles.formLabel} normal`}>Username</label>
+                <label htmlFor="Fname" className={`${styles.formLabel} normal`}>First name</label>
                 <input
                     type="text"
-                    name='name'
-                    id='name'
+                    name='Fname'
+                    id='Fname'
                     className={`${styles.formInput} light-gray light`}
-                    placeholder='name'
+                    placeholder='First name'
                     onChange={(e) => handleChange(e)}
-                    value={signUpData.name}
+                    value={signUpData.Fname}
+                />
+                <label htmlFor="Fname" className={`${styles.formLabel} normal`}>Last name</label>
+                <input
+                    type="text"
+                    name='Lname'
+                    id='Lname'
+                    className={`${styles.formInput} light-gray light`}
+                    placeholder='Last name'
+                    onChange={(e) => handleChange(e)}
+                    value={signUpData.Lname}
                 />
                 <label htmlFor="email" className={`${styles.formLabel} normal`}>Email</label>
                 <input

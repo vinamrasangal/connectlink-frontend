@@ -14,7 +14,7 @@ import { logout } from '../redux/ActionCreators/authAction';
 const SideBar = () => {
     // const user = JSON.parse(localStorage.getItem('user'));
     // const user = { login: true }
-    const user = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.users.profile);
     // console.log(user)
     const router = useRouter();
     const [active, setActive] = useState(false);
@@ -140,7 +140,7 @@ const SideBar = () => {
                                 {FiUser({})}
                             </span>
                         }
-                        <p className={`${styles.name} small-fs normal dark-gray`}>{user.username}</p>
+                        <p className={`${styles.name} small-fs normal dark-gray`}>{user.firstName} {user.lastName}</p>
                         {/* {auth.currentUser?
                             <span className={`${styles.email} small-fs light light-gray`}>{auth.currentUser.email}</span>
                                 :

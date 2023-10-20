@@ -248,6 +248,12 @@
             align-items: center;
             justify-content: center;
         }
+        .loadSendCommentIcon{
+            color: $borders-gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .input {
             border-radius: 8px;
             border: 1px solid $borders-gray;
@@ -310,6 +316,19 @@
      
     
     
+    }
+    .showMoreButtonSpan{
+        width: 100%;
+        display: flex;
+        background-color: #fff;
+        justify-content: right;
+        margin-top: 10px;
+
+        .showMoreButton{
+            display: flex;
+            color:#344054 ;
+            background-color: #fff;
+        }
     }
 }
 
