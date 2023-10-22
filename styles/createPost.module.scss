@@ -72,6 +72,9 @@
                 .upload {
                     margin: 0;
                     position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
                 .upload {
                     border: 2px solid $borders-gray;

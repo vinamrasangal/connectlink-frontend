@@ -13,6 +13,7 @@ export default function postReducer(state = intialState, action) {
             return stateCopy;
         case CLOSE_POST:
             stateCopy.isShow = false;
+            console.log(stateCopy.isShow);
             return stateCopy;
         case OPEN_POST:
             stateCopy.isShow = true;

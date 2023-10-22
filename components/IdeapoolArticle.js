@@ -29,14 +29,15 @@ const IdeapoolArticle = ({
   currentUser,
   postId,
   isLiked,
+  img
 }) => {
   // console.log(isLiked);
   const dispatch = useDispatch();
-  const[loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isCommentOpen, setIsCommentOpen] = useState(true);
   const [commentInput, setCommentInput] = useState("");
   const [isPostShowen, setIsPostShowen] = useState(false);
-  const[showAllComments , setShowAllComments] = useState(false);
+  const [showAllComments, setShowAllComments] = useState(false);
   const [shareData, setShareData] = useState({
     url: "",
     quote: "",
@@ -47,13 +48,13 @@ const IdeapoolArticle = ({
   // const id = JSON.parse(localStorage.getItem("user"))._id
   const likesCount = likes.length;
   // const likeObj = {userId:currentUser._id}
-  console.log(isLiked);
+  // console.log(isLiked);
 
-  const toggleComments = () =>{
+  const toggleComments = () => {
     setShowAllComments(!showAllComments);
-  }
+  };
 
-  const visibleComments = showAllComments ? comments:comments.slice(0,2)
+  const visibleComments = showAllComments ? comments : comments.slice(0, 2);
   const handleCommentClick = () => {
     setIsCommentOpen((prev) => !prev);
   };
@@ -68,8 +69,8 @@ const IdeapoolArticle = ({
 
   const handleCommentSubmit = () => {
     setLoading(true);
-    const commentObj = { desc: commentInput, userId:id };
-    dispatch(addComment(postId,commentObj));
+    const commentObj = { desc: commentInput, userId: id };
+    dispatch(addComment(postId, commentObj));
     setLoading(false);
   };
 
@@ -77,8 +78,8 @@ const IdeapoolArticle = ({
     <>
       <article className={`${styles.post} ${isPostShowen && styles.showen}`}>
         <div className={`${styles.hashTags} small-fs normal`}>
-          <span className={styles.hash}> {tags} </span>
-          <span className={`${styles.hashCount} normal-gray`}>+4</span>
+          <span className={styles.hash}> {tags[0]} </span>
+          <span className={`${styles.hashCount} normal-gray`}>{`+ ${tags.length -1}`}</span>
         </div>
         <span className={`${styles.more} large-fs normal-gray`}>
           {FiMoreHorizontal({})}
@@ -88,45 +89,63 @@ const IdeapoolArticle = ({
           {type === "ask" ? question : title}{" "}
         </h2>
         <p className={`${styles.text} normal-gray light medium-fs`}>{desc}</p>
-        <h2 className={`${styles.roles} semi-bold normal-gray medium-fs`}>
-          Open Roles
-        </h2>
-        <ul className={`${styles.ul} normal-gray light medium-fs`}>
-          <li className={styles.li}>
-            <p className={styles.p}>Android developer</p>
-            <span className={`${styles.span} light light-gray`}>1-2 YOE</span>
-            <span className={`${styles.span} ${styles.join} normal`}>
-              Join team
+
+        {type === "share" ? (
+          <>
+            <img src={img} alt="image" width={400} height={300}/>
+            <h2 className={`${styles.roles} semi-bold normal-gray medium-fs`}>
+              Open Roles
+            </h2>
+
+            <ul className={`${styles.ul} normal-gray light medium-fs`}>
+              <li className={styles.li}>
+                <p className={styles.p}>Android developer</p>
+                <span className={`${styles.span} light light-gray`}>
+                  1-2 YOE
+                </span>
+                <span className={`${styles.span} ${styles.join} normal`}>
+                  Join team
+                </span>
+              </li>
+              <li className={styles.li}>
+                <p className={styles.p}>IOS developer</p>
+                <span className={`${styles.span} light light-gray`}>
+                  2-3 YOE
+                </span>
+                <span className={`${styles.span} ${styles.join} normal`}>
+                  Join team
+                </span>
+              </li>
+              <li className={styles.li}>
+                <p className={styles.p}>Backend developer</p>
+                <span className={`${styles.span} light light-gray`}>
+                  3-4 YOE
+                </span>
+                <span className={`${styles.span} ${styles.join} normal`}>
+                  Join team
+                </span>
+              </li>
+              <li className={styles.li}>
+                <p className={styles.p}>UI/UX designer</p>
+                <span className={`${styles.span} light light-gray`}>
+                  Any YOE
+                </span>
+                <span className={`${styles.span} ${styles.join} normal`}>
+                  Join team
+                </span>
+              </li>
+            </ul>
+            <span
+              className={`${styles.seeMore} medium-fs normal`}
+              onClick={() => setIsPostShowen((prev) => !prev)}
+            >
+              {isPostShowen ? "See less" : "See more"}
             </span>
-          </li>
-          <li className={styles.li}>
-            <p className={styles.p}>IOS developer</p>
-            <span className={`${styles.span} light light-gray`}>2-3 YOE</span>
-            <span className={`${styles.span} ${styles.join} normal`}>
-              Join team
-            </span>
-          </li>
-          <li className={styles.li}>
-            <p className={styles.p}>Backend developer</p>
-            <span className={`${styles.span} light light-gray`}>3-4 YOE</span>
-            <span className={`${styles.span} ${styles.join} normal`}>
-              Join team
-            </span>
-          </li>
-          <li className={styles.li}>
-            <p className={styles.p}>UI/UX designer</p>
-            <span className={`${styles.span} light light-gray`}>Any YOE</span>
-            <span className={`${styles.span} ${styles.join} normal`}>
-              Join team
-            </span>
-          </li>
-        </ul>
-        <span
-          className={`${styles.seeMore} medium-fs normal`}
-          onClick={() => setIsPostShowen((prev) => !prev)}
-        >
-          {isPostShowen ? "See less" : "See more"}
-        </span>
+          </>
+        ) : (
+          <></>
+        )}
+
         <p className={`${styles.details} light-gray light medium-fs`}>
           {" "}
           <span className="semi-bold">Posted by</span> Jenny Wilson{" "}
@@ -148,7 +167,7 @@ const IdeapoolArticle = ({
             {FiMessageCircle({})}
           </span>
           <span className={`${styles.count} medium-fs light light-gray`}>
-            20
+            {comments.length}
           </span>
         </button>
         <button
@@ -190,7 +209,9 @@ const IdeapoolArticle = ({
               onChange={handleCommentChange}
             />
             <span
-              className={`${loading ? styles.loadSendCommentIcon : styles.sendCommentIcon } x-large-fs `}
+              className={`${
+                loading ? styles.loadSendCommentIcon : styles.sendCommentIcon
+              } x-large-fs `}
               onClick={handleCommentSubmit}
             >
               {FiSend({})}
@@ -201,31 +222,36 @@ const IdeapoolArticle = ({
           {/* {console.log(comments)} */}
           {visibleComments.map((comment) => {
             return (
-            <div className={styles.commentArea} key={comment.id}>
-              <span className={`${styles.loggedOutIcon} x-large-fs dark-gray`}>
-                {FiUser({})}
-              </span>
-              <span className={styles.commentBubble}>
-                <div className={styles.userInfo}>
-                  <p className={`${styles.userName} large-fs bold normal-gray`}>
-                    John Doe
-                  </p>
-                  <p className={`${styles.commentTime}`}> 10 hours ago</p>
-                </div>
-                <p>{comment.text}</p>
-              </span>
-            </div>
-            )
+              <div className={styles.commentArea} key={comment.id}>
+                <span
+                  className={`${styles.loggedOutIcon} x-large-fs dark-gray`}
+                >
+                  {FiUser({})}
+                </span>
+                <span className={styles.commentBubble}>
+                  <div className={styles.userInfo}>
+                    <p
+                      className={`${styles.userName} large-fs bold normal-gray`}
+                    >
+                      John Doe
+                    </p>
+                    <p className={`${styles.commentTime}`}> 10 hours ago</p>
+                  </div>
+                  <p>{comment.text}</p>
+                </span>
+              </div>
+            );
           })}
-          {comments.length >2 &&(
+          {comments.length > 2 && (
             <span className={styles.showMoreButtonSpan}>
-              <button onClick={toggleComments} className={styles.showMoreButton}>
-              {showAllComments ? "Less comments" : "...More Comments" }
-            </button>
+              <button
+                onClick={toggleComments}
+                className={styles.showMoreButton}
+              >
+                {showAllComments ? "Less comments" : "...More Comments"}
+              </button>
             </span>
-            
           )}
-
         </div>
       ) : (
         <></>

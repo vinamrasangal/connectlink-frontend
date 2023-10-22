@@ -4,11 +4,13 @@ import { returnErrors } from "./errorAction";
 
 
 export const closePost = () => async (dispatch) => {
+    console.log("close post happened");
     dispatch({ type: CLOSE_POST });
 }
 
 
 export const openPost = () => async (dispatch) => {
+    console.log('Open post happened')
     dispatch({ type: OPEN_POST });
 }
 
@@ -47,6 +49,22 @@ export const addQuestion = (obj) => async (dispatch) => {
 export const addDiscussion = (obj) => async (dispatch) => {
     try {
         const response = await postApiCall(`api/posts/createpost/discuss`, obj);
+        console.log(response.data)
+        if (response.data.success) {
+            // dispatch({ type: ADD_QUESTION, payload: response.data });
+            returnErrors(dispatch, response.data.message, response.status)
+        }
+        else {
+            returnErrors(dispatch, response.data.message, response.status)
+        }
+    } catch (error) {
+        returnErrors(dispatch, error.response?.data.message, error.response?.status)
+    }
+}
+
+export const addIdea = (obj) => async (dispatch) => {
+    try {
+        const response = await postApiCall(`api/posts/createpost/share`, obj);
         console.log(response.data)
         if (response.data.success) {
             // dispatch({ type: ADD_QUESTION, payload: response.data });

@@ -42,17 +42,23 @@
         }
     }
     .users {
+        box-shadow: 2px 2px 5px #0000002c;
+        margin-bottom:10px ;
         .usersHolder {
+            cursor: pointer;
             display: flex;
             align-items: flex-start;
             flex-wrap: wrap;
-            width: 100%;
+            width: 80%;
             height: fit-content;
             .user {
                 position: relative;
+                width: 100%;
+                padding: 30px;
                 .image {
                     position: absolute;
                     border-radius: 50%;
+                    background:$borders-gray;
                 }
                 .name {
                     position: absolute;
@@ -101,14 +107,16 @@
         }
     }
     .users {
-        min-height: calc(100vh - 160px);
-        grid-column: 1/13;
+        min-height: fit-content;
+        grid-column: 1/13;;
         margin-top: 20px;
+        margin-bottom:2px ;
         .usersHolder {
+            max-width:100% ;
             justify-content: flex-start;
             gap: 40px;
             .user {
-                width: calc((100% / 4) - 30px);
+                width:100%;
                 min-width: 330px;
                 height: 140px;
                 .image {
@@ -165,14 +173,16 @@
         }
     }
     .users {
-        min-height: calc(100vh - 160px);
+        min-height: fit-content;
         grid-column: 1/13;
         margin-top: 20px;
         .usersHolder {
             justify-content: flex-start;
             gap: 20px;
+            width: 80%;
+            height: fit-content;
             .user {
-                width: calc((100% / 3) - 15px);
+                width: 80%;
                 min-width: 220px;
                 height: 140px;
                 .image {
@@ -229,14 +239,14 @@
         }
     }
     .users {
-        min-height: calc(100vh - 160px);
+        min-height: fit-content;
         grid-column: 1/13;
         margin-top: 20px;
         .usersHolder {
             justify-content: flex-start;
             gap: 30px;
             .user {
-                width: calc((100% / 2) - 20px);
+                width: 80%;
                 min-width: 220px;
                 height: 140px;
                 .image {
@@ -293,14 +303,14 @@
         }
     }
     .users {
-        min-height: calc(100vh - 110px);
+        min-height: fit-content;
         grid-column: 1/13;
         margin-top: 10px;
         .usersHolder {
             justify-content: flex-start;
             gap: 20px;
             .user {
-                width: calc((100% / 2) - 10px);
+                width: 80%;
                 min-width: 235px;
                 height: 140px;
                 .image {
@@ -363,7 +373,7 @@
         }
     }
     .users {
-        min-height: calc(100vh - 110px);
+        min-height: fit-content;
         grid-column: 1/7;
         margin-top: 10px;
         .usersHolder {
@@ -387,10 +397,8 @@
                     left: 70px;
                 }
                 .desc {
-                    width: 100%;
-                    text-align: center;
                     top: 60px;
-                    left: 0px;
+                    left: 70px;
                 }
             }
         }
@@ -435,7 +443,7 @@
         }
     }
     .users {
-        min-height: calc(100vh - 110px);
+        min-height: fit-content;
         grid-column: 1/7;
         margin-top: 10px;
         .usersHolder {

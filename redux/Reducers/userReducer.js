@@ -1,7 +1,8 @@
-import { EDIT_PROFILE, GET_PROFILE } from "../actionType";
+import { EDIT_PROFILE, GET_PROFILE, RECOMMEND_USERS } from "../actionType";
 
 let intialState = {
-    profile:{}
+    profile:{},
+    recommendUsers:[]
 }
 
 export default function userReducer(state = intialState, action) {
@@ -19,6 +20,9 @@ export default function userReducer(state = intialState, action) {
                 }
             }
             stateCopy.profile = updatedProfile;
+            return stateCopy;
+        case RECOMMEND_USERS:
+            stateCopy.recommendUsers =  action.payload;
             return stateCopy;
         default:
             return stateCopy;

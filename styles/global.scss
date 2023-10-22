@@ -292,7 +292,9 @@ input {
     color: $black-color;
 }
 
-
+.d-none{
+    display: none;
+}
 
 .alert {
     position: fixed;
