@@ -8,10 +8,13 @@ import { getProfile } from "@/redux/ActionCreators/profileAction";
 // import ViewProfile from './viewProfile';
 
 const Profile = () => {
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  if(typeof window !== "undefined" && localStorage.getItem("loginToken")) {
-  return <><EditProfile /></>
-  }
+  return (
+    <>
+      <EditProfile />
+    </>
+  );
 };
 export default Profile;

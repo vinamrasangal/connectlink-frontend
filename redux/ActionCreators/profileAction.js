@@ -23,6 +23,7 @@ export const editProfile  = (obj) => async (dispatch) => {
         console.log(response.data)
         if (response.data) {
             dispatch({ type:EDIT_PROFILE, payload: obj});
+            returnErrors(dispatch, response.data.message, response.status)
         }
         else {
             returnErrors(dispatch, response.data.message, response.status)

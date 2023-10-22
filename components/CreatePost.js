@@ -28,7 +28,15 @@ const CreatePost = () => {
     desc: "",
     tags: "",
   });
-  const [ideaErrors, setIdeaErrors] = useState({});
+  const [ideaErrors, setIdeaErrors] = useState({
+    title:"",
+    desc:"",
+    industry: "",
+    tags: "",
+    links: "",
+    image: "",
+
+  });
   const dispatch = useDispatch();
 
   const [ideaFormData, setIdeaFormData] = useState({
@@ -58,8 +66,17 @@ const CreatePost = () => {
     setCurrent(type);
     if (type !== "discuss") {
       setDiscussErrors({ title: "", desc: "", tags: "" });
-    } else if (type !== "question") {
-      setQuestionErrors({ question: "", desc: "", title: "" });
+    } 
+    if (type !== "question") {
+      setQuestionErrors({ question: "", desc: "", tags: "" });
+    }
+    if(type!=="post"){
+      setIdeaErrors({title:"",
+      desc:"",
+      industry: "",
+      tags: "",
+      links: "",
+      image: "",})
     }
   };
   function handleAddRoles() {
@@ -71,6 +88,7 @@ const CreatePost = () => {
 
   function ideaFormChange(e, i) {
     const { name, value } = e.target;
+    const newErrors = { ...ideaErrors };
     if (name === "discussion" || name === "requirement") {
       setIdeaFormData((prev) => {
         let newObj = { ...prev, [name]: !prev[name] };
@@ -92,9 +110,39 @@ const CreatePost = () => {
           roles: newarr,
         };
       });
-    } else {
-      setIdeaFormData((prev) => ({ ...prev, [name]: value }));
     }
+    if (name === "title" && value === "") {
+      newErrors.title = "Title is required";
+    } else {
+      newErrors.title = "";
+    }
+    if (name === "desc" && value === "") {
+      newErrors.desc = "Description is required";
+    } else {
+      newErrors.desc = "";
+    }
+    if (name === "tags" && value === "") {
+      newErrors.tags = "Tags is required";
+    } else {
+      newErrors.tags = "";
+    }
+    if (name === "links" && value === "") {
+      newErrors.links = "links is required";
+    } else {
+      newErrors.links = "";
+    }
+    if (name === "industry" && value === "") {
+      newErrors.industry = "industry is required";
+    } else {
+      newErrors.industry = "";
+    }
+    if (name === "image" && value === "") {
+      newErrors.image = "image is required";
+    } else {
+      newErrors.image = "";
+    }
+    setIdeaFormData((prev) => ({ ...prev, [name]: value }));
+
   }
 
   function questionFormChange(e) {
@@ -170,17 +218,42 @@ const CreatePost = () => {
     console.log(e);
     e.preventDefault();
     if (type === "post") {
-      const { title, desc, industry, tags, links } = ideaFormData;
-      let data = new FormData();
-      data.append("title", title);
-      data.append("desc", desc);
-      data.append("tags", tags);
-      data.append("image", image);
-      data.append("industry", industry);
-      data.append("links", links);
-
-      await dispatch(addIdea(data));
-      await handleCancel(e);
+      const errors = {};
+      if (!ideaFormData.title) {
+        errors.title = "Title is required";
+        setIdeaErrors(errors);
+      } else if (!ideaFormData.desc) {
+        errors.desc = "Description is required";
+        setIdeaErrors(errors);
+      } else if (!ideaFormData.tags) {
+        errors.tags = "Tags is required";
+        setIdeaErrors(errors);
+      }else if (!ideaFormData.links){
+        errors.links = "Links is required";
+        setIdeaErrors(errors);
+      }else if(!ideaFormData.industry){
+        errors.industry = "Industry is required";
+        setIdeaErrors(errors);
+      }else if(!ideaFormData.image){
+        errors.image = "image is required";
+        setIdeaErrors(errors);
+      }
+      else {
+        setIdeaErrors({ title: "", desc: "", tags: "" });
+        const { title, desc, industry, tags, links } = ideaFormData;
+        let data = new FormData();
+        data.append("title", title);
+        data.append("desc", desc);
+        data.append("tags", tags);
+        data.append("image", image);
+        data.append("industry", industry);
+        data.append("links", links);
+  
+        await dispatch(addIdea(data));
+        await handleCancel(e);
+        
+      }
+     
     } else if (type === "question") {
       const errors = {};
       if (!questionFormData.question) {
@@ -198,6 +271,7 @@ const CreatePost = () => {
         await dispatch(addQuestion(questionFormData));
         await handleCancel(e);
       }
+      console.log(errors);
     } else if (type === "discussion") {
       const errors = {};
       if (!discussionFormData.title) {
@@ -274,6 +348,9 @@ const CreatePost = () => {
               value={ideaFormData.title}
               name="title"
             />
+            {ideaErrors?.title && (
+              <span className={styles.error}>{ideaErrors.title}</span>
+            )}
             <label className="small-fs normal dark-gray" htmlFor="desc">
               Idea Description
             </label>
@@ -286,6 +363,9 @@ const CreatePost = () => {
               value={ideaFormData.desc}
               name="desc"
             />
+            {ideaErrors?.desc && (
+              <span className={styles.error}>{ideaErrors.desc}</span>
+            )}
             <label className="small-fs normal dark-gray" htmlFor="industry">
               Industry
             </label>
@@ -296,6 +376,9 @@ const CreatePost = () => {
               value="software"
               name="industry"
             ></select>
+            {ideaErrors?.industry && (
+              <span className={styles.error}>{ideaErrors.industry}</span>
+            )}
             <label className="small-fs normal dark-gray" htmlFor="tags">
               Tags
             </label>
@@ -308,6 +391,9 @@ const CreatePost = () => {
               value={ideaFormData.tags}
               name="tags"
             />
+            {ideaErrors?.tags && (
+              <span className={styles.error}>{ideaErrors.tags}</span>
+            )}
             <div className={styles.add}>
               <label
                 className={`${styles.linksLabel} small-fs normal dark-gray`}
@@ -324,6 +410,7 @@ const CreatePost = () => {
                 value={ideaFormData.links}
                 name="links"
               />
+              
               <label
                 className={`${styles.imageLabel} small-fs normal dark-gray`}
                 htmlFor="desc"
@@ -331,7 +418,7 @@ const CreatePost = () => {
                 Add image
               </label>
               <div   className={`${styles.upload} S-BTN`}>
-                <label for="fileInput">
+                <label htmlFor="fileInput">
                     {FiUpload({})} Upload
                 </label>
                 <input
@@ -341,6 +428,7 @@ const CreatePost = () => {
                   className="d-none"
                 />
               </div>
+              
               {/* <div>
                 <Input type="file" onChange={handleImage}/>
                 <button
@@ -359,6 +447,12 @@ const CreatePost = () => {
                 </button>
               </DropImage> */}
             </div>
+            {ideaErrors?.links && (
+              <span className={styles.error}>{ideaErrors.links}</span>
+            )}
+            {ideaErrors?.image && (
+              <span className={styles.error}>{ideaErrors.image}</span>
+            )}
             <div className={styles.checkBoxes}>
               <input
                 type="checkbox"
@@ -478,8 +572,8 @@ const CreatePost = () => {
               name="question"
               onChange={(e) => questionFormChange(e)}
             />
-            {discussErrors?.title && (
-              <span className={styles.error}>{discussErrors.title}</span>
+            {questionErrors?.question && (
+              <span className={styles.error}>{questionErrors.question}</span>
             )}
             <label className="small-fs normal dark-gray" htmlFor="desc">
               Description
@@ -493,8 +587,8 @@ const CreatePost = () => {
               name="desc"
               onChange={(e) => questionFormChange(e)}
             />
-            {discussErrors?.desc && (
-              <span className={styles.error}>{discussErrors.desc}</span>
+            {questionErrors?.desc && (
+              <span className={styles.error}>{questionErrors.desc}</span>
             )}
             <label className="small-fs normal dark-gray" htmlFor="tags">
               Tags
@@ -508,8 +602,8 @@ const CreatePost = () => {
               name="tags"
               onChange={(e) => questionFormChange(e)}
             />
-            {discussErrors?.tags && (
-              <span className={styles.error}>{discussErrors.tags}</span>
+            {questionErrors?.tags && (
+              <span className={styles.error}>{questionErrors.tags}</span>
             )}
             <div className={styles.btns}>
               <button

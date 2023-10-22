@@ -8,15 +8,9 @@ import allCountries from "@/suggestions/allCountries";
 import timeZones from "@/suggestions/timeZones";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../nestedComponents/Loading";
-// import { doc, getDoc,updateDoc } from 'firebase/firestore';
-// import { auth, db } from '@/config/firebaseConfig';
-// import { storage } from '@/config/firebaseConfig';
-// import { ref,getDownloadURL, uploadBytes } from 'firebase/storage';
-import { alertActions } from "@/redux/AlertController";
 import Link from "next/link";
 import { editProfile, getProfile } from "@/redux/ActionCreators/profileAction";
-import { Snackbar } from "@mui/material";
-import Alert from "@mui/material";
+
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -46,7 +40,7 @@ const EditProfile = () => {
     setProfile((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSaveInfo(e) {
+  const handleSaveInfo = (e) => {
     e.preventDefault();
     const obj = {
       firstName: profile.Fname,
@@ -66,6 +60,9 @@ const EditProfile = () => {
   }
 
   const data = useSelector((state) => state.users.profile);
+
+  // const error = useSelector((state)=>state.error);
+  // console.log(error);
 
   useEffect(() => {
     dispatch(getProfile());
