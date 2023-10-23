@@ -5,6 +5,7 @@ import { BiFilter } from "react-icons/bi";
 import { FiUserCheck } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile, recommendUsers } from "@/redux/ActionCreators/profileAction";
+import { useRouter } from "next/router";
 
 const connections = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,11 @@ const connections = () => {
   );
   const currentUser = useSelector((state)=>state.users.profile);
   console.log(currentUser);
+  const router = useRouter();
+
+  const handleUserClick= (userId) =>{
+    router.push(`/profile/viewProfile?id=${userId}`)
+  }
 
 
   const newArray = recommendUsersArray.filter((user) => user._id !== currentUser._id);
@@ -62,7 +68,7 @@ const connections = () => {
         return (
           <article key={user.id} className={styles.users}>
             <div className={styles.usersHolder}>
-              <div className={styles.user}>
+              <div className={styles.user} onClick={()=>handleUserClick(user?._id)}>
                 <img
                   className={styles.image}
                   src="/personal-image.png"

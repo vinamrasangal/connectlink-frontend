@@ -8,7 +8,8 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 // import { ref, getDownloadURL } from 'firebase/storage';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../nestedComponents/Loading';
-import { getProfile } from '@/redux/ActionCreators/profileAction';
+import { getProfile, viewProfile } from '@/redux/ActionCreators/profileAction';
+import { useRouter } from 'next/router';
 // import { onAuthStateChanged } from 'firebase/auth';
 
 const ViewProfile = () => {
@@ -16,54 +17,19 @@ const ViewProfile = () => {
     const [data, setData] = useState({});
     const [isFetching, setIsFetching] = useState(true);
     const [imageUrl, setImageUrl] = useState('');
-    
+    const router = useRouter();
+    const{id} = router.query;
+
     useEffect(() => {
-        dispatch(getProfile())
+        dispatch(viewProfile(id))
         setIsFetching(false);
     }, [])
-    const profile = useSelector(state=> state.users.profile);
+
+    const profile = useSelector(state=> state.users.viewProfile);
     console.log(profile);
     
-    // const getProfile = async () => {
-        //     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     })
-        //     const json = await res.json();
-        //     console.log(json)
-        //     if (res.ok) {
-        //         if (rememberMe) {
-        //             window.localStorage.setItem('user', JSON.stringify(json));
-        //         }
-        //         dispatch(alertActions.showAlert({ msg: 'logged in successfully', showen: true, type: 'success' }));
-        //         dispatch(userActions.setUserData({ username: json.username, email: json.email, token: json.token }));
-        //         setIsFetching(false);
-        //     } else {
-        //         dispatch(alertActions.showAlert({ msg: json.message, showen: true, type: 'error' }));
-        //     }
-        // }
-        // if(auth.currentUser){
-        //     const docRef = doc(db,'userData', auth.currentUser.uid);
-        //     getDoc(docRef)
-        //     .then(res => {
-        //         setData(res.data());
-        //         const storageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
-        //         getDownloadURL(storageRef)
-        //         .then(url => {
-        //             setImageUrl(url);
-        //         })
-        //         .catch(()=> setImageUrl(''))
-        //         .finally(()=> setIsFetching(false))
-        //     });
-        // }else {
-        //     setImageUrl('')
-        //     setData({})
-        //     setIsFetching(false)
-        // }
-
-
+    
+    
     if (isFetching) return <section className={styles.loadingContainer}><Loading /></section>
     return (
         <section className={styles.container}>
@@ -156,3 +122,41 @@ const ViewProfile = () => {
 }
 
 export default ViewProfile
+// const getProfile = async () => {
+    //     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     const json = await res.json();
+    //     console.log(json)
+    //     if (res.ok) {
+    //         if (rememberMe) {
+    //             window.localStorage.setItem('user', JSON.stringify(json));
+    //         }
+    //         dispatch(alertActions.showAlert({ msg: 'logged in successfully', showen: true, type: 'success' }));
+    //         dispatch(userActions.setUserData({ username: json.username, email: json.email, token: json.token }));
+    //         setIsFetching(false);
+    //     } else {
+    //         dispatch(alertActions.showAlert({ msg: json.message, showen: true, type: 'error' }));
+    //     }
+    // }
+    // if(auth.currentUser){
+    //     const docRef = doc(db,'userData', auth.currentUser.uid);
+    //     getDoc(docRef)
+    //     .then(res => {
+    //         setData(res.data());
+    //         const storageRef = ref(storage,`images/personalImage_${auth.currentUser.uid}`);
+    //         getDownloadURL(storageRef)
+    //         .then(url => {
+    //             setImageUrl(url);
+    //         })
+    //         .catch(()=> setImageUrl(''))
+    //         .finally(()=> setIsFetching(false))
+    //     });
+    // }else {
+    //     setImageUrl('')
+    //     setData({})
+    //     setIsFetching(false)
+    // }

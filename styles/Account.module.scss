@@ -27,6 +27,18 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
+            .nameDetails{
+                display:flex ;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                .nameInputsdiv{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                }
+            }
             .passwordHolder {
                 position: relative;
                 display: flex;
@@ -39,7 +51,8 @@
                     transform: translate(-50%,-45%);
                 }
             }
-            .formInput {
+            
+            .formInput,.nameInputs {
                 border-radius: 8px;
                 border: 1px solid $borders-gray;
             }
@@ -115,6 +128,11 @@
             .formLabel {
                 margin-top: 15px;
             }
+            .nameInputs{
+                width:185px;
+                padding: 10px 14px;
+                margin:2px;
+            }
             .formInput {
                 width: 380px;
                 padding: 10px 14px;
@@ -171,6 +189,11 @@
         .form {
             .formLabel {
                 margin-top: 20px;
+            }
+            .nameInputs{
+                width:165px;
+                padding: 8px 12px;
+                margin:2px;
             }
             .formInput {
                 width: 340px;
@@ -235,12 +258,18 @@
         width: 100%;
         gap: 15px;
         .form {
+            align-items: center;
             .formLabel {
                 margin-top: 15px;
             }
+            .nameInputs{
+                width:160px;
+                padding: 8px 12px;
+                margin:2px;
+            }
             .formInput {
                 width: 325px;
-                padding: 10px 8px;
+                padding: 8px 12px;
             }
             .passwordP {
                 width: 325px;
@@ -303,6 +332,11 @@
         .form {
             .formLabel {
                 margin-top: 15px;
+            }
+            .nameInputs{
+                width:120px;
+                padding: 8px 8px;
+                margin:2px;
             }
             .formInput {
                 width: 240px;

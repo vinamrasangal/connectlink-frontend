@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../nestedComponents/Loading";
 import Link from "next/link";
 import { editProfile, getProfile } from "@/redux/ActionCreators/profileAction";
+import { useRouter } from "next/router";
 
 
 const EditProfile = () => {
   const dispatch = useDispatch();
-  // const [userInfo,setUserInfo] = useState({LName:'',FName:'',email:'',userImage:''})
-  // const [personalInfo,setPersonalInfo] = useState({Fname:'',Lname:'',email:''});
+  const router = useRouter();
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -38,6 +38,12 @@ const EditProfile = () => {
   function handleInfoChange(e) {
     const { value, name } = e.target;
     setProfile((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const handleViewProfile = (userId,e) =>{
+    e.preventDefault();
+    router.push(`/profile/viewProfile?id=${userId}`);
+
   }
 
   const handleSaveInfo = (e) => {
@@ -126,7 +132,7 @@ const EditProfile = () => {
         </p>
         <button className={`${styles.shareBtn} S-BTN`}>Share</button>
         <Link href="/profile/viewProfile">
-          <button className={`${styles.viewBtn} P-BTN`}>View profile</button>
+          <button className={`${styles.viewBtn} P-BTN`} onClick={(e)=>handleViewProfile(data._id,e)}>View profile</button>
         </Link>
         {/* <Link href='/profile/viewProfile' target='_blank'>
                     <button className={`${styles.viewBtn} P-BTN`}>View profile</button>

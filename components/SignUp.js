@@ -26,7 +26,7 @@ const SignUp = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const signUp = useSelector((state) => state.auth);
-  const error = useSelector((state)=>state.error);
+  const error = useSelector((state) => state.error);
 
   const dispatch = useDispatch();
 
@@ -160,33 +160,42 @@ const SignUp = () => {
         </Alert>
       </Snackbar>
       <form action="" className={`${styles.form} medium-fs normal-gray`}>
-        <label htmlFor="Fname" className={`${styles.formLabel} normal`}>
-          First name
-        </label>
-        <input
-          type="text"
-          name="Fname"
-          id="Fname"
-          className={`${styles.formInput} light-gray light`}
-          placeholder="First name"
-          onChange={(e) => handleChange(e)}
-          value={signUpData.Fname}
-        />
-        <label htmlFor="Fname" className={`${styles.formLabel} normal`}>
-          Last name
-        </label>
-        <input
-          type="text"
-          name="Lname"
-          id="Lname"
-          className={`${styles.formInput} light-gray light`}
-          placeholder="Last name"
-          onChange={(e) => handleChange(e)}
-          value={signUpData.Lname}
-        />
-        <label htmlFor="email" className={`${styles.formLabel} normal`}>
-          Email
-        </label>
+        <div className={`${styles.nameDetails}`}>
+          <div className={`${styles.nameInputsdiv}`}>
+            <label htmlFor="Fname" className={`${styles.formLabel} normal`}>
+              First name
+            </label>
+            <input
+              type="text"
+              name="Fname"
+              id="Fname"
+              className={`${styles.nameInputs} light-gray light`}
+              placeholder="First name"
+              onChange={(e) => handleChange(e)}
+              value={signUpData.Fname}
+            />
+          </div>
+          <div className={`${styles.nameInputsdiv}`}>
+            <label htmlFor="Fname" className={`${styles.formLabel} normal`}>
+              Last name
+            </label>
+            <input
+              type="text"
+              name="Lname"
+              id="Lname"
+              className={`${styles.nameInputs} light-gray light`}
+              placeholder="Last name"
+              onChange={(e) => handleChange(e)}
+              value={signUpData.Lname}
+            />
+          </div>
+
+        </div>
+
+          <label htmlFor="email" className={`${styles.formLabel} normal`}>
+            Email
+          </label>
+
         <input
           type="text"
           name="email"
