@@ -55,6 +55,7 @@
             .formInput,.nameInputs {
                 border-radius: 8px;
                 border: 1px solid $borders-gray;
+                margin:2px;
             }
             .checkbox {
                 position: relative;
@@ -126,7 +127,7 @@
         gap: 15px;
         .form {
             .formLabel {
-                margin-top: 15px;
+                margin:15px 0px 0px 3px; 
             }
             .nameInputs{
                 width:185px;

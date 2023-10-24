@@ -46,7 +46,7 @@ const EditProfile = () => {
 
   }
 
-  const handleSaveInfo = (e) => {
+  const handleSaveInfo = async(e) => {
     e.preventDefault();
     const obj = {
       firstName: profile.Fname,
@@ -60,8 +60,8 @@ const EditProfile = () => {
       // timezone:profile.timezone,
     };
     console.log(obj);
-    dispatch(editProfile(obj));
-    dispatch(getProfile());
+    await dispatch(editProfile(obj));
+    await dispatch(getProfile());
     
   }
 
@@ -73,7 +73,7 @@ const EditProfile = () => {
   useEffect(() => {
     dispatch(getProfile());
     const {
-      username,
+      UserName,
       email,
       profilePicture,
       coverPicture,
@@ -88,6 +88,7 @@ const EditProfile = () => {
     } = data;
     setProfile((prev) => ({
       ...prev,
+      username:UserName,
       email: email,
       profilePicture: profilePicture,
       coverPicture: coverPicture,

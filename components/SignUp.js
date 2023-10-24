@@ -48,6 +48,7 @@ const SignUp = () => {
   function handleClick(e) {
     e.preventDefault();
     const {
+      username,
       Fname,
       Lname,
       email,
@@ -58,6 +59,7 @@ const SignUp = () => {
     } = signUpData;
 
     if (
+      username === ""||
       Fname === "" ||
       Lname === "" ||
       email === "" ||
@@ -116,6 +118,7 @@ const SignUp = () => {
     } else {
       setLoading(true);
       const obj = {
+        username:signUpData.username,
         firstname: signUpData.Fname,
         lastname: signUpData.Lname,
         email: signUpData.email,
@@ -189,12 +192,24 @@ const SignUp = () => {
               value={signUpData.Lname}
             />
           </div>
-
         </div>
+        <label htmlFor="email" className={`${styles.formLabel} normal`}>
+          username
+        </label>
 
-          <label htmlFor="email" className={`${styles.formLabel} normal`}>
-            Email
-          </label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          className={`${styles.formInput} light-gray light`}
+          placeholder="username"
+          onChange={(e) => handleChange(e)}
+          value={signUpData.username}
+        />
+
+        <label htmlFor="email" className={`${styles.formLabel} normal`}>
+          Email
+        </label>
 
         <input
           type="text"
