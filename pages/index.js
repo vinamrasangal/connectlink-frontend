@@ -42,7 +42,7 @@ export default function Home() {
       <main className={styles.main}>
         <CreatePost />
         <section className={`${styles.container} container`}>
-          <nav className={styles.nav}>
+          {/* <nav className={styles.nav}>
             <ul className={styles.ul} role='list'>
               <li className={styles.li}>
                 <Link href='/ideapool' className={`${styles.link} ${choosen === 'ideapool' ? styles.active : ''}`} onClick={() => setChoosen('ideapool')}>
@@ -69,7 +69,7 @@ export default function Home() {
                 </Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
           <Ideapool />
         </section>
       </main>

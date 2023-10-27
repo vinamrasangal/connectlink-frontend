@@ -39,16 +39,16 @@ const Ideapool = () => {
   };
 
   useEffect(() => {
-    dispatch(getProfile());
+    // dispatch(getProfile());
     dispatch(getPosts());
   }, []);
 
   return (
     <>
       <section className={styles.ideas}>
-        <h2 className={`${styles.shareIdea} large-fs semi-bold dark-gray`}>
+        {/* <h2 className={`${styles.shareIdea} large-fs semi-bold dark-gray`}>
           Share an idea
-        </h2>
+        </h2> */}
         <div className={styles.createPost}>
           {auth && imageUrl !== "" ? (
             <img className={styles.image} src={imageUrl} alt="" />

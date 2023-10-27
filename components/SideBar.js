@@ -12,6 +12,9 @@ import {
   FiHeadphones,
   FiSettings,
   FiLogOut,
+  FiGrid,
+  FiBell,
+  FiAlertCircle,
 } from "react-icons/fi";
 import { IoPricetagOutline } from "react-icons/io5";
 import Link from "next/link";
@@ -49,9 +52,16 @@ const SideBar = () => {
     router.push("/login");
   }
 
-//   useEffect(()=>{
-//     dispatch(getProfile());
-//   },[])
+  function handleProfileClick() {
+    router.push('/profile');
+  }
+
+ 
+  useEffect(()=>{
+    if(localStorage.getItem('loginToken')){
+    dispatch(getProfile());
+    }
+  },[])
 
 
   return (
@@ -94,56 +104,11 @@ const SideBar = () => {
               }`}
               onClick={() => setActive(false)}
             >
-              <span className={`${styles.icon} large-fs light-gray`}>
+              <span className={`${styles.icon}  large-fs light-gray`}>
                 {BiHomeAlt({})}
               </span>
               <p className={`${styles.text} small-fs normal normal-gray`}>
                 Home
-              </p>
-            </li>
-          </Link>
-          <Link href="/dashboard">
-            <li
-              className={`${styles.li} ${
-                currentPage === "dashboard" ? styles.active : ""
-              }`}
-              onClick={() => setActive(false)}
-            >
-              <span className={`${styles.icon} large-fs light-gray`}>
-                {FiBarChart2({})}
-              </span>
-              <p className={`${styles.text} small-fs normal normal-gray`}>
-                Dashboard
-              </p>
-            </li>
-          </Link>
-          <Link href="/profile">
-            <li
-              className={`${styles.li} ${
-                currentPage === "profile" ? styles.active : ""
-              }`}
-              onClick={() => setActive(false)}
-            >
-              <span className={`${styles.icon} large-fs light-gray`}>
-                {FiUser({})}
-              </span>
-              <p className={`${styles.text} small-fs normal normal-gray`}>
-                Profile
-              </p>
-            </li>
-          </Link>
-          <Link href="/messages">
-            <li
-              className={`${styles.li} ${
-                currentPage === "messages" ? styles.active : ""
-              }`}
-              onClick={() => setActive(false)}
-            >
-              <span className={`${styles.icon} large-fs light-gray`}>
-                {FiMessageSquare({})}
-              </span>
-              <p className={`${styles.text} small-fs normal normal-gray`}>
-                Messages
               </p>
             </li>
           </Link>
@@ -162,7 +127,69 @@ const SideBar = () => {
               </p>
             </li>
           </Link>
-          <Link href="/promotion">
+          <Link href="/messages">
+            <li
+              className={`${styles.li} ${
+                currentPage === "messages" ? styles.active : ""
+              }`}
+              onClick={() => setActive(false)}
+            >
+              <span className={`${styles.icon} large-fs light-gray`}>
+                {FiMessageSquare({})}
+              </span>
+              <p className={`${styles.text} small-fs normal normal-gray`}>
+                Messages
+              </p>
+            </li>
+          </Link>
+          <Link href="/products">
+            <li
+              className={`${styles.li} ${
+                currentPage === "products" ? styles.active : ""
+              }`}
+              onClick={() => setActive(false)}
+            >
+              <span className={`${styles.icon} large-fs light-gray`}>
+                {FiGrid({})}
+              </span>
+              <p className={`${styles.text} small-fs normal normal-gray`}>
+                Products
+              </p>
+            </li>
+          </Link>
+          <Link href="/dashboard">
+            <li
+              className={`${styles.li} ${
+                currentPage === "dashboard" ? styles.active : ""
+              }`}
+              onClick={() => setActive(false)}
+            >
+              <span className={`${styles.icon} large-fs light-gray`}>
+                {FiBarChart2({})}
+              </span>
+              <p className={`${styles.text} small-fs normal normal-gray`}>
+                Dashboard
+              </p>
+            </li>
+          </Link>
+          {/* <Link href="/profile">
+            <li
+              className={`${styles.li} ${
+                currentPage === "profile" ? styles.active : ""
+              }`}
+              onClick={() => setActive(false)}
+            >
+              <span className={`${styles.icon} large-fs light-gray`}>
+                {FiUser({})}
+              </span>
+              <p className={`${styles.text} small-fs normal normal-gray`}>
+                Profile
+              </p>
+            </li>
+          </Link> */}
+         
+          
+          {/* <Link href="/promotion">
             <li
               className={`${styles.li} ${
                 currentPage === "promotion" ? styles.active : ""
@@ -191,9 +218,39 @@ const SideBar = () => {
                 Integrations
               </p>
             </li>
-          </Link>
+          </Link> */}
         </ul>
         <ul className={styles.ul} role="list">
+          <Link href="/notifications">
+            <li
+              className={`${styles.li} ${
+                currentPage === "support" ? styles.active : ""
+              }`}
+              onClick={() => setActive(false)}
+            >
+              <span className={`${styles.icon} large-fs light-gray`}>
+                {FiBell({})}
+              </span>
+              <p className={`${styles.text} small-fs normal normal-gray`}>
+                Notifications
+              </p>
+            </li>
+          </Link>
+          <Link href="/helpCenter">
+            <li
+              className={`${styles.li} ${
+                currentPage === "support" ? styles.active : ""
+              }`}
+              onClick={() => setActive(false)}
+            >
+              <span className={`${styles.icon} large-fs light-gray`}>
+                {FiAlertCircle({})}
+              </span>
+              <p className={`${styles.text} small-fs normal normal-gray`}>
+                Help Center
+              </p>
+            </li>
+          </Link>
           <Link href="/support">
             <li
               className={`${styles.li} ${
@@ -224,9 +281,24 @@ const SideBar = () => {
               </p>
             </li>
           </Link>
+          {auth.isAuthorized ? (
+            <li
+              className={`${styles.li}`}
+              onClick={handleSignOut}
+            >
+              <span className={`${styles.icon} large-fs light-gray`}>
+                {FiLogOut({})}
+              </span>
+              <p className={`${styles.text} small-fs normal normal-gray`}>
+                Log out
+              </p>
+            </li>):(<></>)}
+
+          
+
         </ul>
         {auth.isAuthorized ? (
-          <div className={styles.account}>
+          <div className={styles.account} onClick={handleProfileClick}>
             {profile?.profilePicture !== "" ? (
               <img src={profile?.profilePicture} alt="" className={styles.profileImage} />
             ) : (
@@ -245,12 +317,6 @@ const SideBar = () => {
             <span className={`${styles.email} small-fs light light-gray`}>
               {profile?.email}
             </span>
-            <button
-              className={`${styles.logOut} large-fs light-gray`}
-              onClick={handleSignOut}
-            >
-              {FiLogOut({})}
-            </button>
           </div>
         ) : (
           <div className={styles.loggedOut}>

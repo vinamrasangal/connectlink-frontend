@@ -34,7 +34,7 @@ const IdeapoolArticle = ({
   // console.log(isLiked);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [isCommentOpen, setIsCommentOpen] = useState(true);
+  const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [commentInput, setCommentInput] = useState("");
   const [isPostShowen, setIsPostShowen] = useState(false);
   const [showAllComments, setShowAllComments] = useState(false);
@@ -76,7 +76,7 @@ const IdeapoolArticle = ({
 
   return (
     <>
-      <article className={`${styles.post} ${isPostShowen && styles.showen}`}>
+      <article className={`${styles.post} ${isPostShowen && styles.showen} ${isCommentOpen ?"":styles.borderRadius}`}>
         <div className={`${styles.hashTags} small-fs normal`}>
           <span className={styles.hash}> {tags[0]} </span>
           <span className={`${styles.hashCount} normal-gray`}>{`+ ${tags.length -1}`}</span>
@@ -188,6 +188,8 @@ const IdeapoolArticle = ({
             999
           </span>
         </button>
+        
+        
         <ShareComponent
           url={shareData.url}
           quote={shareData.quote}
@@ -195,6 +197,8 @@ const IdeapoolArticle = ({
           isShowen={shareData.isShowen}
           setShareData={setShareData}
         />
+
+        
       </article>
       {isCommentOpen ? (
         <div className={styles.commentSection}>
@@ -256,7 +260,7 @@ const IdeapoolArticle = ({
       ) : (
         <></>
       )}
-    </>
+      </>
   );
 };
 

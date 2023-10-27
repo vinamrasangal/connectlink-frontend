@@ -44,7 +44,10 @@
     .account {
         position: absolute;
         bottom: 0px;
-        border-top: 2px solid  $normal-gray;
+        border-top: 2px solid rgba(225, 225, 225, 0.93);
+        cursor: pointer;
+
+        ;
         .profileImage {
             position: absolute;
             background-color: #fff;

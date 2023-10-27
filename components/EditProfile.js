@@ -71,7 +71,10 @@ const EditProfile = () => {
   // console.log(error);
 
   useEffect(() => {
-    dispatch(getProfile());
+    if(isFetching){
+      dispatch(getProfile());
+    }
+    
     const {
       UserName,
       email,
@@ -100,7 +103,7 @@ const EditProfile = () => {
       timezone: timezone,
     }));
     setIsFetching(false);
-  }, []);
+  }, [dispatch,data, isFetching]);
 
   if (isFetching)
     return (
