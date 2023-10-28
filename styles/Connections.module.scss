@@ -1,0 +1,695 @@
+@import "./colors";
+.mainDiv {
+  padding-top: 40px;
+  display: flex;
+  background-color: $BG-color;
+  flex-direction: row;
+  height: 100vh;
+  //   background-color: aqua;
+  overflow-x: hidden;
+
+  // align-items: center;
+  // justify-content: center;
+  .left {
+    // background-color:#FFF ;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    // width: 729px;
+
+    .h2 {
+      width: 100%;
+      align-items: flex-start;
+      justify-content: left;
+      margin-bottom: 20px;
+    }
+    .filterSort {
+      position: fixed;
+      display: flex;
+      top: 90px;
+      // background-color: aqua;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 729px;
+      .innerDiv {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+      }
+    }
+    .users {
+      margin-top: 22px;
+      padding-top: 28px;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      .userCard {
+        height: 134px;
+        margin: 26 0px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 2px 2px 5px #0000002c;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 8px;
+
+        .imageDiv {
+          width: 110px;
+          height: 134px;
+          display: flex;
+          justify-content: right;
+          align-items: center;
+
+          .image {
+            background-color: #fff;
+            border-radius: 50%;
+          }
+          .loggedOutIcon {
+            background-color: $borders-gray;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 75px;
+            height: 75px;
+          }
+        }
+        .bio {
+        cursor: pointer;
+          display: flex;
+          width: 467px;
+          height: auto;
+          // background-color: aqua;
+          padding: 26px;
+          flex-direction: column;
+          text-align: left;
+          .bioText {
+            color: var(--gray-500, #667085);
+          }
+        }
+        .messageButton {
+          display: flex;
+          width: 200px;
+          height: auto;
+          padding: 26px;
+          align-items: flex-end;
+
+          .button {
+            display: flex;
+            background-color: #fff;
+            padding: 2px;
+            border: 2px solid $borders-gray;
+            border-radius: 15px;
+            width: 180px;
+            height: auto;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-500, #667085);
+          }
+        }
+      }
+    }
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    background-color: brown;
+    width: 500px;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+
+    .search {
+      position: fixed;
+      flex-direction: row;
+      display: flex;
+      width: 317px;
+      top: 40px;
+      border: 1px solid var(--gray-500, #667085);
+      border-radius: 10px;
+      background-color: #fff;
+      align-items: center;
+      padding-left: 10px;
+      .searchInput {
+        padding: 15px 0px;
+        padding-left: 18px;
+      }
+      .searchIcon {
+        color: var(--gray-500, #667085);
+      }
+      .searchText {
+        color: var(--gray-500, #667085);
+      }
+    }
+    .currentUser {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 317px;
+      height: 645px;
+      background-color: #fff;
+      box-shadow: 2px 2px 5px #0000002c;
+      border-radius: 12px;
+      top: 129px;
+      .about {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .image {
+          background-color: #fff;
+          border-radius: 50%;
+        }
+        .loggedOutIcon {
+          background-color: $borders-gray;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 150px;
+          height: 150px;
+        }
+      }
+      .bio {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .bioText {
+          color: var(--gray-500, #667085);
+        }
+      }
+
+      .linksdiv {
+        display: flex;
+        text-align: left;
+        color: var(--gray-500, #667085);
+        padding: 20px;
+        cursor: pointer;
+      }
+      .line {
+        width: 80%;
+        height: 2px;
+        background-color: #eaecf0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .mainDiv {
+    margin-left: 360px;
+    padding-top: 40px;
+    display: flex;
+    background-color: $BG-color;
+    flex-direction: row;
+    height: 100vh;
+    //   background-color: aqua;
+    overflow-x: hidden;
+  
+    // align-items: center;
+    // justify-content: center;
+    .left {
+      // background-color:#FFF ;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      width: 720px;
+  
+      .h2 {
+        width: 100%;
+        align-items: flex-start;
+        justify-content: left;
+        margin-bottom: 20px;
+      }
+      .filterSort {
+        position: fixed;
+        display: flex;
+        top: 90px;
+        // background-color: aqua;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 720px;
+        .innerDiv {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 2px;
+        }
+      }
+      .users {
+        margin-top: 22px;
+        padding-top: 28px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        .userCard {
+          height: 134px;
+          margin: 26 0px;
+          background-color: #fff;
+          border-radius: 12px;
+          box-shadow: 2px 2px 5px #0000002c;
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 8px;
+  
+          .imageDiv {
+            width: 110px;
+            height: 134px;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+  
+            .image {
+              background-color: #fff;
+              border-radius: 50%;
+            }
+            .loggedOutIcon {
+              background-color: $borders-gray;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 75px;
+              height: 75px;
+            }
+          }
+          .bio {
+          cursor: pointer;
+            display: flex;
+            width: 467px;
+            height: auto;
+            // background-color: aqua;
+            padding: 26px;
+            flex-direction: column;
+            text-align: left;
+            .bioText {
+              color: var(--gray-500, #667085);
+            }
+          }
+          .messageButton {
+            display: flex;
+            width: 200px;
+            height: auto;
+            padding: 26px;
+            align-items: flex-end;
+  
+            .button {
+              display: flex;
+              background-color: #fff;
+              padding: 2px;
+              border: 2px solid $borders-gray;
+              border-radius: 15px;
+              width: 180px;
+              height: auto;
+              align-items: center;
+              justify-content: center;
+              color: var(--gray-500, #667085);
+            }
+          }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      background-color: brown;
+      width: 500px;
+      height: fit-content;
+      align-items: center;
+      justify-content: center;
+  
+      .search {
+        position: fixed;
+        flex-direction: row;
+        display: flex;
+        width: 300px;
+        top: 40px;
+        border: 1px solid var(--gray-500, #667085);
+        border-radius: 10px;
+        background-color: #fff;
+        align-items: center;
+        padding-left: 10px;
+        .searchInput {
+          padding: 15px 0px;
+          padding-left: 18px;
+        }
+        .searchIcon {
+          color: var(--gray-500, #667085);
+        }
+        .searchText {
+          color: var(--gray-500, #667085);
+        }
+      }
+      .currentUser {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        height: 645px;
+        background-color: #fff;
+        box-shadow: 2px 2px 5px #0000002c;
+        border-radius: 12px;
+        top: 129px;
+        .about {
+          width: 100%;
+          height: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .image {
+            background-color: #fff;
+            border-radius: 50%;
+          }
+          .loggedOutIcon {
+            background-color: $borders-gray;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+          }
+        }
+        .bio {
+          display:flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          .bioText {
+            color: var(--gray-500, #667085);
+          }
+        }
+  
+        .linksdiv {
+          display: flex;
+          text-align: left;
+          color: var(--gray-500, #667085);
+          padding: 20px;
+          cursor: pointer;
+        }
+        .line {
+          width: 80%;
+          height: 2px;
+          background-color: #eaecf0;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1400px) and (min-width: 1200px) {
+  .mainDiv {
+    margin-left: 340px;
+    padding-top: 40px;
+    display: flex;
+    background-color: $BG-color;
+    flex-direction: row;
+    height: 100vh;
+    //   background-color: aqua;
+    overflow-x: hidden;
+  
+    // align-items: center;
+    // justify-content: center;
+    .left {
+      // background-color:#FFF ;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      width: 650px;
+  
+      .h2 {
+        width: 100%;
+        align-items: flex-start;
+        justify-content: left;
+        margin-bottom: 20px;
+      }
+      .filterSort {
+        position: fixed;
+        display: flex;
+        top: 90px;
+        // background-color: aqua;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 650px;
+        .innerDiv {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 2px;
+        }
+      }
+      .users {
+        margin-top: 22px;
+        padding-top: 28px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        .userCard {
+          height: 140px;
+          margin: 26 0px;
+          background-color: #fff;
+          border-radius: 12px;
+          box-shadow: 2px 2px 5px #0000002c;
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 8px;
+  
+          .imageDiv {
+            width: 110px;
+            height: 134px;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+  
+            .image {
+              background-color: #fff;
+              border-radius: 50%;
+            }
+            .loggedOutIcon {
+              background-color: $borders-gray;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 75px;
+              height: 75px;
+            }
+          }
+          .bio {
+          cursor: pointer;
+            display: flex;
+            width: 467px;
+            height: auto;
+            // background-color: aqua;
+            padding: 26px;
+            flex-direction: column;
+            text-align: left;
+            .bioText {
+              color: var(--gray-500, #667085);
+            }
+          }
+          .messageButton {
+            display: flex;
+            width: 200px;
+            height: auto;
+            padding: 26px;
+            align-items: flex-end;
+  
+            .button {
+              display: flex;
+              background-color: #fff;
+              padding: 2px;
+              border: 2px solid $borders-gray;
+              border-radius: 15px;
+              width: 180px;
+              height: auto;
+              align-items: center;
+              justify-content: center;
+              color: var(--gray-500, #667085);
+            }
+          }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      background-color: brown;
+      width: 300px;
+      height: fit-content;
+      align-items: center;
+      justify-content: center;
+  
+      .search {
+        position: fixed;
+        flex-direction: row;
+        display: flex;
+        width:200px;
+        top: 40px;
+        border: 1px solid var(--gray-500, #667085);
+        border-radius: 10px;
+        background-color: #fff;
+        align-items: center;
+        padding-left: 10px;
+        .searchInput {
+          padding: 10px 0px;
+          padding-left: 10px;
+        }
+        .searchIcon {
+          color: var(--gray-500, #667085);
+        }
+        .searchText {
+          color: var(--gray-500, #667085);
+        }
+      }
+      .currentUser {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 220px;
+        height: 645px;
+        background-color: #fff;
+        box-shadow: 2px 2px 5px #0000002c;
+        border-radius: 12px;
+        top: 129px;
+        .about {
+          width: 100%;
+          height: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .image {
+            background-color: #fff;
+            border-radius: 50%;
+          }
+          .loggedOutIcon {
+            background-color: $borders-gray;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+          }
+        }
+        .bio {
+          display:flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          .bioText {
+            color: var(--gray-500, #667085);
+          }
+        }
+  
+        .linksdiv {
+          display: flex;
+          text-align: left;
+          color: var(--gray-500, #667085);
+          padding: 20px;
+          cursor: pointer;
+        }
+        .line {
+          width: 80%;
+          height: 2px;
+          background-color: #eaecf0;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1200px) and (min-width: 992px) {
+  .mainDiv {
+    width: calc(100vw - 300px);
+    margin-left: 300px;
+    .left {
+      display: flex;
+      flex-direction: column;
+      .title {
+        width: 100%;
+        position: fixed;
+      }
+      .filterSort {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+      }
+      .users {
+        .userCard {
+          .image {
+          }
+          .bio {
+          }
+          .message {
+          }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      .search {
+      }
+      .currentUser {
+      }
+    }
+  }
+}
+@media only screen and (max-width: 992px) and (min-width: 768px) {
+  .mainDiv {
+    width: calc(100vw - 200px);
+    margin-left: 250px;
+    .left {
+      display: flex;
+      flex-direction: column;
+      .title {
+        width: 100%;
+        position: fixed;
+      }
+      .filterSort {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+      }
+      .users {
+        .userCard {
+          .image {
+          }
+          .bio {
+          }
+          .message {
+          }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      .search {
+      }
+      .currentUser {
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 480px) {
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 370px) {
+}

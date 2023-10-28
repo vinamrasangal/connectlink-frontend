@@ -4,15 +4,12 @@ import { IoMdRemoveCircleOutline } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { alertActions } from '@/redux/AlertController';
 import { FiUploadCloud } from 'react-icons/fi';
-import { ref,uploadBytes,deleteObject } from 'firebase/storage';
-import { auth, storage } from '@/config/firebaseConfig';
 import DropImage from '@/nestedComponents/DropImage';
 import AddHistory from '@/nestedComponents/AddHistory';
 import { AiOutlineDelete,AiOutlineArrowRight,AiOutlineArrowLeft } from 'react-icons/ai';
-import { setDoc,doc } from 'firebase/firestore';
-import { db } from '@/config/firebaseConfig';
-import { onAuthStateChanged } from 'firebase/auth';
-import { userAction } from '@/redux/User';
+
+
+
 
 
 
@@ -51,6 +48,8 @@ const ProfileCreation = () => {
         volunteer:[],
         agreement:false
     });
+    // console.log(formData)
+    // console.log(personalImage[0])
     function handleShowAddHistory(e,type) {
         e.preventDefault();
         if(showenAddHistory === type ) {
@@ -176,14 +175,14 @@ const ProfileCreation = () => {
         }
     }
 
-    useEffect(()=>{
-        const removeStateChanged =onAuthStateChanged(auth,(res)=>{
-            if (res) {
-                dispatch(userAction.setUser({isLoggedIN:true,rememberMe:formData.rememberMe,userData:auth.currentUser}));
-            }
-        })
-        return () => removeStateChanged();
-    },[])
+    // useEffect(()=>{
+    //     const removeStateChanged =onAuthStateChanged(auth,(res)=>{
+    //         if (res) {
+    //             dispatch(userAction.setUser({isLoggedIN:true,rememberMe:formData.rememberMe,userData:auth.currentUser}));
+    //         }
+    //     })
+    //     return () => removeStateChanged();
+    // },[])
 
     return (
         <>

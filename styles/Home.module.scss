@@ -9,7 +9,6 @@
             height: fit-content;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             .li {
                 .link {
                     display: flex;
@@ -20,7 +19,8 @@
                     &:hover,
                     &.active {
                         background-color: #EFF8FF;
-                        .span {
+                        .span,
+                        .text {
                             color: $primary-color;
                         }
                     }
@@ -78,15 +78,19 @@
             .ul {
                 gap: 10px;
                 flex-wrap: wrap;
+                justify-content: center;
                 .li {
                     .link {
                         border-bottom: 2px solid transparent;
                         padding: 12px 8px;
                         gap: 10px;
-                        width: 140px;
+                        width: 60px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        .text {
+                            display: none;
+                        }
                         &:hover,
                         &.active {
                             border-bottom: 2px solid $primary-color;
@@ -104,16 +108,19 @@
             .ul {
                 gap: 10px;
                 flex-wrap: wrap;
-                justify-content: space-between;
+                justify-content: center;
                 .li {
                     .link {
                         border-bottom: 2px solid transparent;
                         padding: 10px 6px;
                         gap: 10px;
-                        width: 120px;
+                        width: 60px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        .text {
+                            display: none;
+                        }
                         &:hover,
                         &.active {
                             border-bottom: 2px solid $primary-color;
@@ -131,16 +138,19 @@
             .ul {
                 gap: 10px;
                 flex-wrap: wrap;
-                justify-content: space-between;
+                justify-content: center;
                 .li {
                     .link {
                         border-bottom: 2px solid transparent;
                         padding: 10px 6px;
                         gap: 10px;
-                        width: 100px;
+                        width: 50px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        .text {
+                            display: none;
+                        }
                         &:hover,
                         &.active {
                             border-bottom: 2px solid $primary-color;

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@400;700&display=swap');
+@import "./colors";
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -38,8 +39,11 @@ html:focus-within {
 }
 
 /* Set core body defaults */
+
 body {
-    min-height: 100vh;
+    // min-height: 100vh;
+    height: 100%;
+    background-color: $BG-color;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
     font-family: 'Inter', sans-serif;
@@ -292,7 +296,9 @@ input {
     color: $black-color;
 }
 
-
+.d-none{
+    display: none;
+}
 
 .alert {
     position: fixed;
@@ -377,6 +383,32 @@ input {
                 animation: loading 1s infinite linear alternate;
                 animation-delay: calc(0.1s * var(--i));
             }
+        }
+    }
+}
+.not-found {
+    position: relative;
+    min-height: 100vh;
+    z-index: 999;
+    background-color: #fff;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    h2 {
+        text-align: center;
+    }
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 10px 14px;
+        span {
+            display: flex;
         }
     }
 }
@@ -574,3 +606,4 @@ input {
         }
     }
 }
+

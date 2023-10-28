@@ -7,9 +7,7 @@ function DropImage({children,setAcceptedFile,setUrl}) {
             accept: {
             'image/jpeg': [],
             'image/png': [],
-            'image/svg': [],
             'image/jpg': [],
-            'image/gif': []
             },
             onDrop: acceptedFiles => {
             setFiles(acceptedFiles.map(file => Object.assign(file, {
@@ -19,12 +17,15 @@ function DropImage({children,setAcceptedFile,setUrl}) {
             maxFiles:1,
             maxSize:5000000
         });
+        
 
         useEffect(()=>{
+            console.log(acceptedFiles,"23");
             setAcceptedFile(acceptedFiles)
         },[acceptedFiles])
         
         useEffect(()=>{
+            console.log(files[0], "28")
             if(files[0]){
                 setUrl(files[files.length-1].preview);
             }

@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import EditProfile from '@/components/EditProfile';
-
+import React, { useEffect, useState } from "react";
+// import EditProfile from '@/components/EditProfile';
+import { useDispatch, useSelector } from "react-redux";
+import { currentPageAction } from "@/redux/CurrentPage";
+import EditProfile from "@/components/EditProfile";
+import ViewProfile from "./viewProfile";
+import { getProfile } from "@/redux/ActionCreators/profileAction";
+// import ViewProfile from './viewProfile';
 
 const Profile = () => {
-    return (
-        <>
-            <EditProfile />
-        </>
-    )
-}
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-export default Profile
+  return (
+    <>
+      <EditProfile />
+    </>
+  );
+};
+export default Profile;

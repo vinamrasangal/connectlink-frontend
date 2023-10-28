@@ -4,12 +4,16 @@
     height: 100vh;
 }
 .account {
+    position: relative;
     height: 100vh;
     width: 100%;
     display: flex;
+    z-index: 901;
     .logo {
+        position: relative;
+        z-index: 901;
         justify-content: center;
-        background-color: rgba(33, 90, 189, 0.05);
+        background-color: #FAFDFD;
     }
     .logIn,
     .signUp {
@@ -23,6 +27,18 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
+            .nameDetails{
+                display:flex ;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                .nameInputsdiv{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                }
+            }
             .passwordHolder {
                 position: relative;
                 display: flex;
@@ -35,9 +51,11 @@
                     transform: translate(-50%,-45%);
                 }
             }
-            .formInput {
+            
+            .formInput,.nameInputs {
                 border-radius: 8px;
                 border: 1px solid $borders-gray;
+                margin:2px;
             }
             .checkbox {
                 position: relative;
@@ -98,7 +116,7 @@
 }
 @media only screen and (min-width: 992px){
     .logo {
-        background-color: rgba(33, 90, 189, 0.05);
+        // background-color: rgba(33, 90, 189, 0.05);
         display: flex;
         align-items: center;
         width: 50%;
@@ -109,7 +127,12 @@
         gap: 15px;
         .form {
             .formLabel {
-                margin-top: 15px;
+                margin:15px 0px 0px 3px; 
+            }
+            .nameInputs{
+                width:185px;
+                padding: 10px 14px;
+                margin:2px;
             }
             .formInput {
                 width: 380px;
@@ -167,6 +190,11 @@
         .form {
             .formLabel {
                 margin-top: 20px;
+            }
+            .nameInputs{
+                width:165px;
+                padding: 8px 12px;
+                margin:2px;
             }
             .formInput {
                 width: 340px;
@@ -231,12 +259,18 @@
         width: 100%;
         gap: 15px;
         .form {
+            align-items: center;
             .formLabel {
                 margin-top: 15px;
             }
+            .nameInputs{
+                width:160px;
+                padding: 8px 12px;
+                margin:2px;
+            }
             .formInput {
                 width: 325px;
-                padding: 10px 8px;
+                padding: 8px 12px;
             }
             .passwordP {
                 width: 325px;
@@ -299,6 +333,11 @@
         .form {
             .formLabel {
                 margin-top: 15px;
+            }
+            .nameInputs{
+                width:120px;
+                padding: 8px 8px;
+                margin:2px;
             }
             .formInput {
                 width: 240px;
