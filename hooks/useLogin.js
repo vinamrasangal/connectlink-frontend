@@ -5,11 +5,10 @@ import { alertActions } from '@/redux/AlertController';
 
 const useLogin = () => {
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const login = async (email, password, rememberMe) => {
-        // setError(null)
-        setLoading(true)
+        setLoading(true);
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
                 method: 'POST',
@@ -17,25 +16,28 @@ const useLogin = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
+            });
             const json = await res.json();
-            console.log(json)
+            console.log(json);
             if (res.ok) {
                 if (rememberMe) {
                     window.localStorage.setItem('user', JSON.stringify(json));
                 }
-                dispatch(alertActions.showAlert({ msg: 'logged in successfully', showen: true, type: 'success' }));
+                dispatch(alertActions.showAlert({ msg: 'Logged in successfully', showen: true, type: 'success' }));
                 dispatch(userActions.setUserData({ username: json.username, email: json.email, token: json.token }));
             } else {
-                dispatch(alertActions.showAlert({ msg: json.message, showen: true, type: 'error' }));
+                // Handle error response
+                dispatch(alertActions.showAlert({ msg: json.message || 'Login failed', showen: true, type: 'error' }));
             }
         } catch (err) {
-            dispatch(alertActions.showAlert({ msg: err.message, showen: true, type: 'error' }));
+            // Handle fetch error
+            dispatch(alertActions.showAlert({ msg: err.message || 'Failed to connect to the server', showen: true, type: 'error' }));
+        } finally {
+            setLoading(false);
         }
-        setLoading(false)
-    }
+    };
 
-    return { loading, login }
-}
+    return { loading, login };
+};
 
-export default useLogin
+export default useLogin;

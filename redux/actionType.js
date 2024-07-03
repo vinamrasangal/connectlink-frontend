@@ -6,6 +6,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const SIGNUP_USER = 'SIGNUP_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT = 'LOGOUT';
+export const MOCK_LOGIN_USER = "MOCK_LOGIN_USER";
 
 // post
 export const CLOSE_POST = 'CLOSE_POST';

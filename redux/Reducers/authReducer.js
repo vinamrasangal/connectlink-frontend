@@ -1,38 +1,66 @@
-import { SIGNUP_USER, LOGIN_USER, LOGOUT } from "../actionType";
+import { SIGNUP_USER, LOGIN_USER, LOGOUT, MOCK_LOGIN_USER } from "../actionType";
 
-let intialState = {
+let initialState = {
     signUp: false,
-    user: typeof window !== 'undefined' && JSON.parse(localStorage.getItem('user')),
-    isAuthorized: typeof window !== 'undefined' && JSON.parse(localStorage.getItem('user')) ? true : false
+    user: null,
+    isAuthorized: false
+};
+
+// Retrieve user data from localStorage if available
+if (typeof window !== 'undefined') {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    initialState.user = storedUser;
+    initialState.isAuthorized = !!storedUser; // Check if user exists in localStorage
 }
 
-export default function authReducer(state = intialState, action) {
-    let stateCopy = JSON.parse(JSON.stringify(state));
+const authReducer = (state = initialState, action) => {
+    let stateCopy = { ...state }; // Create a shallow copy of state
+
     switch (action.type) {
         case SIGNUP_USER:
-            console.log(action.payload)
-            stateCopy.signUp = true;
-            return stateCopy;
+            console.log(action.payload);
+            return {
+                ...stateCopy,
+                signUp: true
+            };
         case LOGIN_USER:
-            stateCopy.isAuthorized = true;
-            stateCopy.user = action.payload.user;
-            localStorage.setItem('loginToken', action.payload.accesstoken);
+            localStorage.setItem('user', JSON.stringify(action.payload.user));
+            localStorage.setItem('loginToken', action.payload.accessToken);
             localStorage.setItem('loginEmail', action.payload.user?.email);
             localStorage.setItem('name', action.payload.user.username);
-            localStorage.setItem('user', JSON.stringify(action.payload.user));
-            localStorage.setItem('profileComplete', action.payload.profile_complete)
-            // window.location.reload();
-            window.location.href = '/'
-            return stateCopy;
+            localStorage.setItem('profileComplete', action.payload.profile_complete);
+
+            return {
+                ...stateCopy,
+                isAuthorized: true,
+                user: action.payload.user
+            };
         case LOGOUT:
-            stateCopy.isAuthorized = false;
-            stateCopy.user = null;
-            return stateCopy;
-        // case LOGIN_ERROR:
-        //     stateCopy.succesMessage = true;
-        //     stateCopy.succesMessageText = action.payload;
-        //     return stateCopy;
+            localStorage.removeItem('user');
+            localStorage.removeItem('loginToken');
+            localStorage.removeItem('loginEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('profileComplete');
+
+            return {
+                ...stateCopy,
+                isAuthorized: false,
+                user: null
+            };
+        case MOCK_LOGIN_USER:
+            localStorage.setItem('user', JSON.stringify(action.payload));
+            localStorage.setItem('loginToken', action.payload.token);
+            localStorage.setItem('loginEmail', action.payload.email);
+            localStorage.setItem('name', action.payload.username);
+
+            return {
+                ...stateCopy,
+                isAuthorized: true,
+                user: action.payload
+            };
         default:
             return stateCopy;
     }
-}
+};
+
+export default authReducer;
